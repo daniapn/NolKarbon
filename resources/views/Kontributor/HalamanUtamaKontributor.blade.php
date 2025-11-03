@@ -207,11 +207,11 @@
         }
 
         .status-revision {
-            background: #FFF0E6;
+            background: #cbb404ff;
         }
 
         .status-draft {
-            background: #E6E6E6;
+            background: #ece3e3ff;
         }
 
         /* Footer */
@@ -293,7 +293,7 @@
                 </div>
 
                 <div class="article-status 
-                    @if($artikel->status == 'pending') status-pending
+                    @if($artikel->status == 'menunggu revisi') status-pending
                     @elseif($artikel->status == 'published') status-published
                     @elseif($artikel->status == 'rejected') status-rejected
                     @elseif($artikel->status == 'revisi') status-revision
