@@ -277,52 +277,43 @@
         <p>Nol Karbon empowers you to take small yet meaningful actions for a cleaner, greener future. Together, we can build a world free from carbon emissions.</p>
     </section>
 
-    <div class="content-container">
-        <button class="create-btn">Buat Draft Artikel Baru</button>
+<div class="content-container">
+    <button class="create-btn">Buat Draft Artikel Baru</button>
 
-        <div class="article-list">
+    <div class="article-list">
+
+        @forelse($artikels as $artikel)
             <div class="article-card">
                 <div class="article-content">
-                    <div class="article-title">Zero carbon for better life start by little yourself bla bla</div>
+                    <div class="article-title">{{ $artikel->judul }}</div>
+
+                    @if($artikel->status == 'revisi' || $artikel->status == 'draft')
+                        <div class="article-edit">Edit</div>
+                    @endif
                 </div>
-                <div class="article-status status-pending">Menunggu Review</div>
+
+                <div class="article-status 
+                    @if($artikel->status == 'pending') status-pending
+                    @elseif($artikel->status == 'published') status-published
+                    @elseif($artikel->status == 'rejected') status-rejected
+                    @elseif($artikel->status == 'revisi') status-revision
+                    @else status-draft
+                    @endif">
+                    {{ ucwords($artikel->status) }}
+                </div>
             </div>
 
-            <div class="article-card">
-                <div class="article-content">
-                    <div class="article-title">Zero carbon for better life start by little yourself bla bla</div>
-                </div>
-                <div class="article-status status-published">Published</div>
-            </div>
+        @empty
+            <p style="text-align:center; margin-top:20px;">Belum ada artikel.</p>
+        @endforelse
 
-            <div class="article-card">
-                <div class="article-content">
-                    <div class="article-title">Zero carbon for better life start by little yourself bla bla</div>
-                </div>
-                <div class="article-status status-rejected">Ditolak</div>
-            </div>
-
-            <div class="article-card">
-                <div class="article-content">
-                    <div class="article-title">Zero carbon for better life start by little yourself bla bla</div>
-                    <div class="article-edit">Edit</div>
-                </div>
-                <div class="article-status status-revision">Revisi</div>
-            </div>
-
-            <div class="article-card">
-                <div class="article-content">
-                    <div class="article-title">Zero carbon for better life start by little yourself bla bla</div>
-                    <div class="article-edit">Edit</div>
-                </div>
-                <div class="article-status status-draft">Draft</div>
-            </div>
-        </div>
     </div>
+</div>
+
 
     <footer>
-        <img class="footer-logo" src= alt="Nol Karbon Logo">
-        <p>Contact Us</p>
+        <img class="footer-logo" src=/images/logo.png alt="Nol Karbon Logo">
+        <p>NolKarbon@gmail.com</p>
     </footer>
 </body>
 </html>
