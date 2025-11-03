@@ -23,3 +23,12 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+//Halaman Kalkulator
+use App\Http\Controllers\EmisiController;
+
+Route::get('/kalkulator-emisi', [EmisiController::class, 'index']);
+Route::post('/hitung-emisi', [EmisiController::class, 'hitung'])->name('hitung.emisi');
+Route::get('/emisi-saved', [EmisiController::class, 'saved']);
+Route::get('/hasil-emisi', [EmisiController::class, 'hasil']);
+
