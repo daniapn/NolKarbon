@@ -9,4 +9,6 @@ Route::get('/', function () {
 
 Route::get('/kontributor', [KontributorController::class, 'index'])->name('kontributor.index');
 
-
+Route::get('/Admin', function () {
+    return view('statistikemisi');
+});
