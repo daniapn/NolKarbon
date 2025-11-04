@@ -281,77 +281,98 @@
         <img src="/images/logo.png" alt="Nol Karbon Logo">
     </div>
 
+    <section class="hero">
+        <h1>Let's Contribute and Be Part<br>of <span class="highlight">Nol Karbon</span></h1>
+        <p>Nol Karbon empowers you to take small yet meaningful actions for a cleaner, greener future.</p>
+    </section>
 
-<section class="hero">
-<h1>Let's Contribute and Be Part<br>of <span class="highlight">Nol Karbon</span></h1>
-<p>Nol Karbon empowers you to take small yet meaningful actions for a cleaner, greener future.</p>
-</section>
+    <div class="form-container">
+        <div class="form-card">
+            <form action="{{ route('kontributor.updatedraft', $artikel->idDraft) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
 
+                <div class="form-grid">
+                    <div class="form-section">
+                        <div class="form-header">Judul</div>
+                        <div class="form-body">
+                            <input type="text" name="judul" value="{{ $artikel->judul }}" required>
+                        </div>
+                    </div>
 
-<div class="form-container">
-<div class="form-card">
-<form action="{{ route('kontributor.updatedraft', $artikel->idDraft) }}" method="POST" enctype="multipart/form-data">
-@csrf
-@method('PUT')
+                    <div class="form-section">
+                        <div class="form-header">Gambar</div>
+                        <div class="form-body" style="padding: 1rem;">
+                            <label class="image-upload">
+                                <img src="{{ $artikel->gambar ? asset('storage/'.$artikel->gambar) : 'https://placehold.co/400x200?text=No+Image' }}" alt="Article image" id="preview-image">
+                                <input type="file" name="gambar" accept="image/*" id="image-input">
+                            </label>
+                        </div>
+                    </div>
 
+                    <div class="form-section full-width">
+                        <div class="form-header">Isi</div>
+                        <div class="form-body">
+                            <textarea name="isi" required>{{ $artikel->isi }}</textarea>
+                        </div>
+                    </div>
+                </div>
 
-<div class="form-grid">
-<div class="form-section">
-<div class="form-header">Judul</div>
-<div class="form-body">
-<input type="text" name="judul" value="{{ $artikel->judul }}" required>
-</div>
-</div>
+                <div class="action-buttons">
+                    <button class="btn btn-delete" type="button" onclick="confirmDelete()">
+                        Hapus Draft
+                    </button>
+                    <button class="btn" type="submit">
+                        Simpan Draft
+                    </button>
+                    <button class="btn" type="button" onclick="submitDraft()">
+                        Submit Draft
+                    </button>
+                </div>
+            </form>
 
+            <!-- Hidden Delete Form -->
+            <form id="delete-form" action="{{ route('kontributor.deletedraft', $artikel->idDraft) }}" method="POST" style="display: none;">
+                @csrf
+                @method('DELETE')
+            </form>
 
-<div class="form-section">
-<div class="form-header">Gambar</div>
-<div class="form-body" style="padding: 1rem;">
-<label class="image-upload">
-<img src="{{ $artikel->gambar ? asset('storage/'.$artikel->gambar) : 'https://placehold.co/400x200?text=No+Image' }}" alt="Article image">
-<input type="file" name="gambar" accept="image/*">
-</label>
-</div>
-</div>
+            <!-- Hidden Submit Form -->
+            <form id="submit-form" action="{{ route('kontributor.submitdraft', $artikel->idDraft) }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+        </div>
+    </div>
 
+    <footer>
+        <img class="footer-logo" src="/images/logo.png" alt="Nol Karbon Logo">
+        <p>NolKarbon@gmail.com</p>
+    </footer>
 
-<div class="form-section full-width">
-<div class="form-header">Isi</div>
-<div class="form-body">
-<textarea name="isi" required>{{ $artikel->isi }}</textarea>
-</div>
-</div>
-</div>
+    <script>
+        // Image upload preview
+        document.getElementById('image-input').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    document.getElementById('preview-image').src = event.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
 
+        // Confirm delete
+        function confirmDelete() {
+            if (confirm('Hapus draft ini?')) {
+                document.getElementById('delete-form').submit();
+            }
+        }
 
-<div class="action-buttons">
-
-    <!-- Simpan Draft -->
-    <button class="btn" type="submit">Simpan Draft</button>
-
-    <!-- Submit Draft -->
-    <button class="btn"
-        formaction="{{ route('kontributor.submitdraft', $artikel->idDraft) }}"
-        formmethod="POST"
-        onclick="event.preventDefault(); this.closest('form').submit();">
-        Submit Draft
-    </button>
-</div>
-</form> <!-- PENUTUP FORM UTAMA -->
-
-<!-- Form Hapus (TERPISAH) -->
-<form action="{{ route('kontributor.deletedraft', $artikel->idDraft) }}" method="POST" style="margin-top:10px;">
-    @csrf
-    @method('DELETE')
-    <button class="btn btn-delete" onclick="return confirm('Hapus draft ini?')">
-        Hapus Draft
-    </button>
-</form>
-
-</div>
-<footer>
-<img class="footer-logo" src="/images/logo.png" alt="Nol Karbon Logo">
-<p>NolKarbon@gmail.com</p>
-</footer>
+        // Submit draft
+        function submitDraft() {
+            document.getElementById('submit-form').submit();
+        }
+    </script>
 </body>
 </html>
