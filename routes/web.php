@@ -11,6 +11,11 @@ Route::get('/', function () {
 
 // Halaman Kontributor
 Route::get('/kontributor', [KontributorController::class, 'index'])->name('kontributor.index');
+Route::get('/kontributor/artikel/editdraft/{id}', 
+    [KontributorController::class, 'editDraft']
+)->name('kontributor.editdraft');
+
+
 
 // Halaman Admin (Statistik Emisi)
 Route::get('/Admin', function () {

@@ -12,4 +12,11 @@ class KontributorController extends Controller
         $artikels = DraftArtikel::all(); // ambil semua artikel
         return view('Kontributor/HalamanUtamaKontributor', compact('artikels'));
     }
+
+    public function editDraft($id)
+{
+    $artikel = DraftArtikel::findOrFail($id);
+    return view('editDraftArtikel', compact('artikel'));
+}
+
 }
