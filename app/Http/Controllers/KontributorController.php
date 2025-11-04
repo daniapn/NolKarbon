@@ -16,7 +16,7 @@ class KontributorController extends Controller
     public function editDraft($id)
 {
     $artikel = DraftArtikel::findOrFail($id);
-    return view('editDraftArtikel', compact('artikel'));
+    return view('Kontributor/EditDraftArtikel', compact('artikel'));
 }
 
 }
