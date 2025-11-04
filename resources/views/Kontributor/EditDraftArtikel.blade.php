@@ -273,8 +273,13 @@
     </style>
 </head>
 <body>
-<img src="/images/logo.png" alt="Nol Karbon Logo">
-</div>
+    <header>
+        <button class="logout-btn">Logout</button>
+    </header>
+
+    <div class="logo-section">
+        <img src="/images/logo.png" alt="Nol Karbon Logo">
+    </div>
 
 
 <section class="hero">
@@ -285,7 +290,7 @@
 
 <div class="form-container">
 <div class="form-card">
-<form action="{{ route('kontributor.updatedraft', $draft->idDraft) }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('kontributor.updatedraft', $artikel->idDraft) }}" method="POST" enctype="multipart/form-data">
 @csrf
 @method('PUT')
 
@@ -294,7 +299,7 @@
 <div class="form-section">
 <div class="form-header">Judul</div>
 <div class="form-body">
-<input type="text" name="judul" value="{{ $draft->judul }}" required>
+<input type="text" name="judul" value="{{ $artikel->judul }}" required>
 </div>
 </div>
 
@@ -303,7 +308,7 @@
 <div class="form-header">Gambar</div>
 <div class="form-body" style="padding: 1rem;">
 <label class="image-upload">
-<img src="{{ $draft->gambar ? asset('storage/'.$draft->gambar) : 'https://placehold.co/400x200?text=No+Image' }}" alt="Article image">
+<img src="{{ $artikel->gambar ? asset('storage/'.$artikel->gambar) : 'https://placehold.co/400x200?text=No+Image' }}" alt="Article image">
 <input type="file" name="gambar" accept="image/*">
 </label>
 </div>
@@ -313,29 +318,40 @@
 <div class="form-section full-width">
 <div class="form-header">Isi</div>
 <div class="form-body">
-<textarea name="isi" required>{{ $draft->isi }}</textarea>
+<textarea name="isi" required>{{ $artikel->isi }}</textarea>
 </div>
 </div>
 </div>
 
 
 <div class="action-buttons">
-<button class="btn btn-delete" formaction="{{ route('kontributor.deletedraft', $draft->idDraft) }}" formmethod="POST" onclick="return confirm('Hapus draft ini?')">
-@csrf
-@method('DELETE')
-Hapus Draft
-</button>
-<button class="btn" type="submit">Simpan Draft</button>
-<button class="btn" formaction="{{ route('kontributor.submitdraft', $draft->idDraft) }}">Submit Draft</button>
+
+    <!-- Simpan Draft -->
+    <button class="btn" type="submit">Simpan Draft</button>
+
+    <!-- Submit Draft -->
+    <button class="btn"
+        formaction="{{ route('kontributor.submitdraft', $artikel->idDraft) }}"
+        formmethod="POST"
+        onclick="event.preventDefault(); this.closest('form').submit();">
+        Submit Draft
+    </button>
 </div>
+</form> <!-- PENUTUP FORM UTAMA -->
+
+<!-- Form Hapus (TERPISAH) -->
+<form action="{{ route('kontributor.deletedraft', $artikel->idDraft) }}" method="POST" style="margin-top:10px;">
+    @csrf
+    @method('DELETE')
+    <button class="btn btn-delete" onclick="return confirm('Hapus draft ini?')">
+        Hapus Draft
+    </button>
 </form>
-</div>
-</div>
 
-
+</div>
 <footer>
 <img class="footer-logo" src="/images/logo.png" alt="Nol Karbon Logo">
-<p>Contact Us</p>
+<p>NolKarbon@gmail.com</p>
 </footer>
 </body>
 </html>

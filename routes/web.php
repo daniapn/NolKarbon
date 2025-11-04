@@ -14,6 +14,13 @@ Route::get('/kontributor', [KontributorController::class, 'index'])->name('kontr
 Route::get('/kontributor/artikel/editdraft/{id}', 
     [KontributorController::class, 'editDraft']
 )->name('kontributor.editdraft');
+Route::put('/kontributor/updatedraft/{id}', [KontributorController::class, 'updateDraft'])
+    ->name('kontributor.updatedraft');
+Route::delete('/kontributor/deletedraft/{id}', [KontributorController::class, 'deleteDraft'])
+    ->name('kontributor.deletedraft');
+Route::post('/kontributor/submitdraft/{id}', [KontributorController::class, 'submitDraft'])
+    ->name('kontributor.submitdraft');
+
 
 
 
