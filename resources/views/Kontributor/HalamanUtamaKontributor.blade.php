@@ -378,37 +378,43 @@
         <p>NolKarbon@gmail.com</p>
     </footer>
 
+<!-- SweetAlert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<!-- Flash Alert -->
 <script>
-@if(session('success'))
-Swal.fire({
-    icon: 'success',
-    title: "{{ session('success') }}",
-    toast: true,
-    position: 'bottom-right',
-    showConfirmButton: false,
-    timer: 2500,
-    timerProgressBar: true
-})
-@endif
+    @if(session('success'))
+        Swal.fire({
+            icon: 'success',
+            title: "{{ session('success') }}",
+            toast: true,
+            position: 'bottom-right',
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: true
+        });
+    @endif
 
-@if(session('error'))
-Swal.fire({
-    icon: 'error',
-    title: "{{ session('error') }}",
-    toast: true,
-    position: 'bottom-right',
-    showConfirmButton: false,
-    timer: 2500,
-    timerProgressBar: true
-})
-@endif
+    @if(session('error'))
+        Swal.fire({
+            icon: 'error',
+            title: "{{ session('error') }}",
+            toast: true,
+            position: 'bottom-right',
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: true
+        });
+    @endif
+</script>
 
+<!-- Notifikasi SweetAlert -->
+<script>
 document.querySelector(".notification-icon").addEventListener("click", function () {
     fetch("{{ route('kontributor.notif') }}")
         .then(res => res.json())
         .then(data => {
+
             if (data.length === 0) {
                 Swal.fire({
                     icon: "info",
@@ -420,18 +426,21 @@ document.querySelector(".notification-icon").addEventListener("click", function 
 
             let html = "";
             data.forEach(n => {
-                if (n.status.toLowerCase() === "menunggu review") {
+                let status = n.status.toLowerCase();
+
+                if (status === "menunggu review") {
                     html += `<p><b>${n.judul}</b> berhasil disubmit pada <b>${n.created_at}</b></p>`;
                 }
-                if (n.status.toLowerCase() === "draft") {
+                else if (status === "draft") {
                     html += `<p><b>${n.judul}</b> berhasil diupdate pada <b>${n.created_at}</b></p>`;
-                }  
-                else if (["revisi","ditolak","rejected"].includes(n.status.toLowerCase())) {
-                    html += `<p><b>${n.judul}</b><br>Status: ${n.status}<br>Catatan: <i>${draft_artikels.catatan}</i></p>`;
-                } 
-                else if (["published","approve"].includes(n.status.toLowerCase())) {
-                    html += `<p><b>${n.judul}</b> telah diapprove dan dipublish pada <b>${n.created_at}</p>`;
                 }
+                else if (["revisi","ditolak","rejected"].includes(status)) {
+                    html += `<p><b>${n.judul}</b><br>Status: ${n.status}<br>Catatan: <i>${n.catatan ?? '-'}</i></p>`;
+                }
+                else if (["published","approve"].includes(status)) {
+                    html += `<p><b>${n.judul}</b> telah dipublish pada <b>${n.created_at}</b></p>`;
+                }
+
                 html += "<hr>";
             });
 
@@ -443,7 +452,6 @@ document.querySelector(".notification-icon").addEventListener("click", function 
             });
         });
 });
-
 </script>
 </body>
 </html>
