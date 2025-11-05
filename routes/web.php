@@ -12,6 +12,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/NolKarbon', function () {
+    return view('HalamanUtama');
+});
+
 // Halaman Kontributor
 Route::get('/kontributor', [KontributorController::class, 'index'])->name('kontributor.index');
 Route::get('/kontributor/editdraft/{id}', [KontributorController::class, 'editDraft'])->name('kontributor.editdraft');

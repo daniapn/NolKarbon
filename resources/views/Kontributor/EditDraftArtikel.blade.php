@@ -432,7 +432,7 @@
     function confirmDelete(formId) {
         Swal.fire({
             title: "Hapus Draft?",
-            text: "Draft yang terhapus tidak dapat dikembalikan.",
+            text: "Draft yang dihapus tidak dapat dikembalikan.",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#d33",
