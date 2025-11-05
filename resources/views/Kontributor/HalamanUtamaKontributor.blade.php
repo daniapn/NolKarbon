@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nol Karbon - Article Management</title>
+    <title>Kontributor - Article Management</title>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -195,7 +195,7 @@
         }
 
         .status-pending {
-            background: #FFF9E6;
+            background: #e6f5ffff;
         }
 
         .status-published {
@@ -207,7 +207,7 @@
         }
 
         .status-revision {
-            background: #cbb404ff;
+            background: #fffbdcff;
         }
 
         .status-draft {
@@ -256,14 +256,64 @@
             }
         }
     </style>
+    <style>
+.swal2-popup {
+    font-family: 'Lexend', sans-serif;
+    border-radius: 25px !important;
+    background: #ffffffff !important;
+    color: #000862 !important;
+    border: 2px solid #000862 !important;
+}
+
+.swal2-title {
+    font-weight: 700 !important;
+    color: #000862 !important;
+}
+
+.swal2-html-container {
+    color: #000862 !important;
+    font-size: 16px;
+}
+
+.swal2-confirm {
+    background-color: #000862 !important;
+    color: #ffffffff !important;
+    border-radius: 20px !important;
+    padding: 10px 25px !important;
+    font-weight: 600;
+}
+
+.swal2-confirm:hover {
+    background-color: #d65151ff !important;
+}
+
+.swal2-cancel {
+    background-color: #ffffffff !important;
+    border: 2px solid #000862 !important;
+    color: #000862 !important;
+    border-radius: 20px !important;
+    padding: 10px 25px !important;
+    font-weight: 600;
+}
+
+.swal2-cancel:hover {
+    background-color: #c4dae6ff !important;
+}
+
+.swal2-icon {
+    border-color: #000862 !important;
+    color: #000862 !important;
+}
+</style>
+
 </head>
 <body>
     <header>
         <div></div>
         <div class="header-right">
             <div class="notification-icon">
-                <img src="/images/notif.png" alt="Notifications">
-            </div>
+    <img src="/images/notif.png" alt="Notifications">
+</div>
             <button class="logout-btn">Logout</button>
         </div>
     </header>
@@ -278,42 +328,134 @@
     </section>
 
 <div class="content-container">
+    <a href="{{ route('kontributor.createdraft') }}">
     <button class="create-btn">Buat Draft Artikel Baru</button>
+</a>
+
 
     <div class="article-list">
 
         @forelse($artikels as $artikel)
-            <div class="article-card">
-                <div class="article-content">
-                    <div class="article-title">{{ $artikel->judul }}</div>
+        <div class="article-card">
+        <div class="article-content">
+        <div class="article-title">{{ $artikel->judul }}</div>
 
-                    @if($artikel->status == 'revisi' || $artikel->status == 'draft')
-                        <div class="article-edit">Edit</div>
-                    @endif
-                </div>
 
-                <div class="article-status 
-                    @if($artikel->status == 'menunggu revisi') status-pending
-                    @elseif($artikel->status == 'published') status-published
-                    @elseif($artikel->status == 'rejected') status-rejected
-                    @elseif($artikel->status == 'revisi') status-revision
-                    @else status-draft
-                    @endif">
-                    {{ ucwords($artikel->status) }}
-                </div>
-            </div>
+        @if(in_array(strtolower($artikel->status), ['revisi', 'draft']))
+            <a href="{{ route('kontributor.editdraft', $artikel->idDraft) }}" class="article-edit">
+                Edit
+            </a>
+            @else(in_array(strtolower($artikel->status), ['ditolak', 'published', 'menunggu revisi']))
+            <a href="{{ route('kontributor.viewdraft', $artikel->idDraft) }}" class="article-view">
+                Lihat
+            </a>
+        @endif
 
-        @empty
-            <p style="text-align:center; margin-top:20px;">Belum ada artikel.</p>
-        @endforelse
+</div>
 
-    </div>
+    @php
+    $class = match(strtolower($artikel->status)) {
+    'menunggu review' => 'status-pending',
+    'published' => 'status-published',
+    'rejected' => 'status-rejected',
+    'revisi' => 'status-revision',
+    'draft' => 'status-draft',
+    default => 'status-draft'
+    };
+    @endphp
+
+<div class="article-status {{ $class }}">
+{{ ucwords($artikel->status) }}
+</div>
 </div>
 
 
+@empty
+<p style="text-align:center; margin-top:20px;">Belum ada artikel.</p>
+@endforelse
+
+
+</div>
+</div>
     <footer>
         <img class="footer-logo" src=/images/logo.png alt="Nol Karbon Logo">
         <p>NolKarbon@gmail.com</p>
     </footer>
+
+<!-- SweetAlert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- Flash Alert -->
+<script>
+    @if(session('success'))
+        Swal.fire({
+            icon: 'success',
+            title: "{{ session('success') }}",
+            toast: true,
+            position: 'bottom-right',
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: true
+        });
+    @endif
+
+    @if(session('error'))
+        Swal.fire({
+            icon: 'error',
+            title: "{{ session('error') }}",
+            toast: true,
+            position: 'bottom-right',
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: true
+        });
+    @endif
+</script>
+
+<!-- Notifikasi SweetAlert -->
+<script>
+document.querySelector(".notification-icon").addEventListener("click", function () {
+    fetch("{{ route('kontributor.notif') }}")
+        .then(res => res.json())
+        .then(data => {
+
+            if (data.length === 0) {
+                Swal.fire({
+                    icon: "info",
+                    title: "Belum ada notifikasi",
+                    text: "Tidak ada update draft artikel."
+                });
+                return;
+            }
+
+            let html = "";
+            data.forEach(n => {
+                let status = n.status.toLowerCase();
+
+                if (status === "menunggu review") {
+                    html += `<p><b>${n.judul}</b> berhasil disubmit pada <b>${n.created_at}</b></p>`;
+                }
+                else if (status === "draft") {
+                    html += `<p><b>${n.judul}</b> berhasil diupdate pada <b>${n.created_at}</b></p>`;
+                }
+                else if (["revisi","ditolak"].includes(status)) {
+                    html += `<p><b>${n.judul}</b><br>Status: ${n.status}<br>Catatan: <i>${n.catatan ?? '-'}</i></p>`;
+                }
+                else if (["published"].includes(status)) {
+                    html += `<p><b>${n.judul}</b> telah dipublish pada <b>${n.created_at}</b></p>`;
+                }
+
+                html += "<hr>";
+            });
+
+            Swal.fire({
+                title: "Notifikasi",
+                html: html,
+                width: 500,
+                confirmButtonText: "Tutup"
+            });
+        });
+});
+</script>
 </body>
 </html>
