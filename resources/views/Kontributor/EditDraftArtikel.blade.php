@@ -271,6 +271,56 @@
             }
         }
     </style>
+    <style>
+.swal2-popup {
+    font-family: 'Lexend', sans-serif;
+    border-radius: 25px !important;
+    background: #ffffffff !important;
+    color: #000862 !important;
+    border: 2px solid #000862 !important;
+}
+
+.swal2-title {
+    font-weight: 700 !important;
+    color: #000862 !important;
+}
+
+.swal2-html-container {
+    color: #000862 !important;
+    font-size: 16px;
+}
+
+.swal2-confirm {
+    background-color: #000862 !important;
+    color: #ffffffff !important;
+    border-radius: 20px !important;
+    padding: 10px 25px !important;
+    font-weight: 600;
+}
+
+.swal2-confirm:hover {
+    background-color: #d65151ff !important;
+}
+
+.swal2-cancel {
+    background-color: #ffffffff !important;
+    border: 2px solid #000862 !important;
+    color: #000862 !important;
+    border-radius: 20px !important;
+    padding: 10px 25px !important;
+    font-weight: 600;
+}
+
+.swal2-cancel:hover {
+    background-color: #c4dae6ff !important;
+}
+
+.swal2-icon {
+    border-color: #000862 !important;
+    color: #000862 !important;
+}
+</style>
+
 </head>
 <body>
     <header>
@@ -319,9 +369,9 @@
                 </div>
 
                 <div class="action-buttons">
-                    <button class="btn btn-delete" type="button" onclick="confirmDelete()">
-                        Hapus Draft
-                    </button>
+                    <button class="btn btn-delete" type="button" onclick="confirmDelete('delete-form')">
+    Hapus Draft
+</button>
                     <button class="btn" type="submit">
                         Simpan Draft
                     </button>
@@ -362,17 +412,40 @@
             }
         });
 
-        // Confirm delete
-        function confirmDelete() {
-            if (confirm('Hapus draft ini?')) {
-                document.getElementById('delete-form').submit();
-            }
-        }
-
         // Submit draft
         function submitDraft() {
             document.getElementById('submit-form').submit();
         }
     </script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>    // Fungsi konfirmasi hapus draft
+    @if(session('success'))
+        Swal.fire({
+            icon: "success",
+            title: "Berhasil!",
+            text: "{{ session('success') }}",
+            timer: 2000,
+            showConfirmButton: false,
+        });
+    @endif
+
+    function confirmDelete(formId) {
+        Swal.fire({
+            title: "Hapus Draft?",
+            text: "Draft yang terhapus tidak dapat dikembalikan.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Ya, Hapus",
+            cancelButtonText: "Batal"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById(formId).submit();
+            }
+        });
+    }
+</script>
+
 </body>
 </html>

@@ -10,7 +10,7 @@ class KontributorController extends Controller
 {
     public function index()
     {
-        $artikels = DraftArtikel::orderBy('created_at', 'desc')->get();
+        $artikels = DraftArtikel::orderBy('tanggalDibuat', 'desc')->get();
         return view('Kontributor.HalamanUtamaKontributor', compact('artikels'));
     }
 
@@ -20,7 +20,7 @@ class KontributorController extends Controller
         return view('Kontributor.EditDraftArtikel', compact('artikel'));
     }
 
-    public function updateDraft(Request $request, $id)
+   public function updateDraft(Request $request, $id)
 {
     $request->validate([
         'judul' => 'required|string',
@@ -37,11 +37,13 @@ class KontributorController extends Controller
         $draft->gambar = $path;
     }
 
+    // ✅ Simpan waktu update
+    $draft->tanggalUpdate = now();
+
     $draft->save();
 
-    // balik ke tampilan edit + toast success
     return redirect()
-        ->route('kontributor.editdraft', $id)
+        ->route('kontributor.index')
         ->with('success', 'Draft berhasil disimpan!');
 }
 
@@ -60,14 +62,19 @@ class KontributorController extends Controller
             ->with('success', 'Draft berhasil dihapus!');
     }
 
-    public function submitDraft($id)
-    {
-        $draft = DraftArtikel::findOrFail($id);
+public function submitDraft($id)
+{
+    $draft = DraftArtikel::findOrFail($id);
 
-        $draft->status = 'menunggu review';
-        $draft->save();
+    $draft->status = 'menunggu review';
+    
+    // ✅ Simpan waktu update juga
+    $draft->tanggalUpdate = now();
 
-        return redirect()->route('kontributor.index')
-            ->with('success', 'Draft berhasil dikirim untuk review!');
-    }
+    $draft->save();
+
+    return redirect()->route('kontributor.index')
+        ->with('success', 'Draft berhasil dikirim untuk review!');
+}
+
 }

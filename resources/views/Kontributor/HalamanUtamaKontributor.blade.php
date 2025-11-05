@@ -256,6 +256,56 @@
             }
         }
     </style>
+    <style>
+.swal2-popup {
+    font-family: 'Lexend', sans-serif;
+    border-radius: 25px !important;
+    background: #ffffffff !important;
+    color: #000862 !important;
+    border: 2px solid #000862 !important;
+}
+
+.swal2-title {
+    font-weight: 700 !important;
+    color: #000862 !important;
+}
+
+.swal2-html-container {
+    color: #000862 !important;
+    font-size: 16px;
+}
+
+.swal2-confirm {
+    background-color: #000862 !important;
+    color: #ffffffff !important;
+    border-radius: 20px !important;
+    padding: 10px 25px !important;
+    font-weight: 600;
+}
+
+.swal2-confirm:hover {
+    background-color: #d65151ff !important;
+}
+
+.swal2-cancel {
+    background-color: #ffffffff !important;
+    border: 2px solid #000862 !important;
+    color: #000862 !important;
+    border-radius: 20px !important;
+    padding: 10px 25px !important;
+    font-weight: 600;
+}
+
+.swal2-cancel:hover {
+    background-color: #c4dae6ff !important;
+}
+
+.swal2-icon {
+    border-color: #000862 !important;
+    color: #000862 !important;
+}
+</style>
+
 </head>
 <body>
     <header>
@@ -320,11 +370,40 @@
 
 </div>
 </div>
-
-
     <footer>
         <img class="footer-logo" src=/images/logo.png alt="Nol Karbon Logo">
         <p>NolKarbon@gmail.com</p>
     </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+@if(session('success'))
+Swal.fire({
+    icon: 'success',
+    title: "{{ session('success') }}",
+    toast: true,
+    position: 'bottom-right',
+    showConfirmButton: false,
+    timer: 2500,
+    timerProgressBar: true
+})
+@endif
+
+@if(session('error'))
+Swal.fire({
+    icon: 'error',
+    title: "{{ session('error') }}",
+    toast: true,
+    position: 'bottom-right',
+    showConfirmButton: false,
+    timer: 2500,
+    timerProgressBar: true
+})
+@endif
+</script>
+
+
+   
 </body>
 </html>
