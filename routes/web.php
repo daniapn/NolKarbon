@@ -11,15 +11,11 @@ Route::get('/', function () {
 
 // Halaman Kontributor
 Route::get('/kontributor', [KontributorController::class, 'index'])->name('kontributor.index');
-Route::get('/kontributor/artikel/editdraft/{id}', 
-    [KontributorController::class, 'editDraft']
-)->name('kontributor.editdraft');
-Route::put('/kontributor/updatedraft/{id}', [KontributorController::class, 'updateDraft'])
-    ->name('kontributor.updatedraft');
-Route::delete('/kontributor/deletedraft/{id}', [KontributorController::class, 'deleteDraft'])
-    ->name('kontributor.deletedraft');
-Route::post('/kontributor/submitdraft/{id}', [KontributorController::class, 'submitDraft'])
-    ->name('kontributor.submitdraft');
+Route::get('/kontributor/editdraft/{id}', [KontributorController::class, 'editDraft'])->name('kontributor.editdraft');
+Route::get('/kontributor/viewdraft/{id}', [KontributorController::class, 'viewDraft'])->name('kontributor.viewdraft');
+Route::put('/kontributor/updatedraft/{id}', [KontributorController::class, 'updateDraft'])->name('kontributor.updatedraft');
+Route::delete('/kontributor/deletedraft/{id}', [KontributorController::class, 'deleteDraft'])->name('kontributor.deletedraft');
+Route::post('/kontributor/submitdraft/{id}', [KontributorController::class, 'submitDraft'])->name('kontributor.submitdraft');
 Route::get('/artikel/create-draft', [KontributorController::class, 'createDraft'])->name('kontributor.createdraft');
 Route::post('/artikel/store-draft', [KontributorController::class, 'storeDraft'])->name('kontributor.storedraft');
 Route::get('/kontributor/notif', [KontributorController::class, 'getNotif'])->name('kontributor.notif');

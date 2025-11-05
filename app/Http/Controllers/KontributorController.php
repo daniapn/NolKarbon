@@ -22,6 +22,12 @@ class KontributorController extends Controller
         return view('Kontributor.EditDraftArtikel', compact('artikel'));
     }
 
+    public function viewDraft($id)
+    {
+        $artikel = DraftArtikel::findOrFail($id);
+        return view('Kontributor.ViewDraftArtikel', compact('artikel'));
+    }
+
    public function updateDraft(Request $request, $id)
 {
     $request->validate([

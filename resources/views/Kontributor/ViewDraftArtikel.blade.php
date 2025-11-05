@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kontributor - Edit Article</title>
+    <title>Kontributor - View Article</title>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -271,181 +271,71 @@
             }
         }
     </style>
-    <style>
-.swal2-popup {
-    font-family: 'Lexend', sans-serif;
-    border-radius: 25px !important;
-    background: #ffffffff !important;
-    color: #000862 !important;
-    border: 2px solid #000862 !important;
-}
-
-.swal2-title {
-    font-weight: 700 !important;
-    color: #000862 !important;
-}
-
-.swal2-html-container {
-    color: #000862 !important;
-    font-size: 16px;
-}
-
-.swal2-confirm {
-    background-color: #000862 !important;
-    color: #ffffffff !important;
-    border-radius: 20px !important;
-    padding: 10px 25px !important;
-    font-weight: 600;
-}
-
-.swal2-confirm:hover {
-    background-color: #d65151ff !important;
-}
-
-.swal2-cancel {
-    background-color: #ffffffff !important;
-    border: 2px solid #000862 !important;
-    color: #000862 !important;
-    border-radius: 20px !important;
-    padding: 10px 25px !important;
-    font-weight: 600;
-}
-
-.swal2-cancel:hover {
-    background-color: #c4dae6ff !important;
-}
-
-.swal2-icon {
-    border-color: #000862 !important;
-    color: #000862 !important;
-}
-</style>
-
 </head>
 <body>
-    <header>
-        <button class="logout-btn">Logout</button>
-    </header>
 
-    <div class="logo-section">
-        <img src="/images/logo.png" alt="Nol Karbon Logo">
-    </div>
+<header>
+    <button class="logout-btn" onclick="window.location.href='{{ route('logout') }}'">
+        Logout
+    </button>
+</header>
 
-    <section class="hero">
-        <h1>Let's Contribute and Be Part<br>of <span class="highlight">Nol Karbon</span></h1>
-        <p>Nol Karbon empowers you to take small yet meaningful actions for a cleaner, greener future.</p>
-    </section>
+<div class="logo-section">
+    <img src="/images/logo.png" alt="Nol Karbon Logo">
+</div>
 
-    <div class="form-container">
-        <div class="form-card">
-            <form action="{{ route('kontributor.updatedraft', $artikel->idDraft) }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
+<section class="hero">
+    <h1>View Your <span class="highlight">Draft Artikel</span></h1>
+    <p>Lihat draft artikel kamu sebelum dikirim atau direvisi.</p>
+</section>
 
-                <div class="form-grid">
-                    <div class="form-section">
-                        <div class="form-header">Judul</div>
-                        <div class="form-body">
-                            <input type="text" name="judul" value="{{ $artikel->judul }}" required>
-                        </div>
-                    </div>
+<div class="form-container">
+    <div class="form-card">
 
-                    <div class="form-section">
-                        <div class="form-header">Gambar</div>
-                        <div class="form-body" style="padding: 1rem;">
-                            <label class="image-upload">
-                                <img src="{{ $artikel->gambar ? asset('storage/'.$artikel->gambar) : 'https://placehold.co/400x200?text=No+Image' }}" alt="Article image" id="preview-image">
-                                <input type="file" name="gambar" accept="image/*" id="image-input">
-                            </label>
-                        </div>
-                    </div>
+        <div class="form-grid">
 
-                    <div class="form-section full-width">
-                        <div class="form-header">Isi</div>
-                        <div class="form-body">
-                            <textarea name="isi" required>{{ $artikel->isi }}</textarea>
-                        </div>
+            <!-- JUDUL -->
+            <div class="form-section">
+                <div class="form-header">Judul</div>
+                <div class="form-body">
+                    <input type="text" value="{{ $artikel->judul }}" disabled>
+                </div>
+            </div>
+
+            <!-- GAMBAR -->
+            <div class="form-section">
+                <div class="form-header">Gambar</div>
+                <div class="form-body" style="padding: 1rem;">
+                    <div class="image-upload" style="cursor: default;">
+                        <img src="{{ $artikel->gambar ? asset('storage/'.$artikel->gambar) : 'https://placehold.co/400x200?text=No+Image' }}" alt="Article image">
                     </div>
                 </div>
+            </div>
 
-                <div class="action-buttons">
-                    <button class="btn btn-delete" type="button" onclick="confirmDelete('delete-form')">
-    Hapus Draft
-</button>
-                    <button class="btn" type="submit">
-                        Simpan Draft
-                    </button>
-                    <button class="btn" type="button" onclick="submitDraft()">
-                        Submit Draft
-                    </button>
+            <!-- ISI -->
+            <div class="form-section full-width">
+                <div class="form-header">Isi</div>
+                <div class="form-body">
+                    <textarea readonly>{{ $artikel->isi }}</textarea>
                 </div>
-            </form>
+            </div>
 
-            <!-- Hidden Delete Form -->
-            <form id="delete-form" action="{{ route('kontributor.deletedraft', $artikel->idDraft) }}" method="POST" style="display: none;">
-                @csrf
-                @method('DELETE')
-            </form>
-
-            <!-- Hidden Submit Form -->
-            <form id="submit-form" action="{{ route('kontributor.submitdraft', $artikel->idDraft) }}" method="POST" style="display: none;">
-                @csrf
-            </form>
         </div>
+
+        <!-- BUTTON KEMBALI -->
+        <div class="action-buttons">
+            <button class="btn" onclick="window.location.href='{{ route('kontributor.index') }}'">
+                Kembali
+            </button>
+        </div>
+
     </div>
+</div>
 
-    <footer>
-        <img class="footer-logo" src="/images/logo.png" alt="Nol Karbon Logo">
-        <p>NolKarbon@gmail.com</p>
-    </footer>
-
-    <script>
-        // Image upload preview
-        document.getElementById('image-input').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    document.getElementById('preview-image').src = event.target.result;
-                }
-                reader.readAsDataURL(file);
-            }
-        });
-
-        // Submit draft
-        function submitDraft() {
-            document.getElementById('submit-form').submit();
-        }
-    </script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>    // Fungsi konfirmasi hapus draft
-    @if(session('success'))
-        Swal.fire({
-            icon: "success",
-            title: "Berhasil!",
-            text: "{{ session('success') }}",
-            timer: 2000,
-            showConfirmButton: false,
-        });
-    @endif
-
-    function confirmDelete(formId) {
-        Swal.fire({
-            title: "Hapus Draft?",
-            text: "Draft yang terhapus tidak dapat dikembalikan.",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#d33",
-            cancelButtonColor: "#3085d6",
-            confirmButtonText: "Ya, Hapus",
-            cancelButtonText: "Batal"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById(formId).submit();
-            }
-        });
-    }
-</script>
+<footer>
+    <img class="footer-logo" src="/images/logo.png" alt="Nol Karbon Logo">
+    <p>NolKarbon@gmail.com</p>
+</footer>
 
 </body>
 </html>

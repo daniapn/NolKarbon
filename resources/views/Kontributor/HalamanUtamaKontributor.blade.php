@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nol Karbon - Article Management</title>
+    <title>Kontributor - Article Management</title>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -345,6 +345,10 @@
             <a href="{{ route('kontributor.editdraft', $artikel->idDraft) }}" class="article-edit">
                 Edit
             </a>
+            @else(in_array(strtolower($artikel->status), ['ditolak', 'published', 'menunggu revisi']))
+            <a href="{{ route('kontributor.viewdraft', $artikel->idDraft) }}" class="article-view">
+                Lihat
+            </a>
         @endif
 
 </div>
@@ -434,10 +438,10 @@ document.querySelector(".notification-icon").addEventListener("click", function 
                 else if (status === "draft") {
                     html += `<p><b>${n.judul}</b> berhasil diupdate pada <b>${n.created_at}</b></p>`;
                 }
-                else if (["revisi","ditolak","rejected"].includes(status)) {
+                else if (["revisi","ditolak"].includes(status)) {
                     html += `<p><b>${n.judul}</b><br>Status: ${n.status}<br>Catatan: <i>${n.catatan ?? '-'}</i></p>`;
                 }
-                else if (["published","approve"].includes(status)) {
+                else if (["published"].includes(status)) {
                     html += `<p><b>${n.judul}</b> telah dipublish pada <b>${n.created_at}</b></p>`;
                 }
 
