@@ -312,8 +312,8 @@
         <div></div>
         <div class="header-right">
             <div class="notification-icon">
-                <img src="/images/notif.png" alt="Notifications">
-            </div>
+    <img src="/images/notif.png" alt="Notifications">
+</div>
             <button class="logout-btn">Logout</button>
         </div>
     </header>
@@ -328,7 +328,10 @@
     </section>
 
 <div class="content-container">
+    <a href="{{ route('kontributor.createdraft') }}">
     <button class="create-btn">Buat Draft Artikel Baru</button>
+</a>
+
 
     <div class="article-list">
 
@@ -401,9 +404,46 @@ Swal.fire({
     timerProgressBar: true
 })
 @endif
+
+document.querySelector(".notification-icon").addEventListener("click", function () {
+    fetch("{{ route('kontributor.notif') }}")
+        .then(res => res.json())
+        .then(data => {
+            if (data.length === 0) {
+                Swal.fire({
+                    icon: "info",
+                    title: "Belum ada notifikasi",
+                    text: "Tidak ada update draft artikel."
+                });
+                return;
+            }
+
+            let html = "";
+            data.forEach(n => {
+                if (n.status.toLowerCase() === "menunggu review") {
+                    html += `<p><b>${n.judul}</b> berhasil disubmit pada <b>${n.created_at}</b></p>`;
+                }
+                if (n.status.toLowerCase() === "draft") {
+                    html += `<p><b>${n.judul}</b> berhasil diupdate pada <b>${n.created_at}</b></p>`;
+                }  
+                else if (["revisi","ditolak","rejected"].includes(n.status.toLowerCase())) {
+                    html += `<p><b>${n.judul}</b><br>Status: ${n.status}<br>Catatan: <i>${draft_artikels.catatan}</i></p>`;
+                } 
+                else if (["published","approve"].includes(n.status.toLowerCase())) {
+                    html += `<p><b>${n.judul}</b> telah diapprove dan dipublish pada <b>${n.created_at}</p>`;
+                }
+                html += "<hr>";
+            });
+
+            Swal.fire({
+                title: "Notifikasi",
+                html: html,
+                width: 500,
+                confirmButtonText: "Tutup"
+            });
+        });
+});
+
 </script>
-
-
-   
 </body>
 </html>

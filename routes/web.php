@@ -20,6 +20,9 @@ Route::delete('/kontributor/deletedraft/{id}', [KontributorController::class, 'd
     ->name('kontributor.deletedraft');
 Route::post('/kontributor/submitdraft/{id}', [KontributorController::class, 'submitDraft'])
     ->name('kontributor.submitdraft');
+Route::get('/artikel/create-draft', [KontributorController::class, 'createDraft'])->name('kontributor.createdraft');
+Route::post('/artikel/store-draft', [KontributorController::class, 'storeDraft'])->name('kontributor.storedraft');
+Route::get('/kontributor/notif', [KontributorController::class, 'getNotif'])->name('kontributor.notif');
 
 
 
