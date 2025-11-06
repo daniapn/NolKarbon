@@ -21,20 +21,18 @@
         }
 
         /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+                header {
             padding: 1.5rem 5%;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #EEE8DF;
-            z-index: 1000;
         }
 
         .header-container {
+            position: fixed;
+            top: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
             background: rgba(255, 255, 255, 0.95);
             box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.25);
             border-radius: 50px;
@@ -44,7 +42,8 @@
             justify-content: space-between;
             gap: 2rem;
             max-width: 780px;
-            width: 100%;
+            width: 90%;
+            z-index: 1000;
         }
 
         .logo img {
@@ -132,6 +131,8 @@
             align-items: center;
             position: relative;
             overflow: hidden;
+                        justify-content: center;
+            align-items: center;
         }
 
         .nolkarbon-content h2 {
@@ -175,13 +176,16 @@
 
         /* Together Section */
         .together-section {
-            background: #000862;
-            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-            border-radius: 60px;
-            margin: 3rem -5% 0;
-            padding: 3rem 10%;
-            text-align: center;
-        }
+    background: #000862;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+   border-top-left-radius: 60px;
+    border-top-right-radius: 60px;
+    margin: 3rem auto 0;
+    padding: 3rem 5%;
+    text-align: center;
+    max-width: 100%;
+}
+
 
         .together-section h2 {
             font-family: 'Poppins', sans-serif;
@@ -220,6 +224,7 @@
             font-size: 18px;
             letter-spacing: 0.54px;
             line-height: 1.6;
+            margin-top: 2rem;
             margin-bottom: 2rem;
             min-height: 120px;
         }
@@ -228,7 +233,7 @@
             content: '"';
             font-size: 80px;
             position: absolute;
-            top: -30px;
+            top: -50px;
             left: -10px;
             color: white;
             opacity: 0.5;
@@ -262,7 +267,7 @@
         /* Support Section */
         .support-section {
             background: #000862;
-            padding: 4rem 10%;
+            padding: 6rem 10%;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 3rem;
@@ -285,22 +290,16 @@
             line-height: 1.5;
         }
 
-        .project-icons {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-        }
-
         .project-icon {
-            border-radius: 15px;
-            height: 120px;
+            height: 250px;
+            width: 250px;
             overflow: hidden;
+            margin-left: 18rem;
         }
 
         .project-icon img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
         }
 
         .project-icon.large {
@@ -318,15 +317,13 @@
 
         .earth-illustration {
             width: 100%;
-            height: 400px;
-            border-radius: 30px;
+            height: 100%;
             overflow: hidden;
         }
 
         .earth-illustration img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
         }
 
         .habits-content h2 {
@@ -444,30 +441,35 @@
 
         .podium-rank.second {
             width: 203px;
-            height: 77px;
+            height: 90px;
             border-top-left-radius: 35px;
             font-size: 32px;
         }
 
         .podium-rank.third {
             width: 213px;
-            height: 54px;
+            height: 80px;
             border-top-right-radius: 35px;
             font-size: 24px;
         }
 
         .podium-name {
             font-size: 14px;
-            margin-top: 0.5rem;
+            margin-top: 0rem;
         }
 
         .podium-name.first {
             font-size: 14px;
         }
 
-        .podium-name.second,
+        .podium-name.second{
+            font-size: 10px;
+            margin-bottom: 0.75rem;
+        }
+
         .podium-name.third {
             font-size: 10px;
+            margin-bottom: 1rem;
         }
 
         .see-more-bar {
@@ -481,11 +483,17 @@
             color: #FDF3D6;
             font-size: 20px;
             cursor: pointer;
+            margin-left: 1rem;
+            margin-right: 1rem;
         }
+
+        .see-more-bar:hover {
+        background: #3675BE;
+    }
 
         /* Card Section */
         .card-section {
-            padding: 4rem 10%;
+            padding: 6rem 10%;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 3rem;
@@ -493,13 +501,14 @@
         }
 
         .emission-card {
+            margin-top: 6rim;
             border-radius: 25px;
             overflow: hidden;
             position: relative;
         }
 
         .emission-card img {
-            width: 100%;
+            width: 75%;
             height: auto;
             display: block;
         }
@@ -508,9 +517,11 @@
             font-family: 'Poppins', sans-serif;
             font-size: 75px;
             font-weight: 600;
-            line-height: 80px;
+            line-height: 100px;
             letter-spacing: 1.5px;
+            white-space: nowrap;
             color: #FDF3D6;
+            margin-top: 6rim;
         }
 
         .btn-secondary {
@@ -527,8 +538,24 @@
             margin-top: 2rem;
         }
 
+        .btn-secondary:hover {
+        background: #3675BE;
+        color: #fff;
+        transform: scale(1.05);
+    }
+
         /* Challenge Section */
-        .challenge-section {
+.card-section {
+  background: #000862;
+  padding: 6rem 10%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+}
+            .challenge-section {
             background: #000862;
             padding: 4rem 10%;
             text-align: center;
@@ -547,28 +574,34 @@
 
         .trophy {
             width: 504px;
-            height: 504px;
             margin: 2rem auto;
             overflow: hidden;
         }
 
         .trophy img {
-            width: 100%;
-            height: 100%;
+            width: 75%;
+            height: 75%;
             object-fit: contain;
         }
 
         .btn-challenge {
             background: #D9D9D9;
             color: #000862;
-            padding: 1.5rem 3rem;
+            padding: 0.5rem 1rem;
             border: none;
             border-radius: 35px;
             font-family: 'Poppins', sans-serif;
-            font-size: 32px;
+            font-size: 24px;
             font-weight: 600;
             cursor: pointer;
         }
+
+        .btn-challenge:hover {
+        background: #3675BE;
+        color: #fff;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+    }
 
         /* Articles Section */
         .articles-section {
@@ -681,6 +714,16 @@
                 line-height: 60px;
             }
         }
+
+        html, body {
+  overflow-x: hidden;
+}
+
+section, div, img {
+  max-width: 100%;
+}
+
+
     </style>
 </head>
 <body>
@@ -746,23 +789,18 @@
         </div>
         <div class="project-icons">
             <div class="project-icon">
-                <img src="/images/project1.jpg" alt="Trees Project">
+                <img src="/images/sdgs13.png" alt="Protection Project">
             </div>
-            <div class="project-icon">
-                <img src="/images/project2.jpg" alt="Protection Project">
-            </div>
-            <div class="project-icon large">
-                <img src="/images/project3.jpg" alt="See More Projects">
-            </div>
+            
         </div>
     </section>
 
     <section class="habits-section">
         <div class="earth-illustration">
-            <img src="/images/earth.jpg" alt="Earth Illustration">
+            <img src="/images/earth.png" alt="Earth Illustration">
         </div>
         <div class="habits-content">
-            <h2>Let's see how your habits affect the Earth 🌍</h2>
+            <h2>Let's see how your habits affect the Earth</h2>
             <p>Empower your climate action with data-driven insight</p>
             <button class="btn-primary">Start Calculate</button>
         </div>
@@ -840,13 +878,12 @@
         </div>
     </section>
 
-    <section class="card-section" style="background: #000862; margin: 0 -100vw; padding-left: calc(50vw - 50%); padding-right: calc(50vw - 50%);">
+    <section class="card-section">
         <div class="emission-card">
-            <img src="/images/emission-card.jpg" alt="Emission Card">
+            <img src="/images/cardd.png" alt="Emission Card">
         </div>
         <div class="card-content">
-            <h2>Get Your</h2>
-            <h2>Own</h2>
+            <h2>Get Your Own</h2>
             <h2>"Kartu Emisi"</h2>
             <button class="btn-secondary">Lihat Kartu Emisi</button>
         </div>
@@ -855,7 +892,7 @@
     <section class="challenge-section">
         <h2>Join Eco Challenge<br>and Earn Points!</h2>
         <div class="trophy">
-            <img src="/images/trophy.png" alt="Trophy">
+            <img src="/images/piala.png" alt="Trophy">
         </div>
         <button class="btn-challenge">Check it Out!</button>
     </section>

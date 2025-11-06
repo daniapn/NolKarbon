@@ -31,6 +31,9 @@ Route::post('/kontributor/submitdraft/{id}', [KontributorController::class, 'sub
 Route::get('/artikel/create-draft', [KontributorController::class, 'createDraft'])->name('kontributor.createdraft');
 Route::post('/artikel/store-draft', [KontributorController::class, 'storeDraft'])->name('kontributor.storedraft');
 Route::get('/kontributor/notif', [KontributorController::class, 'getNotif'])->name('kontributor.notif');
+Route::get('/NolKarbon', function () {
+    return view('HalamanUtama');
+})->name('logout');
 
 // login regois (aurel)
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
