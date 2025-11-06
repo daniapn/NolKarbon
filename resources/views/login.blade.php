@@ -11,23 +11,24 @@
             box-sizing: border-box;
         }
 
-        body {
+        html, body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
+            min-height: 100vh;
+            background: #f5f0e8;
+            overflow-y: auto; /* scroll 1 halaman */
         }
 
         .container {
             display: flex;
-            flex: 1;
-            min-height: 100vh;
+            flex-wrap: wrap;
+            min-height: calc(100vh - 120px);
         }
 
-        /* ===== LEFT SECTION ===== */
+        /* LEFT SECTION */
         .left-section {
-            background: linear-gradient(135deg, #001d5c 0%, #003399 100%);
+            background: #000862;
             width: 50%;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -43,25 +44,10 @@
             margin-bottom: 40px;
         }
 
-        .logo-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
         .logo-container img {
-            width: 150px;
+            width: 180px;
             height: auto;
             margin-bottom: 10px;
-        }
-
-        .logo-text {
-            font-size: 42px;
-            font-weight: bold;
-            color: #00bfff;
-            letter-spacing: 2px;
-            line-height: 1.2;
         }
 
         .tagline {
@@ -70,14 +56,14 @@
             opacity: 0.9;
         }
 
-        /* ===== RIGHT SECTION ===== */
+        /* RIGHT SECTION */
         .right-section {
+            flex: 1;
             background: #f5f0e8;
-            width: 50%;
             display: flex;
             justify-content: center;
-            align-items: center;
-            padding: 40px;
+            align-items: center; /* form di tengah vertikal */
+            padding: 60px 40px;
         }
 
         .form-card {
@@ -86,18 +72,19 @@
             border-radius: 24px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 450px;
+            max-width: 460px;
+            margin: auto;
         }
 
         .form-header {
             text-align: right;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             font-size: 14px;
             color: #666;
         }
 
         .form-header a {
-            color: #001d5c;
+            color: #000862;
             text-decoration: underline;
             font-weight: 500;
         }
@@ -126,7 +113,7 @@
 
         .form-group input:focus {
             outline: none;
-            border-color: #003399;
+            border-color: #000862;
             background: white;
         }
 
@@ -137,7 +124,7 @@
         .submit-btn {
             width: 100%;
             padding: 16px;
-            background: linear-gradient(135deg, #001d5c 0%, #003399 100%);
+            background: #000862;
             color: white;
             border: none;
             border-radius: 50px;
@@ -169,33 +156,25 @@
             text-align: center;
         }
 
-        /* ===== FOOTER ===== */
+        /* FOOTER */
         .footer {
-            background: linear-gradient(135deg, #001d5c 0%, #003399 100%);
+            background: #000862;
             padding: 30px 50px;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
         }
 
         .footer-logo {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 15px;
         }
 
         .footer-logo img {
             width: 150px;
             height: 150px;
             object-fit: contain;
-            border-radius: 50%;
-        }
-
-        .footer-logo-text {
-            font-size: 24px;
-            font-weight: bold;
-            color: #00bfff;
-            line-height: 1.2;
         }
 
         .footer-contact {
@@ -203,22 +182,24 @@
             font-size: 16px;
             cursor: pointer;
             transition: color 0.3s;
+            margin-top: 10px;
         }
 
         .footer-contact:hover {
             color: #00bfff;
         }
 
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 968px) {
+        /* RESPONSIVE */
+        @media (max-width: 992px) {
             .container {
                 flex-direction: column;
             }
             .left-section, .right-section {
                 width: 100%;
+                min-height: auto;
             }
             .left-section {
-                min-height: 40vh;
+                padding: 40px 20px;
             }
         }
     </style>
@@ -276,8 +257,8 @@
     <div class="footer">
         <div class="footer-logo">
             <img src="/images/logo.png" alt="Nol Karbon Footer Logo">
+            <div class="footer-contact">Contact Us</div>
         </div>
-        <div class="footer-contact">Contact Us</div>
     </div>
 </body>
 </html>
