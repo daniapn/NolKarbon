@@ -6,8 +6,9 @@ use App\Http\Controllers\KontributorController;
 use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\ChallengeUserController;
 use App\Http\Controllers\ChallengeAdminController;
+use App\Http\Controllers\AuthController;
 
-// Halaman utama (welcome)
+// Halaman utama (welcome) (dn)
 Route::get('/', function () {
     return view('welcome');
 });
@@ -16,7 +17,7 @@ Route::get('/NolKarbon', function () {
     return view('HalamanUtama');
 });
 
-// Halaman Kontributor
+// Halaman Kontributor (dn)
 Route::get('/kontributor', [KontributorController::class, 'index'])->name('kontributor.index');
 Route::get('/kontributor/editdraft/{id}', [KontributorController::class, 'editDraft'])->name('kontributor.editdraft');
 Route::get('/kontributor/viewdraft/{id}', [KontributorController::class, 'viewDraft'])->name('kontributor.viewdraft');
@@ -26,6 +27,10 @@ Route::post('/kontributor/submitdraft/{id}', [KontributorController::class, 'sub
 Route::get('/artikel/create-draft', [KontributorController::class, 'createDraft'])->name('kontributor.createdraft');
 Route::post('/artikel/store-draft', [KontributorController::class, 'storeDraft'])->name('kontributor.storedraft');
 Route::get('/kontributor/notif', [KontributorController::class, 'getNotif'])->name('kontributor.notif');
+
+// login regois (aurel)
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 
 Route::get('/leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard.index');
 Route::get('/communities/dashboard', [CommunityController::class, 'dashboard'])->name('communities.dashboard');
