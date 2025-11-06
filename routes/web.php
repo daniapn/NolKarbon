@@ -8,6 +8,7 @@ use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\ReportAdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\KontributorController;
 use Illuminate\Support\Facades\Auth;
 
 // Halaman utama (welcome) (dn)
