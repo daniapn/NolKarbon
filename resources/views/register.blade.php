@@ -12,63 +12,41 @@
         }
 
         html, body {
-            height: 100%;
-            width: 100%;
-            overflow-x: hidden;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f5f0e8;
+            min-height: 100vh;
+            overflow-y: auto;
         }
 
         .container {
             display: flex;
             flex-wrap: wrap;
-            min-height: 100vh;
+            min-height: calc(100vh - 120px);
         }
 
         /* ===== LEFT SECTION ===== */
         .left-section {
-            flex: 1 1 50%;
-            background: linear-gradient(135deg, #001d5c 0%, #003399 100%);
+            background: #000862;
+            width: 50%;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: center; /* biar pas tengah vertikal */
             align-items: center;
+            padding: 60px;
             color: white;
-            padding: 60px 40px;
+            text-align: center;
         }
 
         .welcome-text {
             font-size: 60px;
             font-weight: bold;
-            margin-bottom: 30px;
-            text-align: center;
+            margin-bottom: 20px; /* dikit aja, biar nggak terlalu jauh dari logo */
         }
 
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 20px;
+        .logo-container img {
+            width: 180px;
+            height: auto;
             margin-bottom: 15px;
-        }
-
-        .logo-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #1e90ff 0%, #00bfff 100%);
-            border-radius: 50%;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .logo-icon::before {
-            content: '';
-            position: absolute;
-            width: 50%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.3);
-            top: 0;
-            left: 0;
-            border-radius: 50% 0 0 50%;
         }
 
         .logo-text {
@@ -76,23 +54,23 @@
             font-weight: bold;
             color: #00bfff;
             letter-spacing: 2px;
+            line-height: 1.2;
         }
 
         .tagline {
             font-size: 18px;
             margin-top: 10px;
             opacity: 0.9;
-            text-align: center;
         }
 
         /* ===== RIGHT SECTION ===== */
         .right-section {
-            flex: 1 1 50%;
+            flex: 1;
             background: #f5f0e8;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 40px;
+            padding: 60px 40px;
         }
 
         .form-card {
@@ -102,6 +80,7 @@
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 460px;
+            margin: auto;
         }
 
         .form-header {
@@ -112,7 +91,7 @@
         }
 
         .form-header a {
-            color: #001d5c;
+            color: #000862;
             text-decoration: underline;
             font-weight: 500;
         }
@@ -141,12 +120,8 @@
 
         .form-group input:focus {
             outline: none;
-            border-color: #003399;
+            border-color: #000862;
             background: white;
-        }
-
-        .form-group input::placeholder {
-            color: #aaa;
         }
 
         .checkbox-group {
@@ -171,7 +146,7 @@
         .submit-btn {
             width: 100%;
             padding: 16px;
-            background: linear-gradient(135deg, #001d5c 0%, #003399 100%);
+            background: #000862;
             color: white;
             border: none;
             border-radius: 50px;
@@ -194,32 +169,23 @@
 
         /* ===== FOOTER ===== */
         .footer {
-            background: linear-gradient(135deg, #001d5c 0%, #003399 100%);
-            padding: 30px 60px;
+            background: #000862;
+            padding: 30px 50px;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            color: white;
-            flex-shrink: 0;
         }
 
         .footer-logo {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 15px;
         }
 
-        .footer-logo-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #1e90ff 0%, #00bfff 100%);
-            border-radius: 50%;
-        }
-
-        .footer-logo-text {
-            font-size: 24px;
-            font-weight: bold;
-            color: #00bfff;
+        .footer-logo img {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
         }
 
         .footer-contact {
@@ -227,6 +193,7 @@
             font-size: 16px;
             cursor: pointer;
             transition: color 0.3s;
+            margin-top: 10px;
         }
 
         .footer-contact:hover {
@@ -239,8 +206,8 @@
                 flex-direction: column;
             }
             .left-section, .right-section {
-                flex: 1 1 100%;
                 width: 100%;
+                min-height: auto;
             }
             .left-section {
                 padding: 40px 20px;
@@ -249,15 +216,13 @@
     </style>
 </head>
 <body>
+
     <div class="container">
         <!-- LEFT SIDE -->
         <div class="left-section">
             <h1 class="welcome-text">Welcome to</h1>
             <div class="logo-container">
-                <div class="logo-icon"></div>
-                <div>
-                    <div class="logo-text">NOL<br>KARBON</div>
-                </div>
+                <img src="/images/logo.png" alt="Nol Karbon Logo">
             </div>
             <p class="tagline">Go Blue, Stay Clean, Be NolKarbon</p>
         </div>
@@ -320,12 +285,12 @@
         </div>
     </div>
 
+    <!-- FOOTER -->
     <div class="footer">
         <div class="footer-logo">
-            <div class="footer-logo-icon"></div>
-            <span class="footer-logo-text">NOL<br>KARBON</span>
+            <img src="/images/logo.png" alt="Nol Karbon Footer Logo">
+            <div class="footer-contact">Contact Us</div>
         </div>
-        <div class="footer-contact">Contact Us</div>
     </div>
 </body>
 </html>
