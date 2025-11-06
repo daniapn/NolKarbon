@@ -168,7 +168,6 @@
         <nav class="nav-menu">
             <a href="{{ route('admin.dashboardadmin') }}" class="nav-item">Dashboard</a>
             <a href="{{ route('admin.usermanagement') }}" class="nav-item active">User Management</a>
-            <a href="#" class="nav-item">Communities</a>
             <a href="#" class="nav-item">Review Draft</a>
             <a href="#" class="nav-item">Challenges</a>
             <a href="#" class="nav-item">Reports</a>
