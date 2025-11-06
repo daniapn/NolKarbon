@@ -1,11 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LeaderboardController;
-use App\Http\Controllers\KontributorController;
-use App\Http\Controllers\CommunityController;
-use App\Http\Controllers\ChallengeUserController;
 use App\Http\Controllers\ChallengeAdminController;
+use App\Http\Controllers\ChallengeUserController;
+use App\Http\Controllers\CommunityController;
+use App\Http\Controllers\LeaderboardController;
+use App\Http\Controllers\ReportAdminController;
+
 
 // Halaman utama (welcome)
 Route::get('/', function () {
@@ -30,7 +31,7 @@ Route::get('/kontributor/notif', [KontributorController::class, 'getNotif'])->na
 Route::get('/leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard.index');
 Route::get('/communities/dashboard', [CommunityController::class, 'dashboard'])->name('communities.dashboard');
 
-Route::prefix('challenges')->name('challenges.')->group(function () {
+Route::prefix('challenge')->name('challenge.')->group(function () {
     Route::get('/', [ChallengeUserController::class, 'index'])->name('index');
     Route::get('/dashboard', [ChallengeUserController::class, 'dashboard'])->name('dashboard');
     Route::get('/dashboard/badges', [ChallengeUserController::class, 'badges'])->name('badges');
@@ -48,5 +49,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [ChallengeAdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/reports', [ReportAdminController::class, 'index'])->name('reports.index');
     Route::get('/reports/activities', [ReportAdminController::class, 'activities'])->name('reports.activities');
-    Route::resource('challenges', ChallengeAdminController::class);
+    Route::resource('challenge', ChallengeAdminController::class);
+});
+
+Route::get('/admin/statistik', function () {
+    return view('admin/reports/statistikemisi');
 });
