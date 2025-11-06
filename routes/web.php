@@ -2,15 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChallengeAdminController;
-<<<<<<< HEAD
 use App\Http\Controllers\ChallengeUserController;
 use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\ReportAdminController;
-
-=======
 use App\Http\Controllers\AuthController;
->>>>>>> e6a46c0d682d7afa8f9fc3f72281b1f73a1464b7
+use App\Http\Controllers\AdminController;
+use Illuminate\Support\Facades\Auth;
 
 // Halaman utama (welcome) (dn)
 Route::get('/', function () {
@@ -31,17 +29,20 @@ Route::post('/kontributor/submitdraft/{id}', [KontributorController::class, 'sub
 Route::get('/artikel/create-draft', [KontributorController::class, 'createDraft'])->name('kontributor.createdraft');
 Route::post('/artikel/store-draft', [KontributorController::class, 'storeDraft'])->name('kontributor.storedraft');
 Route::get('/kontributor/notif', [KontributorController::class, 'getNotif'])->name('kontributor.notif');
+
 Route::get('/NolKarbon', function () {
     return view('HalamanUtama');
 })->name('logout');
 
-// login regois (aurel)
+// login & register (aurel)
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 
+// leaderboard & communities
 Route::get('/leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard.index');
 Route::get('/communities/dashboard', [CommunityController::class, 'dashboard'])->name('communities.dashboard');
 
+// challenge (user)
 Route::prefix('challenge')->name('challenge.')->group(function () {
     Route::get('/', [ChallengeUserController::class, 'index'])->name('index');
     Route::get('/dashboard', [ChallengeUserController::class, 'dashboard'])->name('dashboard');
@@ -56,13 +57,26 @@ Route::prefix('challenge')->name('challenge.')->group(function () {
     Route::get('/{challenge}', [ChallengeUserController::class, 'show'])->name('show');
 });
 
+// admin (gabungan semua)
 Route::prefix('admin')->name('admin.')->group(function () {
+    // dashboard & reports
     Route::get('/dashboard', [ChallengeAdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/reports', [ReportAdminController::class, 'index'])->name('reports.index');
     Route::get('/reports/activities', [ReportAdminController::class, 'activities'])->name('reports.activities');
+    
+    // route dari versi lama
     Route::resource('challenge', ChallengeAdminController::class);
+
+    // route tambahan dari versi kamu
+    Route::resource('challenges', ChallengeAdminController::class);
+    Route::get('/dashboardadmin', [AdminController::class, 'dashboardAdmin'])->name('dashboardadmin');
+    Route::get('/usermanagement', [AdminController::class, 'userManagement'])->name('usermanagement');
 });
 
+// statistik
 Route::get('/admin/statistik', function () {
     return view('admin/reports/statistikemisi');
 });
+
+// logout (versi kamu)
+Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
