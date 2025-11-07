@@ -2,14 +2,10 @@
 
 namespace App\Http\Controllers;
 
-<<<<<<< HEAD
-use Illuminate\Http\Request;
-=======
 use App\Models\Community;
 use App\Models\Pengguna;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
->>>>>>> 1d4a1e903990573206bb9273a209c961220b1ab4
 
 class AdminController extends Controller
 {
@@ -32,9 +28,6 @@ class AdminController extends Controller
 
         return view('statistikemisi', compact('emissionReports', 'challengeReports'));
     }
-<<<<<<< HEAD
-}
-=======
 
      public function dashboardAdmin()
     {
@@ -74,4 +67,3 @@ class AdminController extends Controller
         return redirect('/login');
     }
 }
->>>>>>> 1d4a1e903990573206bb9273a209c961220b1ab4
