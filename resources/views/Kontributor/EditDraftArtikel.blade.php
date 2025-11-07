@@ -233,19 +233,16 @@
             padding: 3rem 5%;
             text-align: center;
             color: white;
-            margin-top: 4rem;
-        }
-
-        footer .footer-logo {
-            width: 226px;
-            height: 91px;
-            margin: 0 auto 1rem;
         }
 
         footer p {
-            color: #FDF3D6;
+            margin: 0.5rem 0;
             font-size: 18px;
-            font-family: 'Lexend', sans-serif;
+        }
+
+        footer .footer-logo {
+            width: 120px;
+            height: 50px;
         }
 
         @media (max-width: 768px) {
@@ -397,6 +394,7 @@
     <footer>
         <img class="footer-logo" src="/images/logo.png" alt="Nol Karbon Logo">
         <p>NolKarbon@gmail.com</p>
+        <p>© 2025 Nol Karbon. All rights reserved.</p>
     </footer>
 
     <script>
