@@ -2,7 +2,14 @@
 
 namespace App\Http\Controllers;
 
+<<<<<<< HEAD
 use Illuminate\Http\Request;
+=======
+use App\Models\Community;
+use App\Models\Pengguna;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+>>>>>>> 1d4a1e903990573206bb9273a209c961220b1ab4
 
 class AdminController extends Controller
 {
@@ -25,4 +32,46 @@ class AdminController extends Controller
 
         return view('statistikemisi', compact('emissionReports', 'challengeReports'));
     }
+<<<<<<< HEAD
 }
+=======
+
+     public function dashboardAdmin()
+    {
+        $stats = [
+            'total_users' => Pengguna::count(),
+            'co2_reduced' => '1,998 ton',
+            'communities' => 34,
+            'challenges' => 18,
+        ];
+
+        // jika butuh data lagi, kirim ke view
+        return view('admin.dashboardadmin', compact('stats'));
+    }
+
+    // Halaman user management
+    public function userManagement()
+    {
+        // ambil semua user (atau paginate kalau banyak)
+        $users = Pengguna::select('idPengguna', 'username', 'email', 'universitas', 'role', 'status', 'join_date')->get();
+
+        $stats = [
+            'total_users' => Pengguna::count(),
+            'community_admins' => Pengguna::where('role', 'Admin')->count(),
+            'active_users' => Pengguna::where('status', 'Active')->count(),
+            'inactive_users' => Pengguna::where('status', 'Inactive')->count(),
+        ];
+
+        return view('admin.usermanagement', compact('users', 'stats'));
+    }
+
+    // Logout untuk form POST /logout
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/login');
+    }
+}
+>>>>>>> 1d4a1e903990573206bb9273a209c961220b1ab4
