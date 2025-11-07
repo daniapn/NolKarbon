@@ -46,7 +46,7 @@ Route::get('/leaderboard', [LeaderboardController::class, 'index'])->name('leade
 Route::get('/communities/dashboard', [CommunityController::class, 'dashboard'])->name('communities.dashboard');
 
 // challenge (user)
-Route::prefix('challenge')->name('challenge.')->group(function () {
+Route::prefix('challenges')->name('challenges.')->group(function () {
     Route::get('/', [ChallengeUserController::class, 'index'])->name('index');
     Route::get('/dashboard', [ChallengeUserController::class, 'dashboard'])->name('dashboard');
     Route::get('/dashboard/badges', [ChallengeUserController::class, 'badges'])->name('badges');
