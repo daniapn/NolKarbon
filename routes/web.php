@@ -9,7 +9,6 @@ use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\ReportAdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\KontributorController;
 use Illuminate\Support\Facades\Auth;
 
 // Halaman utama (welcome) (dn)
@@ -77,7 +76,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 // statistik
 Route::get('/admin/statistik', function () {
-    return view('admin/reports/statistikemisi');
+    return view('Admin/statistikemisi');
 });
 
 // logout (versi kamu)
