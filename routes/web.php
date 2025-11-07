@@ -20,7 +20,7 @@ Route::get('/NolKarbon', function () {
     return view('HalamanUtama');
 });
 
-// Halaman Kontributor (dn)
+// Artikel (dn)
 Route::get('/kontributor', [KontributorController::class, 'index'])->name('kontributor.index');
 Route::get('/kontributor/editdraft/{id}', [KontributorController::class, 'editDraft'])->name('kontributor.editdraft');
 Route::get('/kontributor/viewdraft/{id}', [KontributorController::class, 'viewDraft'])->name('kontributor.viewdraft');
@@ -30,6 +30,8 @@ Route::post('/kontributor/submitdraft/{id}', [KontributorController::class, 'sub
 Route::get('/artikel/create-draft', [KontributorController::class, 'createDraft'])->name('kontributor.createdraft');
 Route::post('/artikel/store-draft', [KontributorController::class, 'storeDraft'])->name('kontributor.storedraft');
 Route::get('/kontributor/notif', [KontributorController::class, 'getNotif'])->name('kontributor.notif');
+Route::get('/admin/review', [AdminController::class, 'reviewDraft'])->name('admin.reviewdraft');
+Route::post('/admin/unpublish/{id}', [AdminController::class, 'unpublish'])->name('admin.unpublish');
 
 Route::get('/NolKarbon', function () {
     return view('HalamanUtama');

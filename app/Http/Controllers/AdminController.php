@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Community;
 use App\Models\Pengguna;
+use App\Models\DraftArtikel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -65,5 +66,28 @@ class AdminController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/login');
+    }
+
+    //jgn dihapus -dn
+    public function reviewDraft()
+    {
+    // Ambil hanya artikel dengan status 'menunggu review' atau 'published'
+    $artikels = DraftArtikel::whereIn('status', ['menunggu review', 'published'])->get();
+    return view('Admin.artikel.ReviewDraft', compact('artikels'));
+    }
+
+    public function unpublish($id)
+    {
+        $artikel = DraftArtikel::findOrFail($id);
+
+        // Jika statusnya published, ubah ke menunggu review
+        if ($artikel->status === 'Published') {
+            $artikel->status = 'Menunggu Review';
+            $artikel->save();
+        }
+
+        // Balik lagi ke halaman review draft
+        return redirect()->back()->with('success', 'Artikel berhasil di-unpublish!');
+
     }
 }
