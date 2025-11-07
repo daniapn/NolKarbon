@@ -1,16 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\KontributorController;
 use App\Http\Controllers\ChallengeAdminController;
-<<<<<<< HEAD
 use App\Http\Controllers\ChallengeUserController;
 use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\ReportAdminController;
-
-=======
 use App\Http\Controllers\AuthController;
->>>>>>> e6a46c0d682d7afa8f9fc3f72281b1f73a1464b7
+
 
 // Halaman utama (welcome) (dn)
 Route::get('/', function () {
