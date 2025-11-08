@@ -153,7 +153,7 @@ class ChallengeUserController extends Controller
         );
 
         return redirect()
-            ->route('challenges.show', $challenge)
+            ->route('challenge.show', $challenge)
             ->with('status', 'Kamu berhasil bergabung ke tantangan!')
             ->with('participant_id', $participant->id);
     }
@@ -291,7 +291,7 @@ class ChallengeUserController extends Controller
             ],
         ];
 
-        return view('challenges.badges', [
+        return view('challenge.badges', [
             'user' => $user,
             'level' => $level,
             'nextLevelPoints' => ($level * 100) - $totalPoints,

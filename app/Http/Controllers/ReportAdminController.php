@@ -16,31 +16,37 @@ class ReportAdminController extends Controller
 {
     public function index(): View
     {
-        $communityEmissions = Community::query()
+        $communityEmissionsQuery = Community::query()
             ->select('id', 'name', 'total_emission_reduced', 'total_points')
             ->withAvg('emissionRecords as average_reduction', 'reduction_kg_co2')
-            ->orderByDesc('total_emission_reduced')
-            ->get()
-            ->map(function ($community) {
-                return [
-                    'name' => $community->name,
-                    'total_emission' => number_format((float) $community->total_emission_reduced, 1) . ' Kg CO₂',
-                    'average_monthly' => number_format((float) ($community->average_reduction ?? 0), 1) . ' Kg CO₂',
-                ];
-            });
+            ->orderByDesc('total_emission_reduced');
 
-        $challengeParticipation = ChallengeParticipant::with(['user', 'challenge'])
+        $communityEmissions = (clone $communityEmissionsQuery)
+            ->paginate(6, ['*'], 'community_page');
+
+        $communityEmissions->getCollection()->transform(function ($community) {
+            return [
+                'name' => $community->name,
+                'total_emission' => number_format((float) $community->total_emission_reduced, 1) . ' Kg CO₂',
+                'average_monthly' => number_format((float) ($community->average_reduction ?? 0), 1) . ' Kg CO₂',
+            ];
+        });
+
+        $challengeParticipationQuery = ChallengeParticipant::with(['user', 'challenge'])
             ->orderByDesc('points_earned')
-            ->limit(8)
-            ->get()
-            ->map(function ($participant) {
-                return [
-                    'user' => $participant->user->name ?? 'Peserta',
-                    'challenge' => $participant->challenge->title ?? '-',
-                    'points' => $participant->points_earned,
-                    'status' => ucfirst($participant->status),
-                ];
-            });
+            ->orderByDesc('last_reported_at');
+
+        $challengeParticipation = (clone $challengeParticipationQuery)
+            ->paginate(8, ['*'], 'challenge_page');
+
+        $challengeParticipation->getCollection()->transform(function ($participant) {
+            return [
+                'user' => $participant->user->name ?? 'Peserta',
+                'challenge' => $participant->challenge->title ?? '-',
+                'points' => $participant->points_earned,
+                'status' => ucfirst($participant->status),
+            ];
+        });
 
         return view('admin.reports.index', [
             'communityEmissions' => $communityEmissions,
