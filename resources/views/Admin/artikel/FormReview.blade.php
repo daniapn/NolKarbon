@@ -174,6 +174,7 @@
         .content {
             padding: 40px;
             flex: 1;
+            overflow-y: auto;
         }
 
         .page-title {
@@ -194,30 +195,22 @@
             color: #3675BE;
         }
 
-        /* Draft Cards */
-        .draft-list {
-            max-width: 900px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
+        /* Draft Card */
         .draft-card {
             background: white;
             border-radius: 20px;
-            padding: 1rem;
+            padding: 2.5rem;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .draft-image-container {
             display: grid;
             grid-template-columns: 200px 1fr;
             gap: 2rem;
-            align-items: center;
-            transition: all 0.3s;
-        }
-
-        .draft-card:hover {
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-            transform: translateY(-4px);
+            margin-bottom: 2rem;
+            align-items: start;
         }
 
         .draft-image {
@@ -233,12 +226,6 @@
             object-fit: cover;
         }
 
-        .draft-content {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
         .draft-title {
             font-family: 'Poppins', sans-serif;
             font-size: 24px;
@@ -247,23 +234,70 @@
             line-height: 1.4;
         }
 
-        .review-btn {
-            background: #001d5c;
-            color: white;
-            padding: 0.8rem 2rem;
+        .draft-content {
+            font-size: 16px;
+            color: #333;
+            line-height: 1.6;
+            text-align: justify;
+            margin-top: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2.5rem;
+        }
+
+        .btn {
+            padding: 12px 32px;
             border: none;
-            border-radius: 10px;
+            border-radius: 50px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            align-self: flex-start;
+            font-family: 'Lexend', sans-serif;
         }
 
-        .review-btn:hover {
+        .btn-revisi {
+            background: #001d5c;
+            color: white;
+        }
+
+        .btn-revisi:hover {
             background: #003399;
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-tolak {
+            background: #001d5c;
+            color: white;
+        }
+
+        .btn-tolak:hover {
+            background: #003399;
+            transform: translateY(-2px);
+        }
+
+        .btn-approve {
+            background: #001d5c;
+            color: white;
+        }
+
+        .btn-approve:hover {
+            background: #003399;
+            transform: translateY(-2px);
+        }
+
+        /* Hidden Form Elements */
+        textarea {
+            display: none;
+        }
+
+        form {
+            display: none;
         }
 
         /* Footer */
@@ -299,69 +333,75 @@
             .logo-sidebar img {
                 width: 50px;
             }
-            .draft-card {
+            .draft-image-container {
                 grid-template-columns: 1fr;
             }
             .page-title h1 {
                 font-size: 32px;
             }
+            .action-buttons {
+                flex-direction: column;
+            }
+            .btn {
+                width: 100%;
+            }
         }
     </style>
     <style>
-.swal2-popup {
-    font-family: 'Lexend', sans-serif;
-    border-radius: 25px !important;
-    background: #ffffffff !important;
-    color: #000862 !important;
-    border: 2px solid #000862 !important;
-}
+        .swal2-popup {
+            font-family: 'Lexend', sans-serif;
+            border-radius: 25px !important;
+            background: #ffffffff !important;
+            color: #000862 !important;
+            border: 2px solid #000862 !important;
+        }
 
-.swal2-title {
-    font-weight: 700 !important;
-    color: #000862 !important;
-}
+        .swal2-title {
+            font-weight: 700 !important;
+            color: #000862 !important;
+        }
 
-.swal2-html-container {
-    color: #000862 !important;
-    font-size: 16px;
-}
+        .swal2-html-container {
+            color: #000862 !important;
+            font-size: 16px;
+        }
 
-.swal2-confirm {
-    background-color: #000862 !important;
-    color: #ffffffff !important;
-    border-radius: 20px !important;
-    padding: 10px 25px !important;
-    font-weight: 600;
-}
+        .swal2-confirm {
+            background-color: #000862 !important;
+            color: #ffffffff !important;
+            border-radius: 20px !important;
+            padding: 10px 25px !important;
+            font-weight: 600;
+        }
 
-.swal2-confirm:hover {
-    background-color: #d65151ff !important;
-}
+        .swal2-confirm:hover {
+            background-color: #d65151ff !important;
+        }
 
-.swal2-cancel {
-    background-color: #ffffffff !important;
-    border: 2px solid #000862 !important;
-    color: #000862 !important;
-    border-radius: 20px !important;
-    padding: 10px 25px !important;
-    font-weight: 600;
-}
+        .swal2-cancel {
+            background-color: #ffffffff !important;
+            border: 2px solid #000862 !important;
+            color: #000862 !important;
+            border-radius: 20px !important;
+            padding: 10px 25px !important;
+            font-weight: 600;
+        }
 
-.swal2-cancel:hover {
-    background-color: #c4dae6ff !important;
-}
+        .swal2-cancel:hover {
+            background-color: #c4dae6ff !important;
+        }
 
-.swal2-icon {
-    border-color: #000862 !important;
-    color: #000862 !important;
-}
-</style>
+        .swal2-icon {
+            border-color: #000862 !important;
+            color: #000862 !important;
+        }
+    </style>
 </head>
 <body>
     <!-- Sidebar -->
     <aside class="sidebar">
         <div class="logo-sidebar">
-            <img src="/images/logo.png" alt="NolKarbon Logos">
+            <img src="/images/logo.png" alt="NolKarbon Logo">
         </div>
 
         <nav class="nav-menu">
@@ -451,81 +491,158 @@
 
         <!-- Content -->
         <div class="content">
+            <!-- Page Title -->
             <div class="page-title">
-                <h1>Let's Review Our<br>Contributor Article Draft<br>on <span class="highlight">Nol Karbon</span></h1>
+                <h1>Let's Review our<br>Contributor Article Draft<br>on <span class="highlight">Nol Karbon</span></h1>
             </div>
 
-            <div class="draft-list">
-    @foreach ($artikels as $artikel)
-        <div class="draft-card">
-            <div class="draft-image">
-                <img src="{{ asset('storage/' . $artikel->gambar) }}" alt="Article Image">
-            </div>
-            <div class="draft-content">
-                <h3 class="draft-title">{{ $artikel->judul }}</h3>
-                @if (strtolower($artikel->status) === 'menunggu review')
-                <form action="{{ route('admin.formreview', $artikel->idDraft) }}" method="POST" class="formreview">
-    @csrf
-    <button class="review-btn">Review</button>
-@elseif (strtolower($artikel->status) === 'published')
-    <form action="{{ route('admin.unpublish', $artikel->idDraft) }}" method="POST" class="unpublish-form">
-    @csrf
-    <button type="button" class="review-btn" style="background-color:#f44336;" onclick="confirmUnpublish(this)">
-        Unpublish
-    </button>
-</form>
+            <!-- Draft Card -->
+            <div class="draft-card">
+                <div class="draft-image-container">
+                    <div class="draft-image">
+                        <img src="{{ asset('storage/' . $artikel->gambar) }}" alt="Gambar Artikel">
+                    </div>
+                    <div>
+                        <h3 class="draft-title">{{ $artikel->judul }}</h3>
+                    </div>
+                </div>
 
-@endif
+                <div class="draft-content">
+                    {!! nl2br(e($artikel->isi)) !!}
+                </div>
 
-            </div>
-        </div>
-    @endforeach
-
-    @if ($artikels->isEmpty())
-        <p style="text-align:center; color:#666;">Belum ada artikel yang menunggu review atau sudah published.</p>
-    @endif
-</div>
-
+                <div class="action-buttons">
+                    <button class="btn btn-revisi" id="btnRevisi">Minta Revisi</button>
+                    <button class="btn btn-tolak" id="btnTolak">Tolak Draft</button>
+                    <button class="btn btn-approve" id="btnApprove">Approve Draft</button>
+                </div>
             </div>
         </div>
 
         <!-- Footer -->
         <footer>
             <img src="/images/logo.png" alt="NolKarbon Logo">
-            <p>NolKarbon@gmail.com</p>
+            <p>Contact Us</p>
         </footer>
     </main>
+
+    <!-- Hidden Forms -->
+    <form action="{{ route('admin.approve', $artikel->idDraft) }}" method="POST" id="formApprove">
+        @csrf
+    </form>
+
+    <form action="{{ route('admin.revisi', $artikel->idDraft) }}" method="POST" id="formRevisi">
+        @csrf
+        <input type="hidden" name="catatan" id="catatanRevisi">
+    </form>
+
+    <form action="{{ route('admin.tolak', $artikel->idDraft) }}" method="POST" id="formTolak">
+        @csrf
+        <input type="hidden" name="catatan" id="catatanTolak">
+    </form>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-function confirmUnpublish(button) {
-    Swal.fire({
-        title: 'Yakin ingin unpublish artikel ini?',
-        text: "Status artikel akan berubah menjadi 'Menunggu Review'.",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Ya, Unpublish',
-        cancelButtonText: 'Batal'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // Submit form terdekat
-            button.closest('form').submit();
-        }
-    });
-}
-</script>
-@if (session('success'))
-<script>
-Swal.fire({
-    icon: 'success',
-    title: 'Berhasil',
-    text: "{{ session('success') }}",
-    showConfirmButton: false,
-    timer: 1500
-});
-</script>
-@endif
+        document.addEventListener('DOMContentLoaded', function () {
+            const formApprove = document.getElementById('formApprove');
+            const formRevisi = document.getElementById('formRevisi');
+            const formTolak = document.getElementById('formTolak');
+
+            // === BUTTON REVISI ===
+            document.getElementById('btnRevisi').addEventListener('click', function (e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Kirim permintaan revisi?',
+                    text: 'Artikel ini akan dikembalikan ke kontributor untuk diperbaiki.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#ffb300',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Ya, kirim revisi'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: 'Catatan Revisi',
+                            input: 'textarea',
+                            inputPlaceholder: 'Tuliskan catatan revisi Anda di sini...',
+                            showCancelButton: true,
+                            confirmButtonText: 'Kirim',
+                            preConfirm: (value) => {
+                                if (!value) Swal.showValidationMessage('Catatan revisi wajib diisi!');
+                                return value;
+                            }
+                        }).then((note) => {
+                            if (note.isConfirmed) {
+                                document.getElementById('catatanRevisi').value = note.value;
+                                formRevisi.submit();
+                            }
+                        });
+                    }
+                });
+            });
+
+            // === BUTTON TOLAK ===
+            document.getElementById('btnTolak').addEventListener('click', function (e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Tolak draft ini?',
+                    text: 'Draft akan ditolak dan tidak bisa diubah lagi.',
+                    icon: 'error',
+                    showCancelButton: true,
+                    confirmButtonColor: '#e53935',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Ya, tolak'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: 'Catatan Penolakan',
+                            input: 'textarea',
+                            inputPlaceholder: 'Tuliskan alasan penolakan...',
+                            showCancelButton: true,
+                            confirmButtonText: 'Kirim',
+                            preConfirm: (value) => {
+                                if (!value) Swal.showValidationMessage('Catatan penolakan wajib diisi!');
+                                return value;
+                            }
+                        }).then((note) => {
+                            if (note.isConfirmed) {
+                                document.getElementById('catatanTolak').value = note.value;
+                                formTolak.submit();
+                            }
+                        });
+                    }
+                });
+            });
+
+            // === BUTTON APPROVE ===
+            document.getElementById('btnApprove').addEventListener('click', function (e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Setujui dan publish draft ini?',
+                    text: 'Artikel akan dipublish ke halaman utama.',
+                    icon: 'success',
+                    showCancelButton: true,
+                    confirmButtonColor: '#43a047',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Ya, publish'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        formApprove.submit();
+                    }
+                });
+            });
+
+            // === ALERT JIKA BERHASIL ===
+            @if (session('success'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: '{{ session('success') }}',
+                    confirmButtonColor: '#001d5c'
+                });
+            @endif
+        });
+    </script>
 
 </body>
 </html>
