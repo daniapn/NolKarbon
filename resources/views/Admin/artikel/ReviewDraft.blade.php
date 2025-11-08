@@ -361,7 +361,7 @@
     <!-- Sidebar -->
     <aside class="sidebar">
         <div class="logo-sidebar">
-            <img src="/images/logo.png" alt="NolKarbon Logo">
+            <img src="/images/logo.png" alt="NolKarbon Logos">
         </div>
 
         <nav class="nav-menu">
