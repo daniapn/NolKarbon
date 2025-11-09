@@ -723,6 +723,50 @@ section, div, img {
   max-width: 100%;
 }
 
+.user-profile {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 50px;
+    padding: 0.3rem 1rem;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.15);
+    gap: 0.7rem;
+}
+
+.user-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+}
+
+.user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.user-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: #000;
+}
+
+.user-email {
+    font-size: 12px;
+    color: #555;
+}
+
 
     </style>
 </head>
@@ -740,8 +784,22 @@ section, div, img {
                     <li><a href="#articles">Artikel</a></li>
                 </ul>
             </nav>
-            <a href="{{ route('login') }}">
-    <button class="login-btn">Login</button>
+            <a href="{{ route('logout') }}">
+    <button class="login-btn">Logout</button>
+    <nav>
+    <div class="user-profile">
+    <div class="user-avatar">
+        <img src="{{ asset('images/user-profile.png') }}" alt="User Avatar">
+    </div>
+    <div class="user-info">
+        <div class="user-name">{{ Auth::user()->nama ??'' }}</div>
+        <div class="user-email">{{ Auth::user()->email ?? '' }}</div>
+    </div>
+</div>
+
+    </nav>
+</div>
+
 </a>
 
         </div>

@@ -3,7 +3,7 @@
 @section('title', 'Gabung ' . $challenge->title)
 
 @section('back-link')
-    <a href="{{ route('challenge.show', $challenge) }}" class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white px-4 py-2 text-xs font-semibold text-blue-900 shadow hover:bg-blue-50">
+    <a href="{{ route('challenges.show', $challenge) }}" class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white px-4 py-2 text-xs font-semibold text-blue-900 shadow hover:bg-blue-50">
         <i class="fa-solid fa-arrow-left-long"></i> Kembali
     </a>
 @endsection
@@ -18,7 +18,7 @@
                 Apakah kamu yakin ingin bergabung dalam tantangan <strong>{{ $challenge->title }}</strong>? Kamu akan mendapatkan
                 <strong class="text-blue-700">{{ $challenge->point_reward }} poin</strong> langsung setelah bergabung.
             </p>
-            <form method="POST" action="{{ route('challenge.join.store', $challenge) }}" class="mt-10 flex flex-wrap items-center justify-center gap-4">
+            <form method="POST" action="{{ route('challenges.join.store', $challenge) }}" class="mt-10 flex flex-wrap items-center justify-center gap-4">
                 @csrf
                 <input type="hidden" name="motivation" value="{{ old('motivation', 'Saya siap mengikuti tantangan ini.') }}">
                 <input type="hidden" name="personal_goal" value="{{ old('personal_goal', 'Mengurangi jejak karbon harian.') }}">
@@ -28,7 +28,7 @@
                         class="inline-flex w-44 items-center justify-center gap-2 rounded-full bg-blue-700 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-800">
                     Join Now
                 </button>
-                <a href="{{ route('challenge.index') }}"
+                <a href="{{ route('challenges.index') }}"
                    class="inline-flex w-44 items-center justify-center gap-2 rounded-full border border-blue-200 px-6 py-3 text-sm font-semibold text-blue-700 hover:bg-blue-50">
                     Cancel
                 </a>

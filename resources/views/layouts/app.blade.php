@@ -28,7 +28,7 @@
                 ],
                 [
                     'label' => 'Challenge',
-                    'route' => 'challenge.index',
+                    'route' => 'challenges.index',
                     'url' => null,
                     'pattern' => 'challenge.',
                 ],

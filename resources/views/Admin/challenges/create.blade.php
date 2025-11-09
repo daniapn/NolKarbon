@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="space-y-6">
-        <a href="{{ route('admin.challenge.index') }}"
+        <a href="{{ route('admin.challenges.index') }}"
            class="inline-flex items-center gap-2 rounded-full border border-blue-200 px-4 py-2 text-xs font-semibold text-blue-700 hover:bg-blue-50">
             <i class="fa-solid fa-arrow-left"></i> Kembali ke daftar
         </a>

@@ -286,5 +286,44 @@ public function revisi(Request $request, $id)
      return redirect()->route('admin.reviewdraft')
                      ->with('success', 'Artikel telah ditolak.');
 }
+public function storeUser(Request $request)
+    {
+        // Validasi input
+        $validated = $request->validate([
+    'name' => 'required|string|max:255',
+    'email' => 'required|email|unique:penggunas,email',
+    'password' => 'required|string|min:6',
+    'universitas' => 'required|string|max:255',
+    'role' => 'required|in:User,Admin,Kontributor',
+    'status' => 'required|in:Active,Inactive',
+]);
 
+
+        try {
+            // Buat user baru
+            Pengguna::create([
+                'username' => $validated['name'],
+                'email' => $validated['email'],
+                'password' =>$validated['password'],
+                'universitas' => $validated['universitas'],
+                'role' => $validated['role'],
+                'status' => $validated['status'],
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+            return redirect()
+                ->route('admin.usermanagement')
+                ->with('success', 'User has been added successfully!');
+
+        } catch (\Exception $e) {
+            return back()
+                ->withInput()
+                ->withErrors(['error' => 'Failed to add user: ' . $e->getMessage()]);
+        }
+    }
+public function showAddUserForm()
+{
+    return view('admin.adduser');
+}
 }

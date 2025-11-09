@@ -20,6 +20,8 @@ Route::get('/', function () {
 
 Route::get('/NolKarbon', [HomeController::class, 'index'])->name('home');
 Route::get('/artikel/{id}', [HomeController::class, 'show'])->name('artikel.detail');
+Route::get('/NolKarbonn', [HomeController::class, 'index2'])->name('homee');
+Route::post('/login', [AuthController::class, 'showLogin'])->name('login');
 
 // Artikel (dn)
 Route::get('/kontributor', [KontributorController::class, 'index'])->name('kontributor.index');
@@ -43,6 +45,7 @@ Route::post('/admin/revisi/{id}', [AdminController::class, 'revisi'])->name('adm
 // login & register (aurel)
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register.store');
 
 // leaderboard & communities
 Route::get('/leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard.index');
@@ -97,3 +100,10 @@ Route::get('/emission/card', [EmissionController::class, 'showCard'])->name('emi
 
 // logout (versi kamu)
 Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
+
+// add-user
+Route::get('/admin/users/add', [AdminController::class, 'showAddUserForm'])
+        ->name('admin.adduser');
+    
+    Route::post('/admin/users/store', [AdminController::class, 'storeUser'])
+        ->name('admin.adduser.store');

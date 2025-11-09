@@ -8,7 +8,7 @@
 @section('title', $challenge->title . ' | Nol Karbon Challenge')
 
 @section('back-link')
-    <a href="{{ route('challenge.index') }}" class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white px-4 py-2 text-xs font-semibold text-blue-900 shadow hover:bg-blue-50">
+    <a href="{{ route('challenges.index') }}" class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white px-4 py-2 text-xs font-semibold text-blue-900 shadow hover:bg-blue-50">
         <i class="fa-solid fa-arrow-left-long"></i>
         Kembali
     </a>
@@ -124,7 +124,7 @@
                         <div class="space-y-3">
                             <h3 class="text-base font-semibold text-blue-900">Tantangan Terkait</h3>
                             @foreach ($relatedChallenges as $related)
-                                <a href="{{ route('challenge.show', $related) }}"
+                                <a href="{{ route('challenges.show', $related) }}"
                                    class="flex flex-col gap-2 rounded-[28px] border border-blue-200 bg-white px-5 py-4 text-sm shadow-sm transition hover:border-blue-400 hover:text-blue-700">
                                     <span class="text-xs uppercase text-blue-500">{{ ucfirst($related->status) }}</span>
                                     <span class="font-semibold text-blue-900">{{ $related->title }}</span>
