@@ -27,8 +27,8 @@ Route::get('/kontributor/viewdraft/{id}', [KontributorController::class, 'viewDr
 Route::put('/kontributor/updatedraft/{id}', [KontributorController::class, 'updateDraft'])->name('kontributor.updatedraft');
 Route::delete('/kontributor/deletedraft/{id}', [KontributorController::class, 'deleteDraft'])->name('kontributor.deletedraft');
 Route::post('/kontributor/submitdraft/{id}', [KontributorController::class, 'submitDraft'])->name('kontributor.submitdraft');
-Route::get('/artikel/create-draft', [KontributorController::class, 'createDraft'])->name('kontributor.createdraft');
-Route::post('/artikel/store-draft', [KontributorController::class, 'storeDraft'])->name('kontributor.storedraft');
+Route::get('/kontributor/create-draft', [KontributorController::class, 'createDraft'])->name('kontributor.createdraft');
+Route::post('/kontributor/store-draft', [KontributorController::class, 'storeDraft'])->name('kontributor.storedraft');
 Route::get('/kontributor/notif', [KontributorController::class, 'getNotif'])->name('kontributor.notif');
 Route::get('/admin/review', [AdminController::class, 'reviewDraft'])->name('admin.reviewdraft');
 Route::post('/admin/unpublish/{id}', [AdminController::class, 'unpublish'])->name('admin.unpublish');
