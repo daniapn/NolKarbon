@@ -701,7 +701,7 @@
         <!-- Footer -->
         <footer>
             <img src="/images/logo.png" alt="NolKarbon Logo">
-            <p>Contact Us</p>
+            <p>NolKarbon@gmail.com</p>
         </footer>
     </main>
 </body>
