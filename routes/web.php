@@ -9,6 +9,7 @@ use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\ReportAdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 
 // Halaman utama (welcome) (dn)
@@ -16,9 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/NolKarbon', function () {
-    return view('HalamanUtama');
-});
+Route::get('/NolKarbon', [HomeController::class, 'index'])->name('home');
+Route::get('/artikel/{id}', [HomeController::class, 'show'])->name('artikel.detail');
 
 // Artikel (dn)
 Route::get('/kontributor', [KontributorController::class, 'index'])->name('kontributor.index');
@@ -38,10 +38,6 @@ Route::post('/admin/approve/{id}', [AdminController::class, 'approve'])->name('a
 Route::post('/admin/tolak/{id}', [AdminController::class, 'tolak'])->name('admin.tolak');
 Route::post('/admin/revisi/{id}', [AdminController::class, 'revisi'])->name('admin.revisi');
 
-
-Route::get('/NolKarbon', function () {
-    return view('HalamanUtama');
-})->name('logout');
 
 // login & register (aurel)
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
