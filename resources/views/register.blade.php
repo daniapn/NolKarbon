@@ -231,7 +231,7 @@
         <div class="right-section">
             <div class="form-card">
                 <div class="form-header">
-                    Already have an account? <a href="{{ route('login') }}">Sign in</a>
+                    Already have an account? <a href="{{ route('login') }}">Log in</a>
                 </div>
 
                 <form method="POST" action="{{ route('register') }}">
@@ -289,7 +289,7 @@
     <div class="footer">
         <div class="footer-logo">
             <img src="/images/logo.png" alt="Nol Karbon Footer Logo">
-            <div class="footer-contact">Contact Us</div>
+            <div class="footer-contact">NolKarbon@gmail.com</div>
         </div>
     </div>
 </body>

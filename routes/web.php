@@ -11,6 +11,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\EmisiController;
 
 // Halaman utama (welcome) (dn)
 Route::get('/', function () {
@@ -82,6 +83,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::get('/admin/statistik', function () {
     return view('Admin/statistikemisi');
 });
+
+// kalkulator 
+Route::get('/kalkulator-emisi', [EmisiController::class, 'index']);
+Route::post('/hitung-emisi', [EmisiController::class, 'hitung'])->name('hitung.emisi');
 
 // logout (versi kamu)
 Route::post('/logout', [AdminController::class, 'logout'])->name('logout');

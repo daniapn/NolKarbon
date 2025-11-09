@@ -23,7 +23,7 @@
         /* Sidebar */
         .sidebar {
             width: 230px;
-            background: linear-gradient(135deg, #000862 0%, #001d5c 100%);
+            background: linear-gradient(135deg, #001d5c 0%, #003399 100%);
             color: white;
             display: flex;
             flex-direction: column;
@@ -324,7 +324,7 @@
 
         /* Footer */
         footer {
-            background: linear-gradient(135deg, #000862 0%, #001d5c 100%);
+            background: linear-gradient(135deg, #001d5c 0%, #003399 100%);
             padding: 30px 50px;
             display: flex;
             justify-content: space-between;
@@ -558,7 +558,7 @@
         <!-- Footer -->
         <footer>
             <img src="/images/logo.png" alt="NolKarbon Logo">
-            <p>Contact Us</p>
+            <p>NolKarbon@gmail.com</p>
         </footer>
     </main>
 
