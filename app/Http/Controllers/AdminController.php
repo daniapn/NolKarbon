@@ -290,20 +290,21 @@ public function storeUser(Request $request)
     {
         // Validasi input
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:pengguna,email',
-            'password' => 'required|string|min:6',
-            'universitas' => 'required|string|max:255',
-            'role' => 'required|in:User,Admin,Kontributor',
-            'status' => 'required|in:Active,Inactive',
-        ]);
+    'name' => 'required|string|max:255',
+    'email' => 'required|email|unique:penggunas,email',
+    'password' => 'required|string|min:6',
+    'universitas' => 'required|string|max:255',
+    'role' => 'required|in:User,Admin,Kontributor',
+    'status' => 'required|in:Active,Inactive',
+]);
+
 
         try {
             // Buat user baru
             Pengguna::create([
                 'username' => $validated['name'],
                 'email' => $validated['email'],
-                'password' => Hash::make($validated['password']),
+                'password' =>$validated['password'],
                 'universitas' => $validated['universitas'],
                 'role' => $validated['role'],
                 'status' => $validated['status'],
