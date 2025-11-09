@@ -724,48 +724,53 @@ section, div, img {
 }
 
 .user-profile {
-    display: flex;
-    align-items: center;
-    background: #ffffff;
-    border-radius: 50px;
-    padding: 0.3rem 1rem;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.15);
-    gap: 0.7rem;
-}
+            position: fixed;
+            top: 1.5rem;
+            height:65px;
+            right: 5%;
+            display: flex;
+            align-items: center;
+            background: #ffffff;
+            border-radius: 50px;
+            padding: 0.3rem 1rem;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.15);
+            gap: 0.7rem;
+            z-index: 999;
+        }
 
-.user-avatar {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #000;
-}
+        .user-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000;
+        }
 
-.user-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-.user-info {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.1;
-}
+        .user-info {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
 
-.user-name {
-    font-weight: 600;
-    font-size: 14px;
-    color: #000;
-}
+        .user-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: #000;
+        }
 
-.user-email {
-    font-size: 12px;
-    color: #555;
-}
+        .user-email {
+            font-size: 12px;
+            color: #555;
+        }
 
 
     </style>
@@ -784,24 +789,20 @@ section, div, img {
                     <li><a href="#articles">Artikel</a></li>
                 </ul>
             </nav>
-            <a href="{{ route('logout') }}">
-    <button class="login-btn">Logout</button>
-    <nav>
-    <div class="user-profile">
-    <div class="user-avatar">
-        <img src="{{ asset('images/user-profile.png') }}" alt="User Avatar">
-    </div>
-    <div class="user-info">
-        <div class="user-name">{{ Auth::user()->nama ??'' }}</div>
+<form action="{{ route('logout') }}" method="POST">
+    @csrf
+    <button class="login-btn" type="submit">Logout</button>
+</form>
+        </div>
+        
+        <div class="user-profile">
+            <div class="user-avatar">
+                <img src="/images/user.png" alt="User Avatar">
+            </div>
+            <div class="user-info">
+                <div class="user-name">{{ Auth::user()->username ?? '' }}</div>
         <div class="user-email">{{ Auth::user()->email ?? '' }}</div>
-    </div>
-</div>
-
-    </nav>
-</div>
-
-</a>
-
+            </div>
         </div>
     </header>
 
@@ -863,7 +864,7 @@ section, div, img {
         <div class="habits-content">
             <h2>Let's see how your habits affect the Earth</h2>
             <p>Empower your climate action with data-driven insight</p>
-            <a href="{{ route('login') }}">
+            <a href="{{ route('form') }}">
             <button class="btn-primary">Start Calculate</button>
             </a>
         </div>
@@ -903,7 +904,7 @@ section, div, img {
                     </div>
                 </div>
             </div>
-            <a href="{{ route('login') }}">
+            <a href="{{ route('communities.dashboard') }}">
             <div class="see-more-bar">See More!</div>
             </a>
         </div>
@@ -939,7 +940,7 @@ section, div, img {
                     </div>
                 </div>
             </div>
-            <a href="{{ route('login') }}">
+            <a href="{{ route('leaderboard.index') }}">
             <div class="see-more-bar">See More!</div>
             </a>
         </div>
@@ -952,7 +953,7 @@ section, div, img {
         <div class="card-content">
             <h2>Get Your Own</h2>
             <h2>"Kartu Emisi"</h2>
-            <a href="{{ route('login') }}">
+            <a href="{{ route('emission.card') }}">
             <button class="btn-secondary">Lihat Kartu Emisi</button>
             </a>
         </div>
