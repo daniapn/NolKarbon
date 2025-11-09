@@ -231,7 +231,7 @@
         <div class="right-section">
             <div class="form-card">
                 <div class="form-header">
-                    Already have an account? <a href="{{ route('login') }}">Sign in</a>
+                    Already have an account? <a href="{{ route('login') }}">Log in</a>
                 </div>
 
                 <form method="POST" action="{{ route('register') }}">
