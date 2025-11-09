@@ -3,13 +3,13 @@
 @section('title', 'Dashboard Progress & Poin')
 
 @section('back-link')
-    <a href="{{ route('challenge.index') }}" class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white px-4 py-2 text-xs font-semibold text-blue-900 shadow hover:bg-blue-50">
+    <a href="{{ route('challenges.index') }}" class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white px-4 py-2 text-xs font-semibold text-blue-900 shadow hover:bg-blue-50">
         <i class="fa-solid fa-arrow-left-long"></i> Kembali
     </a>
 @endsection
 
 @section('hero-actions')
-    <a href="{{ route('challenge.badges') }}" class="inline-flex items-center gap-2 rounded-full bg-blue-700 px-6 py-3 text-sm font-semibold text-white shadow hover:bg-blue-800">
+    <a href="{{ route('challenges.badges') }}" class="inline-flex items-center gap-2 rounded-full bg-blue-700 px-6 py-3 text-sm font-semibold text-white shadow hover:bg-blue-800">
         <i class="fa-solid fa-award"></i> See My Badges
     </a>
 @endsection
@@ -76,7 +76,7 @@
                     </div>
                 </div>
 
-                <a href="{{ route('challenge.index') }}"
+                <a href="{{ route('challenges.index') }}"
                    class="inline-flex w-full items-center justify-center gap-2 rounded-full bg-blue-700 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-800">
                     Return to the Challenge
                 </a>
