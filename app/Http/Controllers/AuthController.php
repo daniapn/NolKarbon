@@ -7,27 +7,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Pengguna;
 
 class AuthController extends Controller
 {
-    public function showRegister()
-    {
-        return view('register');
-    }
-
-    public function showLogin()
-    {
-        return view('login');
-    }
-
-    public function register(Request $request)
+public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'username' => 'required|string|max:255|unique:users',
-            'email' => 'required|string|email|max:255|unique:users',
+            'username' => 'required|string|max:255|unique:penggunas,username',
+            'email' => 'required|string|email|max:255|unique:penggunas,email',
             'university' => 'required|string|max:255',
             'password' => 'required|string|min:8|confirmed',
-            'terms' => 'accepted'
+            'terms' => 'accepted',
         ]);
 
         if ($validator->fails()) {
@@ -36,11 +27,14 @@ class AuthController extends Controller
                 ->withInput();
         }
 
-        $user = User::create([
+        $user = Pengguna::create([
             'username' => $request->username,
             'email' => $request->email,
-            'university' => $request->university,
+            'universitas' => $request->university,
             'password' => Hash::make($request->password),
+            'role' => 'User',
+            'status' => 'Active',
+            'join_date' => now(),
         ]);
 
         Auth::login($user);

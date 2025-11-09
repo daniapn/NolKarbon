@@ -43,6 +43,7 @@ Route::post('/admin/revisi/{id}', [AdminController::class, 'revisi'])->name('adm
 // login & register (aurel)
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register.store');
 
 // leaderboard & communities
 Route::get('/leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard.index');
