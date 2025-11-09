@@ -31,33 +31,155 @@ class AdminController extends Controller
     }
 
      public function dashboardAdmin()
-    {
-        $stats = [
-            'total_users' => Pengguna::count(),
-            'co2_reduced' => '1,998 ton',
-            'communities' => 34,
-            'challenges' => 18,
-        ];
+{
+    // Ambil data bulan ini dan bulan lalu
+    $currentMonth = now()->startOfMonth();
+    $lastMonth = now()->subMonth()->startOfMonth();
 
-        // jika butuh data lagi, kirim ke view
-        return view('admin.dashboardadmin', compact('stats'));
-    }
+    // ========== TOTAL USERS ==========
+    $totalUsersNow = \App\Models\User::count();
+    $totalUsersLastMonth = \App\Models\User::where('created_at', '<', $currentMonth)->count();
+    $userGrowth = $totalUsersLastMonth > 0 
+        ? round((($totalUsersNow - $totalUsersLastMonth) / $totalUsersLastMonth) * 100, 1) 
+        : 0;
 
-    // Halaman user management
+    // ========== CO2 REDUCED ==========
+    $co2Now = \App\Models\emission_records::sum('reduction_kg_co2');
+    $co2LastMonth = \App\Models\emission_records::where('created_at', '<', $currentMonth)->sum('reduction_kg_co2');
+    $co2Growth = $co2LastMonth > 0 
+        ? round((($co2Now - $co2LastMonth) / $co2LastMonth) * 100, 1) 
+        : 0;
+
+    // ========== COMMUNITIES ==========
+    $communitiesNow = \App\Models\Community::where('status', 'active')->count();
+    $communitiesLastMonth = \App\Models\Community::where('status', 'active')
+        ->where('created_at', '<', $currentMonth)->count();
+    $communityGrowth = $communitiesLastMonth > 0 
+        ? round((($communitiesNow - $communitiesLastMonth) / $communitiesLastMonth) * 100, 1) 
+        : 0;
+
+    // ========== CHALLENGES ==========
+    $challengesNow = \App\Models\Challenge::where('status', 'active')->count();
+    $challengesLastMonth = \App\Models\Challenge::where('status', 'active')
+        ->where('created_at', '<', $currentMonth)->count();
+    $challengeGrowth = $challengesLastMonth > 0 
+        ? round((($challengesNow - $challengesLastMonth) / $challengesLastMonth) * 100, 1) 
+        : 0;
+
+    // Stats dengan growth percentage
+    $stats = [
+        'total_users' => $totalUsersNow,
+        'total_users_growth' => $userGrowth,
+        
+        'co2_reduced' => number_format($co2Now, 0, ',', '.') . ' kg',
+        'co2_growth' => $co2Growth,
+        
+        'communities' => $communitiesNow,
+        'community_growth' => $communityGrowth,
+        
+        'challenges' => $challengesNow,
+        'challenge_growth' => $challengeGrowth,
+    ];
+
+    // Card data
+    $cardData = [
+        'total_cards' => \App\Models\EmissionCard::count(),
+        'submitted_drafts' => \App\Models\Article::where('status', 'submitted')->count(),
+        'unreviewed_drafts' => \App\Models\Article::where('status', 'pending')->count(),
+        'approved_drafts' => \App\Models\Article::where('status', 'approved')->count(),
+    ];
+
+    // Emission stats untuk chart (per bulan) - HANYA TAHUN INI
+    $emissionStats = \App\Models\emission_records::selectRaw('
+            MONTHNAME(created_at) as month,
+            MONTH(created_at) as month_num,
+            SUM(emission_kg_co2) as emission,
+            SUM(reduction_kg_co2) as reduction
+        ')
+        ->whereYear('created_at', now()->year)
+        ->groupBy('month', 'month_num')
+        ->orderBy('month_num')
+        ->get();
+
+    return view('admin.dashboardadmin', compact('stats', 'cardData', 'emissionStats'));
+}
+
     public function userManagement()
-    {
-        // ambil semua user (atau paginate kalau banyak)
-        $users = Pengguna::select('idPengguna', 'username', 'email', 'universitas', 'role', 'status', 'join_date')->get();
-
-        $stats = [
-            'total_users' => Pengguna::count(),
-            'community_admins' => Pengguna::where('role', 'Admin')->count(),
-            'active_users' => Pengguna::where('status', 'Active')->count(),
-            'inactive_users' => Pengguna::where('status', 'Inactive')->count(),
-        ];
-
-        return view('admin.usermanagement', compact('users', 'stats'));
-    }
+{
+    $currentMonth = now()->startOfMonth();
+    
+    // ========== TOTAL USERS ==========
+    $totalUsersNow = \App\Models\Pengguna::count();
+    $totalUsersLastMonth = \App\Models\Pengguna::where('created_at', '<', $currentMonth)->count();
+    $userGrowth = $totalUsersLastMonth > 0 
+        ? round((($totalUsersNow - $totalUsersLastMonth) / $totalUsersLastMonth) * 100, 1) 
+        : 0;
+    
+    // ========== COMMUNITY ADMINS (role = admin) ==========
+    $communityAdminsNow = \App\Models\Pengguna::where('role', 'admin')->count();
+    $communityAdminsLastMonth = \App\Models\Pengguna::where('role', 'admin')
+        ->where('created_at', '<', $currentMonth)->count();
+    $adminGrowth = $communityAdminsLastMonth > 0 
+        ? round((($communityAdminsNow - $communityAdminsLastMonth) / $communityAdminsLastMonth) * 100, 1) 
+        : 0;
+    
+    // ========== ACTIVE USERS ==========
+    $activeUsersNow = \App\Models\Pengguna::where('status', 'active')->count();
+    $activeUsersLastMonth = \App\Models\Pengguna::where('status', 'active')
+        ->where('created_at', '<', $currentMonth)->count();
+    $activeGrowth = $activeUsersLastMonth > 0 
+        ? round((($activeUsersNow - $activeUsersLastMonth) / $activeUsersLastMonth) * 100, 1) 
+        : 0;
+    
+    // ========== INACTIVE USERS ==========
+    $inactiveUsersNow = \App\Models\Pengguna::where('status', 'inactive')->count();
+    $inactiveUsersLastMonth = \App\Models\Pengguna::where('status', 'inactive')
+        ->where('created_at', '<', $currentMonth)->count();
+    $inactiveGrowth = $inactiveUsersLastMonth > 0 
+        ? round((($inactiveUsersNow - $inactiveUsersLastMonth) / $inactiveUsersLastMonth) * 100, 1) 
+        : 0;
+    
+    // ========== STATS (sesuai desain) ==========
+    $stats = [
+        'total_users' => $totalUsersNow,
+        'total_users_growth' => $userGrowth,
+        
+        'community_admins' => $communityAdminsNow,
+        'community_admins_growth' => $adminGrowth,
+        
+        'active_users' => $activeUsersNow,
+        'active_users_growth' => $activeGrowth,
+        
+        'inactive_users' => $inactiveUsersNow,
+        'inactive_users_growth' => $inactiveGrowth,
+    ];
+    
+    // ========== AMBIL DATA USERS UNTUK TABLE ==========
+    $users = \App\Models\Pengguna::select(
+            'idPengguna',
+            'username',
+            'email',
+            'universitas',
+            'role',
+            'status',
+            'join_date'
+        )
+        ->orderBy('join_date', 'desc')
+        ->get()
+        ->map(function($user) {
+            return [
+                'idPengguna' => $user->idPengguna,
+                'username' => $user->username,
+                'email' => $user->email,
+                'universitas' => $user->universitas ?? '-',
+                'role' => ucfirst($user->role ?? 'User'),
+                'status' => ucfirst($user->status ?? 'Active'),
+                'join_date' => $user->join_date, // langsung pakai kalau udah format Y-m-d
+            ];
+        });
+    
+    return view('admin.usermanagement', compact('stats', 'users'));
+}
 
     // Logout untuk form POST /logout
     public function logout(Request $request)

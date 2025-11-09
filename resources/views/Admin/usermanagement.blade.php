@@ -549,53 +549,64 @@
 
         <!-- Content -->
         <div class="content">
-            <!-- Stats Grid - 4 CARDS (2x2) -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-badge">+12,5%</div>
-                    <div class="stat-icon">
-                        <svg width="28" height="28" fill="#001d5c" viewBox="0 0 24 24">
-                            <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
-                        </svg>
-                    </div>
-                    <div class="stat-value">{{ $stats['total_users'] }}</div>
-                    <div class="stat-label">Total Users</div>
-                </div>
+           <!-- Stats Grid (2x2) - SESUAI DESAIN -->
+<div class="stats-grid">
+    <!-- Total Users -->
+    <div class="stat-card">
+        <div class="stat-badge" style="background: {{ $stats['total_users_growth'] >= 0 ? '#E3F2FD' : '#FFEBEE' }}; color: {{ $stats['total_users_growth'] >= 0 ? '#1976D2' : '#D32F2F' }}">
+            {{ $stats['total_users_growth'] >= 0 ? '+' : '' }}{{ $stats['total_users_growth'] }}%
+        </div>
+        <div class="stat-icon">
+            <svg width="28" height="28" fill="#001d5c" viewBox="0 0 24 24">
+                <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+            </svg>
+        </div>
+        <div class="stat-value">{{ number_format($stats['total_users'], 0, ',', '.') }}</div>
+        <div class="stat-label">Total Users</div>
+    </div>
 
-                <div class="stat-card">
-                    <div class="stat-badge">+8%</div>
-                    <div class="stat-icon">
-                        <svg width="28" height="28" fill="#001d5c" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
-                        </svg>
-                    </div>
-                    <div class="stat-value">{{ $stats['community_admins'] }}</div>
-                    <div class="stat-label">Community Admins</div>
-                </div>
+    <!-- Community Admins -->
+    <div class="stat-card">
+        <div class="stat-badge" style="background: {{ $stats['community_admins_growth'] >= 0 ? '#E3F2FD' : '#FFEBEE' }}; color: {{ $stats['community_admins_growth'] >= 0 ? '#1976D2' : '#D32F2F' }}">
+            {{ $stats['community_admins_growth'] >= 0 ? '+' : '' }}{{ $stats['community_admins_growth'] }}%
+        </div>
+        <div class="stat-icon">
+            <svg width="28" height="28" fill="#001d5c" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+            </svg>
+        </div>
+        <div class="stat-value">{{ $stats['community_admins'] }}</div>
+        <div class="stat-label">Community Admins</div>
+    </div>
 
-                <div class="stat-card">
-                    <div class="stat-badge">+5%</div>
-                    <div class="stat-icon">
-                        <svg width="28" height="28" fill="#001d5c" viewBox="0 0 24 24">
-                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                        </svg>
-                    </div>
-                    <div class="stat-value">{{ $stats['active_users'] }}</div>
-                    <div class="stat-label">Active Users</div>
-                </div>
+    <!-- Active Users -->
+    <div class="stat-card">
+        <div class="stat-badge" style="background: {{ $stats['active_users_growth'] >= 0 ? '#E3F2FD' : '#FFEBEE' }}; color: {{ $stats['active_users_growth'] >= 0 ? '#1976D2' : '#D32F2F' }}">
+            {{ $stats['active_users_growth'] >= 0 ? '+' : '' }}{{ $stats['active_users_growth'] }}%
+        </div>
+        <div class="stat-icon">
+            <svg width="28" height="28" fill="#001d5c" viewBox="0 0 24 24">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
+        </div>
+        <div class="stat-value">{{ $stats['active_users'] }}</div>
+        <div class="stat-label">Active Users</div>
+    </div>
 
-                <div class="stat-card">
-                    <div class="stat-badge">-2%</div>
-                    <div class="stat-icon">
-                        <svg width="28" height="28" fill="#001d5c" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 11c-.55 0-1-.45-1-1V8c0-.55.45-1 1-1s1 .45 1 1v4c0 .55-.45 1-1 1zm1 4h-2v-2h2v2z"/>
-                        </svg>
-                    </div>
-                    <div class="stat-value">{{ $stats['inactive_users'] }}</div>
-                    <div class="stat-label">Inactive Users</div>
-                </div>
-            </div>
-
+    <!-- Inactive Users -->
+    <div class="stat-card">
+        <div class="stat-badge" style="background: {{ $stats['inactive_users_growth'] >= 0 ? '#FFEBEE' : '#E3F2FD' }}; color: {{ $stats['inactive_users_growth'] >= 0 ? '#D32F2F' : '#1976D2' }}">
+            {{ $stats['inactive_users_growth'] >= 0 ? '+' : '' }}{{ $stats['inactive_users_growth'] }}%
+        </div>
+        <div class="stat-icon">
+            <svg width="28" height="28" fill="#001d5c" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 11c-.55 0-1-.45-1-1V8c0-.55.45-1 1-1s1 .45 1 1v4c0 .55-.45 1-1 1zm1 4h-2v-2h2v2z"/>
+            </svg>
+        </div>
+        <div class="stat-value">{{ $stats['inactive_users'] }}</div>
+        <div class="stat-label">Inactive Users</div>
+    </div>
+</div>
             <!-- User Data Table -->
             <div class="user-data-section">
                 <div class="section-header">
