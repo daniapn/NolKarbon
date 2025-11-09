@@ -257,7 +257,7 @@
     <div class="footer">
         <div class="footer-logo">
             <img src="/images/logo.png" alt="Nol Karbon Footer Logo">
-            <div class="footer-contact">Contact Us</div>
+            <div class="footer-contact">NolKarbon@gmail.com</div>
         </div>
     </div>
 </body>

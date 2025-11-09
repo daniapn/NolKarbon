@@ -11,6 +11,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\EmisiController;
 
 // Halaman utama (welcome) (dn)
 Route::get('/', function () {
@@ -27,8 +28,8 @@ Route::get('/kontributor/viewdraft/{id}', [KontributorController::class, 'viewDr
 Route::put('/kontributor/updatedraft/{id}', [KontributorController::class, 'updateDraft'])->name('kontributor.updatedraft');
 Route::delete('/kontributor/deletedraft/{id}', [KontributorController::class, 'deleteDraft'])->name('kontributor.deletedraft');
 Route::post('/kontributor/submitdraft/{id}', [KontributorController::class, 'submitDraft'])->name('kontributor.submitdraft');
-Route::get('/artikel/create-draft', [KontributorController::class, 'createDraft'])->name('kontributor.createdraft');
-Route::post('/artikel/store-draft', [KontributorController::class, 'storeDraft'])->name('kontributor.storedraft');
+Route::get('/kontributor/create-draft', [KontributorController::class, 'createDraft'])->name('kontributor.createdraft');
+Route::post('/kontributor/store-draft', [KontributorController::class, 'storeDraft'])->name('kontributor.storedraft');
 Route::get('/kontributor/notif', [KontributorController::class, 'getNotif'])->name('kontributor.notif');
 Route::get('/admin/review', [AdminController::class, 'reviewDraft'])->name('admin.reviewdraft');
 Route::post('/admin/unpublish/{id}', [AdminController::class, 'unpublish'])->name('admin.unpublish');
@@ -82,6 +83,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::get('/admin/statistik', function () {
     return view('Admin/statistikemisi');
 });
+
+// kalkulator 
+Route::get('/kalkulator-emisi', [EmisiController::class, 'index']);
+Route::post('/hitung-emisi', [EmisiController::class, 'hitung'])->name('hitung.emisi');
 
 // logout (versi kamu)
 Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
