@@ -22,9 +22,9 @@
                 ],
                 [
                     'label' => 'Challenge',
-                    'route' => 'challenges.index',
+                    'route' => 'challenge.index',
                     'url' => null,
-                    'pattern' => 'challenges.',
+                    'pattern' => 'challenge.',
                 ],
                 [
                     'label' => 'Leaderboard',

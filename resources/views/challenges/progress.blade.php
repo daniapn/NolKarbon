@@ -3,7 +3,7 @@
 @section('title', 'Update Progres ' . $challenge->title)
 
 @section('back-link')
-    <a href="{{ route('challenges.show', $challenge) }}" class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white px-4 py-2 text-xs font-semibold text-blue-900 shadow hover:bg-blue-50">
+    <a href="{{ route('challenge.show', $challenge) }}" class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white px-4 py-2 text-xs font-semibold text-blue-900 shadow hover:bg-blue-50">
         <i class="fa-solid fa-arrow-left-long"></i> Kembali
     </a>
 @endsection
@@ -93,7 +93,7 @@
                             class="inline-flex w-48 items-center justify-center gap-2 rounded-full bg-blue-700 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-800">
                         <i class="fa-solid fa-upload"></i> Simpan Laporan
                     </button>
-                    <a href="{{ route('challenges.dashboard') }}"
+                    <a href="{{ route('challenge.dashboard') }}"
                        class="inline-flex w-48 items-center justify-center gap-2 rounded-full border border-blue-200 px-6 py-3 text-sm font-semibold text-blue-700 hover:bg-blue-50">
                         Batal
                     </a>

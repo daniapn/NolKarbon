@@ -6,6 +6,7 @@ use App\Models\Community;
 use App\Models\Pengguna;
 use App\Models\DraftArtikel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
@@ -212,4 +213,78 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'Artikel berhasil di-unpublish!');
 
     }
+    public function formReview($id)
+{
+    // Ambil artikel berdasarkan ID
+    $artikel = DraftArtikel::findOrFail($id);
+
+    // Kirim ke blade
+    return view('Admin.artikel.formReview', compact('artikel'));
+}
+
+public function approve($id)
+{
+    $artikel = DraftArtikel::findOrFail($id);
+    $artikel->status = 'published';
+    $artikel->catatan = null;
+    $artikel->save();
+
+    DB::table('notifications')->insert([
+        'user_id' => $artikel->user_id, 
+        'catatan' => $artikel->catatan,
+        'judul' => $artikel->judul,
+        'status' => $artikel->status,
+        'created_at' => now()
+    ]);
+
+    return redirect()->route('admin.reviewdraft')
+                     ->with('success', 'Artikel berhasil dipublish!');
+}
+
+
+    // === MINTA REVISI ===
+public function revisi(Request $request, $id)
+{
+    $artikel = DraftArtikel::findOrFail($id);
+    $artikel->status = 'revisi';
+    $artikel->catatan = $request->catatan;
+    $artikel->save();
+
+     //Tambahkan notifikasi untuk kontributor
+    DB::table('notifications')->insert([
+        'user_id' => $artikel->user_id, 
+        'catatan' => $artikel->catatan,
+        'judul' => $artikel->judul,
+        'status' => $artikel->status,
+        'created_at' => now()
+    ]);
+
+     return redirect()->route('admin.reviewdraft')
+                     ->with('success', 'Artikel telah diminta revisi.');
+}
+
+
+    // === TOLAK DRAFT ===
+
+    public function tolak(Request $request, $id)
+{
+    $artikel = DraftArtikel::findOrFail($id);
+
+        $artikel->status = 'ditolak';
+        $artikel->catatan = $request->catatan; // alasan penolakan
+        $artikel->save();
+
+    // Tambahkan notifikasi untuk kontributor
+    DB::table('notifications')->insert([
+        'user_id' => $artikel->user_id,
+        'catatan' => $artikel->catatan,
+        'judul' => $artikel->judul,
+        'status' => $artikel->status,
+        'created_at' => now()
+    ]);
+
+     return redirect()->route('admin.reviewdraft')
+                     ->with('success', 'Artikel telah ditolak.');
+}
+
 }

@@ -203,7 +203,7 @@
         }
 
         .status-rejected {
-            background: #FFE6E6;
+            background: #ffababff;
         }
 
         .status-revision {
@@ -354,7 +354,7 @@
     $class = match(strtolower($artikel->status)) {
     'menunggu review' => 'status-pending',
     'published' => 'status-published',
-    'rejected' => 'status-rejected',
+    'ditolak' => 'status-rejected',
     'revisi' => 'status-revision',
     'draft' => 'status-draft',
     default => 'status-draft'
@@ -437,7 +437,7 @@ document.querySelector(".notification-icon").addEventListener("click", function 
                     html += `<p><b>${n.judul}</b> berhasil diupdate pada <b>${n.created_at}</b></p>`;
                 }
                 else if (["revisi","ditolak"].includes(status)) {
-                    html += `<p><b>${n.judul}</b><br>Status: ${n.status}<br>Catatan: <i>${n.catatan ?? '-'}</i></p>`;
+                    html += `<p><b>${n.judul}</b> Status: ${n.status} pada <b>${n.created_at}</b> <br>Catatan: <i>${n.catatan ?? '-'}</i></p>`;
                 }
                 else if (["published"].includes(status)) {
                     html += `<p><b>${n.judul}</b> telah dipublish pada <b>${n.created_at}</b></p>`;
