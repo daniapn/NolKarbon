@@ -35,8 +35,8 @@ Route::post('/kontributor/store-draft', [KontributorController::class, 'storeDra
 Route::get('/kontributor/notif', [KontributorController::class, 'getNotif'])->name('kontributor.notif');
 Route::get('/admin/review', [AdminController::class, 'reviewDraft'])->name('admin.reviewdraft');
 Route::post('/admin/unpublish/{id}', [AdminController::class, 'unpublish'])->name('admin.unpublish');
-Route::get('/admin/formreview/{id}', [AdminController::class, 'formReview'])->name('admin.formreview');
-Route::post('/admin/formreview/{id}', [AdminController::class, 'formReview'])->name('admin.formreview');
+Route::match(['get', 'post'], '/admin/formreview/{id}', [AdminController::class, 'formReview'])
+    ->name('admin.formreview');
 Route::post('/admin/approve/{id}', [AdminController::class, 'approve'])->name('admin.approve');
 Route::post('/admin/tolak/{id}', [AdminController::class, 'tolak'])->name('admin.tolak');
 Route::post('/admin/revisi/{id}', [AdminController::class, 'revisi'])->name('admin.revisi');
@@ -44,8 +44,10 @@ Route::post('/admin/revisi/{id}', [AdminController::class, 'revisi'])->name('adm
 
 // login & register (aurel)
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.process');
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('register.store');
+
 
 // leaderboard & communities
 Route::get('/leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard.index');

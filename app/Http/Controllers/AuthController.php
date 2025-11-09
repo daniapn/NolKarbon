@@ -27,7 +27,7 @@ public function register(Request $request)
                 ->withInput();
         }
 
-        $user = Pengguna::create([
+        Pengguna::create([
             'username' => $request->username,
             'email' => $request->email,
             'universitas' => $request->university,
@@ -37,9 +37,10 @@ public function register(Request $request)
             'join_date' => now(),
         ]);
 
-        Auth::login($user);
-
-        return redirect()->route('homee')->with('success', 'Registration successful!');
+        // Setelah register, arahkan ke halaman login
+        return redirect()
+            ->route('login')
+            ->with('success', 'Registration successful! Please login.');
     }
 
     public function login(Request $request)
@@ -56,18 +57,18 @@ public function register(Request $request)
     }
 
     $credentials = filter_var($request->username_email, FILTER_VALIDATE_EMAIL)
-        ? ['email' => $request->username_email, 'password' => $request->password]
-        : ['username' => $request->username_email, 'password' => $request->password];
+            ? ['email' => $request->username_email, 'password' => $request->password]
+            : ['username' => $request->username_email, 'password' => $request->password];
 
-    if (Auth::attempt($credentials, $request->filled('remember'))) {
-        $request->session()->regenerate();
-        return redirect()->route('homee')->with('success', 'Login successful!');
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->route('homee')->with('success', 'Login successful!');
+        }
+
+        return redirect()->back()
+            ->withErrors(['username_email' => 'Invalid username/email or password'])
+            ->withInput();
     }
-
-    return redirect()->back()
-        ->withErrors(['username_email' => 'Invalid credentials'])
-        ->withInput();
-}
 
     public function logout(Request $request)
     {
