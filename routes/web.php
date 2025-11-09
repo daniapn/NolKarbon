@@ -20,6 +20,8 @@ Route::get('/', function () {
 
 Route::get('/NolKarbon', [HomeController::class, 'index'])->name('home');
 Route::get('/artikel/{id}', [HomeController::class, 'show'])->name('artikel.detail');
+Route::get('/NolKarbonn', [HomeController::class, 'index2'])->name('homee');
+Route::post('/login', [AuthController::class, 'showLogin'])->name('login');
 
 // Artikel (dn)
 Route::get('/kontributor', [KontributorController::class, 'index'])->name('kontributor.index');
