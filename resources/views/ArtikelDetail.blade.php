@@ -14,14 +14,14 @@
 
         body {
             font-family: 'Lexend', sans-serif;
-            background: #EEE8DF;
+            background: #F5F1EB;
             color: #333;
             overflow-x: hidden;
             padding-top: 90px;
         }
 
         /* Header */
-                header {
+        header {
             padding: 1.5rem 5%;
             display: flex;
             justify-content: center;
@@ -101,10 +101,11 @@
         .hero h1 {
             font-family: 'Poppins', sans-serif;
             font-size: 55px;
-            font-weight: 600;
+            font-weight: 700;
             line-height: 65px;
-            letter-spacing: 1.1px;
-            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+            margin-bottom: 2rem;
+            color: #1a1a1a;
         }
 
         .hero h1 .highlight {
@@ -114,8 +115,38 @@
         .hero p {
             font-size: 18px;
             max-width: 785px;
-            margin: 0 auto;
+            margin: 0 auto 3rem;
             line-height: 1.6;
+            color: #666;
+        }
+
+        .hero-image {
+            max-width: 200px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 20px;
+        }
+
+        /* Content Text Section */
+        .content-text {
+            padding: 4rem 5%;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .content-text p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+            text-align: justify;
         }
 
         /* NolKarbon Section */
@@ -131,8 +162,7 @@
             align-items: center;
             position: relative;
             overflow: hidden;
-                        justify-content: center;
-            align-items: center;
+            justify-content: center;
         }
 
         .nolkarbon-content h2 {
@@ -176,16 +206,15 @@
 
         /* Together Section */
         .together-section {
-    background: #000862;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-   border-top-left-radius: 60px;
-    border-top-right-radius: 60px;
-    margin: 3rem auto 0;
-    padding: 3rem 5%;
-    text-align: center;
-    max-width: 100%;
-}
-
+            background: #000862;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-top-left-radius: 60px;
+            border-top-right-radius: 60px;
+            margin: 3rem auto 0;
+            padding: 3rem 5%;
+            text-align: center;
+            max-width: 100%;
+        }
 
         .together-section h2 {
             font-family: 'Poppins', sans-serif;
@@ -488,20 +517,23 @@
         }
 
         .see-more-bar:hover {
-        background: #3675BE;
-    }
+            background: #3675BE;
+        }
 
         /* Card Section */
         .card-section {
+            background: #000862;
             padding: 6rem 10%;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 3rem;
             align-items: center;
+            width: 100%;
+            margin: 0;
         }
 
         .emission-card {
-            margin-top: 6rim;
+            margin-top: 6rem;
             border-radius: 25px;
             overflow: hidden;
             position: relative;
@@ -521,7 +553,7 @@
             letter-spacing: 1.5px;
             white-space: nowrap;
             color: #FDF3D6;
-            margin-top: 6rim;
+            margin-top: 6rem;
         }
 
         .btn-secondary {
@@ -539,23 +571,13 @@
         }
 
         .btn-secondary:hover {
-        background: #3675BE;
-        color: #fff;
-        transform: scale(1.05);
-    }
+            background: #3675BE;
+            color: #fff;
+            transform: scale(1.05);
+        }
 
         /* Challenge Section */
-.card-section {
-  background: #000862;
-  padding: 6rem 10%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: center;
-  width: 100%;
-  margin: 0;
-}
-            .challenge-section {
+        .challenge-section {
             background: #000862;
             padding: 4rem 10%;
             text-align: center;
@@ -597,11 +619,11 @@
         }
 
         .btn-challenge:hover {
-        background: #3675BE;
-        color: #fff;
-        transform: translateY(-3px);
-        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
-    }
+            background: #3675BE;
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+        }
 
         /* Articles Section */
         .articles-section {
@@ -634,10 +656,16 @@
         }
 
         .article-card {
-            background: #EEE8DF;
+            background: #F5F1EB;
             border-radius: 25px;
-            border: 1px solid #000862;
+            border: 1px solid #D4CCBF;
             overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
         .article-image {
@@ -672,6 +700,11 @@
             color: #3675BE;
             font-size: 18px;
             text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .article-content a:hover {
+            color: #000862;
         }
 
         /* Footer */
@@ -687,6 +720,7 @@
             font-size: 18px;
         }
 
+        /* Responsive */
         @media (max-width: 1024px) {
             .testimonials,
             .articles-grid {
@@ -716,13 +750,12 @@
         }
 
         html, body {
-  overflow-x: hidden;
-}
+            overflow-x: hidden;
+        }
 
-section, div, img {
-  max-width: 100%;
-}
-
+        section, div, img {
+            max-width: 100%;
+        }
 
     </style>
 </head>
@@ -744,185 +777,25 @@ section, div, img {
         </div>
     </header>
 
+    <!-- Hero Section -->
     <section class="hero">
-        <h1>Towards Cleaner Air<br>Start From <span class="highlight">Nol Karbon</span></h1>
-        <p>Nol Karbon empowers you to take small yet meaningful actions for a cleaner, greener future. Together, we can build a world free from carbon emissions.</p>
-    </section>
-
-    <section class="nolkarbon-section">
-        <div class="nolkarbon-content">
-            <h2>#NolKarbon</h2>
-            <p>We believe that big changes begin with small steps. Nol Karbon exists to inspire and guide people in reducing their carbon footprint through education, real action, and collaboration.</p>
-        </div>
-        <div class="nolkarbon-image">
-            <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800" alt="Environmental imagery">
+        <h1>{{ $article->judul }}</h1>
+        <div class="hero-image">
+            <img src="{{ asset('storage/' . $article->gambar) }}" alt="{{ $article->judul }}">
         </div>
     </section>
 
-    <section class="together-section">
-        <h2>Together, We Make a Difference</h2>
-        <p>Your small steps matter. Be part of the movement toward a cleaner and more sustainable future with Nol Karbon.</p>
-        
-        <div class="testimonials">
-            <div class="testimonial">
-                <p class="testimonial-text">By integrating NolKarbon's digital solutions, we can transparently measure, report, and offset our emissions making our operations greener and more accountable.</p>
-                <div class="author">Dania</div>
-                <div class="position">Founder Nol Karbon, Mahasiswa Universitas Brawijaya</div>
-            </div>
-            <div class="testimonial">
-                <p class="testimonial-text">Every step you take brings us closer to a cleaner planet. Join Nol Karbon and start making real impact today.</p>
-                <div class="author">Raissa</div>
-                <div class="position">Head of Sustainability, Mahasiswa Universitas Brawijaya</div>
-            </div>
-            <div class="testimonial">
-                <p class="testimonial-text">Small changes create big differences. Let's reduce carbon footprints and build a greener future with Nol Karbon</p>
-                <div class="author">Alexandra</div>
-                <div class="position">Chief Risk & Sustainability Officer, Universitas Brawijaya</div>
-            </div>
-        </div>
+    <!-- Content Text Section -->
+    <section class="content-text">
+        {!! nl2br(e($article->isi)) !!}
     </section>
 
-    <section class="support-section">
-        <div>
-            <h2>Support Our Projects</h2>
-            <p>Join our environmental initiatives — from tree planting and recycling to education and community awareness. Every project helps us move closer to zero emissions.</p>
-        </div>
-        <div class="project-icons">
-            <div class="project-icon">
-                <img src="/images/sdgs13.png" alt="Protection Project">
-            </div>
-            
-        </div>
-    </section>
-
-    <section class="habits-section">
-        <div class="earth-illustration">
-            <img src="/images/earth.png" alt="Earth Illustration">
-        </div>
-        <div class="habits-content">
-            <h2>Let's see how your habits affect the Earth</h2>
-            <p>Empower your climate action with data-driven insight</p>
-            <button class="btn-primary">Start Calculate</button>
-        </div>
-    </section>
-
-    <div class="blue-divider"></div>
-
-    <section class="tracking-section">
-        <h2>Track Your Campus<br>Emission Performance!</h2>
-        <div class="leaderboard">
-            <div class="podium">
-                <div class="podium-item">
-                    <div class="podium-avatar">
-                        <img src="/images/avatar2.jpg" alt="Second Place">
-                    </div>
-                    <div class="podium-rank second">
-                        2nd
-                        <span class="podium-name second">Kucing Ngelag<br>90.000 point</span>
-                    </div>
-                </div>
-                <div class="podium-item">
-                    <div class="podium-avatar">
-                        <img src="/images/avatar1.jpg" alt="First Place">
-                    </div>
-                    <div class="podium-rank first">
-                        1st
-                        <span class="podium-name first">Kucing Marah<br>100.000 point</span>
-                    </div>
-                </div>
-                <div class="podium-item">
-                    <div class="podium-avatar">
-                        <img src="/images/avatar3.jpg" alt="Third Place">
-                    </div>
-                    <div class="podium-rank third">
-                        3rd
-                        <span class="podium-name third">Kucing Ngoding<br>80.000 point</span>
-                    </div>
-                </div>
-            </div>
-            <div class="see-more-bar">See More!</div>
-        </div>
-
-        <h2>Track Your Individual<br>Emission Performance!</h2>
-        <div class="leaderboard">
-            <div class="podium">
-                <div class="podium-item">
-                    <div class="podium-avatar">
-                        <img src="/images/user2.jpg" alt="Second Place">
-                    </div>
-                    <div class="podium-rank second">
-                        2nd
-                        <span class="podium-name second">User Name<br>Points</span>
-                    </div>
-                </div>
-                <div class="podium-item">
-                    <div class="podium-avatar">
-                        <img src="/images/user1.jpg" alt="First Place">
-                    </div>
-                    <div class="podium-rank first">
-                        1st
-                        <span class="podium-name first">User Name<br>Points</span>
-                    </div>
-                </div>
-                <div class="podium-item">
-                    <div class="podium-avatar">
-                        <img src="/images/user3.jpg" alt="Third Place">
-                    </div>
-                    <div class="podium-rank third">
-                        3rd
-                        <span class="podium-name third">User Name<br>Points</span>
-                    </div>
-                </div>
-            </div>
-            <div class="see-more-bar">See More!</div>
-        </div>
-    </section>
-
-    <section class="card-section">
-        <div class="emission-card">
-            <img src="/images/cardd.png" alt="Emission Card">
-        </div>
-        <div class="card-content">
-            <h2>Get Your Own</h2>
-            <h2>"Kartu Emisi"</h2>
-            <button class="btn-secondary">Lihat Kartu Emisi</button>
-        </div>
-    </section>
-
-    <section class="challenge-section">
-        <h2>Join Eco Challenge<br>and Earn Points!</h2>
-        <div class="trophy">
-            <img src="/images/piala.png" alt="Trophy">
-        </div>
-        <button class="btn-challenge">Check it Out!</button>
-    </section>
-
-    <section class="articles-section">
-        <h2>Stay Informed on<br><span class="highlight">Climate, Carbon, and Sustainability</span></h2>
-        <p>Explore expert insights, trends, and stories from the frontlines of sustainability.</p>
-        
-        <div class="articles-grid">
-    @forelse ($articles as $article)
-        <div class="article-card">
-            <div class="article-image">
-                <img src="{{ asset('storage/' . $article->gambar) }}" alt="{{ $article->judul }}">
-            </div>
-            <div class="article-content">
-                <h3>{{ Str::limit($article->judul, 80) }}</h3>
-                <a href="{{ route('artikel.detail', $article->idDraft) }}">Read more</a>
-            </div>
-        </div>
-    @empty
-        <p style="grid-column: span 3;">Belum ada artikel yang dipublikasikan.</p>
-    @endforelse
-</div>
-
-    </section>
+    
 
     <footer>
         <div class="logo">
-                <img src="/images/logo.png" alt="Nol Karbon Logo">
-            </div>
+            <img src="/images/logo.png" alt="Nol Karbon Logo">
+        </div>
         <p>NolKarbon@gmail.com</p>
         <p>© 2025 Nol Karbon. All rights reserved.</p>
     </footer>
