@@ -9,17 +9,17 @@
 
 @section('subnav')
     <nav class="hidden items-center gap-4 rounded-full border border-blue-200 bg-white px-6 py-2 text-xs font-semibold text-blue-800 shadow md:flex">
-        <a href="{{ route('challenge.index') }}" class="rounded-full px-3 py-1 {{ request()->routeIs('challenge.index') ? 'bg-blue-700 text-white shadow' : '' }}">Challenge</a>
-        <a href="{{ route('challenge.dashboard') }}" class="rounded-full px-3 py-1 {{ request()->routeIs('challenge.dashboard') ? 'bg-blue-700 text-white shadow' : '' }}">Dashboard</a>
-        <a href="{{ route('challenge.badges') }}" class="rounded-full px-3 py-1 {{ request()->routeIs('challenge.badges') ? 'bg-blue-700 text-white shadow' : '' }}">Badge</a>
+        <a href="{{ route('challenges.index') }}" class="rounded-full px-3 py-1 {{ request()->routeIs('challenges.index') ? 'bg-blue-700 text-white shadow' : '' }}">Challenge</a>
+        <a href="{{ route('challenges.dashboard') }}" class="rounded-full px-3 py-1 {{ request()->routeIs('challenge.dashboard') ? 'bg-blue-700 text-white shadow' : '' }}">Dashboard</a>
+        <a href="{{ route('challenges.badges') }}" class="rounded-full px-3 py-1 {{ request()->routeIs('challenge.badges') ? 'bg-blue-700 text-white shadow' : '' }}">Badge</a>
     </nav>
 @endsection
 
 @section('hero-actions')
-    <a href="{{ route('challenge.dashboard') }}" class="inline-flex items-center gap-2 rounded-full border border-blue-700 bg-blue-700 px-6 py-3 text-sm font-semibold text-white shadow hover:bg-blue-800">
+    <a href="{{ route('challenges.dashboard') }}" class="inline-flex items-center gap-2 rounded-full border border-blue-700 bg-blue-700 px-6 py-3 text-sm font-semibold text-white shadow hover:bg-blue-800">
         <i class="fa-solid fa-chart-line"></i> My Progress
     </a>
-    <a href="{{ route('challenge.badges') }}" class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white px-6 py-3 text-sm font-semibold text-blue-800 shadow hover:bg-blue-50">
+    <a href="{{ route('challenges.badges') }}" class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white px-6 py-3 text-sm font-semibold text-blue-800 shadow hover:bg-blue-50">
         <i class="fa-solid fa-award"></i> See My Badges
     </a>
 @endsection
@@ -33,10 +33,10 @@
                     <p class="mt-1 text-xs text-slate-500">Tetap konsisten melaporkan aksi hijau untuk naik level lebih cepat.</p>
                 </div>
                 <div class="flex flex-wrap gap-3 text-xs font-semibold text-blue-700">
-                    <a href="{{ route('challenge.dashboard') }}" class="inline-flex items-center gap-2 rounded-full bg-blue-100 px-4 py-2 shadow">
+                    <a href="{{ route('challenges.dashboard') }}" class="inline-flex items-center gap-2 rounded-full bg-blue-100 px-4 py-2 shadow">
                         <i class="fa-solid fa-gauge-high"></i> Dashboard Progres
                     </a>
-                    <a href="{{ route('challenge.badges') }}" class="inline-flex items-center gap-2 rounded-full bg-blue-100 px-4 py-2 shadow">
+                    <a href="{{ route('challenges.badges') }}" class="inline-flex items-center gap-2 rounded-full bg-blue-100 px-4 py-2 shadow">
                         <i class="fa-solid fa-medal"></i> Koleksi Badge
                     </a>
                 </div>
@@ -71,11 +71,11 @@
                                 <div class="h-2 rounded-full bg-blue-700" style="width: {{ min(100, $activeParticipation->progress_percentage) }}%"></div>
                             </div>
                             <div class="flex gap-3">
-                                <a href="{{ route('challenge.progress.create', $activeParticipation->challenge) }}"
+                                <a href="{{ route('challenges.progress.create', $activeParticipation->challenge) }}"
                                    class="inline-flex items-center gap-2 rounded-full bg-blue-700 px-4 py-2 text-xs font-semibold text-white hover:bg-blue-800">
                                     <i class="fa-solid fa-pen-nib"></i> Report Progress
                                 </a>
-                                <a href="{{ route('challenge.show', $activeParticipation->challenge) }}"
+                                <a href="{{ route('challenges.show', $activeParticipation->challenge) }}"
                                    class="inline-flex items-center gap-2 rounded-full border border-blue-200 px-4 py-2 text-xs font-semibold text-blue-700 hover:bg-blue-50">
                                     Detail
                                 </a>
@@ -145,11 +145,11 @@
                             </p>
                         </div>
                         <div class="flex flex-col gap-3 text-xs font-semibold text-blue-700">
-                            <a href="{{ route('challenge.show', $challenge) }}"
+                            <a href="{{ route('challenges.show', $challenge) }}"
                                class="inline-flex items-center justify-center gap-2 rounded-full border border-blue-200 px-5 py-2 hover:bg-blue-50">
                                 Detail Challenge
                             </a>
-                            <a href="{{ route('challenge.join', $challenge) }}"
+                            <a href="{{ route('challenges.join', $challenge) }}"
                                class="inline-flex items-center justify-center gap-2 rounded-full bg-blue-700 px-5 py-2 text-white hover:bg-blue-800">
                                 Ikuti Tantangan
                             </a>

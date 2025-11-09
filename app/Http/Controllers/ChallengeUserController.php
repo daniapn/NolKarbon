@@ -153,7 +153,7 @@ class ChallengeUserController extends Controller
         );
 
         return redirect()
-            ->route('challenge.show', $challenge)
+            ->route('challenges.show', $challenge)
             ->with('status', 'Kamu berhasil bergabung ke tantangan!')
             ->with('participant_id', $participant->id);
     }

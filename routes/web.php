@@ -90,3 +90,10 @@ Route::post('/hitung-emisi', [EmisiController::class, 'hitung'])->name('hitung.e
 
 // logout (versi kamu)
 Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
+
+// add-user
+Route::get('/admin/users/add', [AdminController::class, 'showAddUserForm'])
+        ->name('admin.adduser');
+    
+    Route::post('/admin/users/store', [AdminController::class, 'storeUser'])
+        ->name('admin.adduser.store');
