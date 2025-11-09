@@ -687,7 +687,7 @@
             font-size: 18px;
         }
 
-        @media (max-width: 1024px) {
+        @media (max-width: 200px) {
             .testimonials,
             .articles-grid {
                 grid-template-columns: 1fr;

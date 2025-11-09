@@ -379,14 +379,8 @@
                 <span>User Management</span>
             </a>
 
-            <a href="#communities" class="nav-item">
-                <svg fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 2zm6.82 6L12 12.72 5.18 8 12 3.28 18.82 8zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/>
-                </svg>
-                <span>Communities</span>
-            </a>
 
-            <a href="#draft" class="nav-item active">
+            <a href="{{ route('admin.reviewdraft') }}" class="nav-item active">
                 <svg fill="currentColor" viewBox="0 0 24 24">
                     <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
                 </svg>
@@ -400,7 +394,7 @@
                 <span>Challenges</span>
             </a>
 
-            <a href="#reports" class="nav-item">
+            <a href="{{ route('admin.reports.index') }}" class="nav-item">
                 <svg fill="currentColor" viewBox="0 0 24 24">
                     <path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/>
                 </svg>
@@ -431,8 +425,7 @@
         <!-- Header -->
         <header class="header">
             <div class="header-left">
-                <h2>Hai,</h2>
-                <p>Miguel</p>
+                <h2>Review Draft</h2>
             </div>
             <div class="header-right">
                 <div class="user-profile">
