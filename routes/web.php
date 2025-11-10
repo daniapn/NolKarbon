@@ -11,7 +11,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\EmisiController;
+use App\Http\Controllers\EmissionController;
 
 // Halaman utama (welcome) (dn)
 Route::get('/', function () {
@@ -20,6 +20,8 @@ Route::get('/', function () {
 
 Route::get('/NolKarbon', [HomeController::class, 'index'])->name('home');
 Route::get('/artikel/{id}', [HomeController::class, 'show'])->name('artikel.detail');
+Route::get('/NolKarbonn', [HomeController::class, 'index2'])->name('homee');
+Route::post('/login', [AuthController::class, 'showLogin'])->name('login');
 
 // Artikel (dn)
 Route::get('/kontributor', [KontributorController::class, 'index'])->name('kontributor.index');
@@ -33,7 +35,6 @@ Route::post('/kontributor/store-draft', [KontributorController::class, 'storeDra
 Route::get('/kontributor/notif', [KontributorController::class, 'getNotif'])->name('kontributor.notif');
 Route::get('/admin/review', [AdminController::class, 'reviewDraft'])->name('admin.reviewdraft');
 Route::post('/admin/unpublish/{id}', [AdminController::class, 'unpublish'])->name('admin.unpublish');
-Route::get('/admin/formreview/{id}', [AdminController::class, 'formReview'])->name('admin.formreview');
 Route::post('/admin/formreview/{id}', [AdminController::class, 'formReview'])->name('admin.formreview');
 Route::post('/admin/approve/{id}', [AdminController::class, 'approve'])->name('admin.approve');
 Route::post('/admin/tolak/{id}', [AdminController::class, 'tolak'])->name('admin.tolak');
@@ -42,7 +43,10 @@ Route::post('/admin/revisi/{id}', [AdminController::class, 'revisi'])->name('adm
 
 // login & register (aurel)
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.process');
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register.store');
+
 
 // leaderboard & communities
 Route::get('/leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard.index');
@@ -84,12 +88,20 @@ Route::get('/admin/statistik', function () {
     return view('Admin/statistikemisi');
 });
 
-// kalkulator 
-Route::get('/kalkulator-emisi', [EmisiController::class, 'index']);
-Route::post('/hitung-emisi', [EmisiController::class, 'hitung'])->name('hitung.emisi');
+
+Route::get('/', [EmissionController::class, 'showForm'])->name('form');
+Route::post('/calculate', [EmissionController::class, 'calculate'])->name('calculate');
+
+Route::post('/emissions', [EmissionController::class, 'store'])->name('emissions.store');
+Route::get('/emissions/{emission}/saved', [EmissionController::class, 'saved'])->name('emissions.saved');
+Route::get('/emissions/{emission}/card', [EmissionController::class, 'card'])->name('emissions.card');
+
+Route::get('/emission/card', [EmissionController::class, 'showCard'])->name('emission.card');
+
 
 // logout (versi kamu)
-Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
 
 // add-user
 Route::get('/admin/users/add', [AdminController::class, 'showAddUserForm'])

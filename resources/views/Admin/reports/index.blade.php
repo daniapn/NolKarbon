@@ -424,21 +424,21 @@
                 <span>User Management</span>
             </a>
 
-            <a href="#draft" class="nav-item">
+            <a href="{{ route('admin.reviewdraft') }}" class="nav-item">
                 <svg fill="currentColor" viewBox="0 0 24 24">
                     <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
                 </svg>
                 <span>Review Draft</span>
             </a>
 
-            <a href="#challenges" class="nav-item">
+            <a href="{{ route('admin.challenge.index') }}" class="nav-item">
                 <svg fill="currentColor" viewBox="0 0 24 24">
                     <path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 10H3V8h18v8zM6 15h2v-2H6v2zm0-3h2v-2H6v2zm3 3h8v-2H9v2zm0-3h8v-2H9v2z"/>
                 </svg>
                 <span>Challenges</span>
             </a>
 
-            <a href="#reports" class="nav-item active">
+            <a href="{{ route('admin.reports.index') }}" class="nav-item active">
                 <svg fill="currentColor" viewBox="0 0 24 24">
                     <path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/>
                 </svg>
