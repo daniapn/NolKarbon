@@ -31,7 +31,7 @@ public function register(Request $request)
             'username' => $request->username,
             'email' => $request->email,
             'universitas' => $request->university,
-            'password' => Hash::make($request->password),
+            'password' =>$request->password,
             'role' => 'User',
             'status' => 'Active',
             'join_date' => now(),
@@ -43,7 +43,7 @@ public function register(Request $request)
             ->with('success', 'Registration successful! Please login.');
     }
 
-    public function login(Request $request)
+   public function login(Request $request)
 {
     $validator = Validator::make($request->all(), [
         'username_email' => 'required|string',
@@ -56,19 +56,35 @@ public function register(Request $request)
             ->withInput();
     }
 
-    $credentials = filter_var($request->username_email, FILTER_VALIDATE_EMAIL)
-            ? ['email' => $request->username_email, 'password' => $request->password]
-            : ['username' => $request->username_email, 'password' => $request->password];
+    $input = $request->username_email;
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->route('homee')->with('success', 'Login successful!');
-        }
+    $user = \App\Models\Pengguna::where('username', $input)
+        ->orWhere('email', $input)
+        ->first();
 
-        return redirect()->back()
-            ->withErrors(['username_email' => 'Invalid username/email or password'])
-            ->withInput();
+    // 🔍 Debug sementara
+    if (!$user) {
+        dd('User tidak ditemukan', $input);
     }
+
+    if ($user->password !== $request->password) {
+        dd('Password tidak cocok', [
+            'input_password' => $request->password,
+            'db_password' => $user->password,
+        ]);
+    }
+
+    Auth::login($user);
+    $request->session()->regenerate();
+   switch ($user->role) {
+        case 'Admin':
+            return redirect()->route('dashboardadmin')->with('success', 'Welcome Admin!');
+        case 'Kontributor':
+            return redirect()->route('kontributor.index')->with('success', 'Welcome Kontributor!');
+        default:
+            return redirect()->route('homee')->with('success', 'Login successful!');
+}
+}
 
     public function logout(Request $request)
     {
