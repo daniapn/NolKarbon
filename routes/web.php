@@ -12,6 +12,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\EmissionController;
+use App\Http\Controllers\Admin\EmissionTemplateController;
 
 // Halaman utama (welcome) (dn)
 
@@ -78,6 +79,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('challenges', ChallengeAdminController::class);
     Route::get('/dashboardadmin', [AdminController::class, 'dashboardAdmin'])->name('dashboardadmin');
     Route::get('/usermanagement', [AdminController::class, 'userManagement'])->name('usermanagement');
+
+
 });
 
 // statistik
@@ -106,3 +109,15 @@ Route::get('/admin/users/add', [AdminController::class, 'showAddUserForm'])
     
     Route::post('/admin/users/store', [AdminController::class, 'storeUser'])
         ->name('admin.adduser.store');
+
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/emission-card', [EmissionTemplateController::class, 'index'])->name('admin.emission-card');
+    Route::post('/admin/emission-card', [EmissionTemplateController::class, 'store'])->name('admin.emission-card.store');
+    Route::get('/admin/emission-card/{id}/edit', [EmissionTemplateController::class, 'edit'])->name('admin.emission-card.edit');
+    Route::put('/admin/emission-card/{id}', [EmissionTemplateController::class, 'update'])->name('admin.emission-card.update');
+    Route::delete('/admin/emission-card/{id}', [EmissionTemplateController::class, 'destroy'])->name('admin.emission-card.delete');
+    Route::get('/admin/emission-card/{id}/edit', [EmissionTemplateController::class, 'edit'])->name('admin.emission-card.edit');
+    Route::put('/admin/emission-card/{id}', [EmissionTemplateController::class, 'update'])->name('admin.emission-card.update');
+    Route::get('/admin/emission-card/deleted', [EmissionTemplateController::class, 'deleted'])->name('admin.emission-card.deleted');
+});
