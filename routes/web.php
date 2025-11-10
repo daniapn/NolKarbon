@@ -12,6 +12,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\EmissionController;
+use App\Http\Controllers\Admin\EmissionTemplateController;
+
 use App\Http\Controllers\PenggunaController;
 // Halaman utama (welcome) (dn)
 
@@ -78,6 +80,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('challenges', ChallengeAdminController::class);
     Route::get('/dashboardadmin', [AdminController::class, 'dashboardAdmin'])->name('dashboardadmin');
     Route::get('/usermanagement', [AdminController::class, 'userManagement'])->name('usermanagement');
+
+
 });
 
 // statistik
@@ -104,15 +108,45 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/users/add', [AdminController::class, 'showAddUserForm'])->name('adduser');
     Route::post('/users/store', [AdminController::class, 'storeUser'])->name('adduser.store');
     
+    Route::post('/admin/users/store', [AdminController::class, 'storeUser'])
+        ->name('admin.adduser.store');
+
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/emission-card', [EmissionTemplateController::class, 'index'])->name('admin.emission-card');
+    Route::post('/admin/emission-card', [EmissionTemplateController::class, 'store'])->name('admin.emission-card.store');
+    Route::get('/admin/emission-card/{id}/edit', [EmissionTemplateController::class, 'edit'])->name('admin.emission-card.edit');
+    Route::put('/admin/emission-card/{id}', [EmissionTemplateController::class, 'update'])->name('admin.emission-card.update');
+    Route::delete('/admin/emission-card/{id}', [EmissionTemplateController::class, 'destroy'])->name('admin.emission-card.delete');
+    Route::get('/admin/emission-card/{id}/edit', [EmissionTemplateController::class, 'edit'])->name('admin.emission-card.edit');
+    Route::put('/admin/emission-card/{id}', [EmissionTemplateController::class, 'update'])->name('admin.emission-card.update');
+    Route::get('/admin/emission-card/deleted', [EmissionTemplateController::class, 'deleted'])->name('admin.emission-card.deleted');
+});
     Route::get('/users/edit/{id}', [AdminController::class, 'editUser'])->name('updateuser');
     Route::put('/users/update/{id}', [AdminController::class, 'updateUser'])->name('updateuser.update');
     
     Route::get('/users/view/{id}', [AdminController::class, 'readUser'])->name('readuser');
 
     Route::delete('/users/delete/{id}', [AdminController::class, 'deleteUser'])->name('deleteuser');
+<<<<<<< HEAD
     Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');   
+=======
+    Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');
+    Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');
+    Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');   
+    Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');
+>>>>>>> 70da441b2d98bbf26816146d690aeb1b7553f18f
 });
 
 Route::get('/profile', [PenggunaController::class, 'index'])->name('profile.index');
 Route::post('/profile/update', [PenggunaController::class, 'update'])->name('profile.update');
+<<<<<<< HEAD
+=======
+    Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');
+    Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/kontributor', [KontributorController::class, 'index'])->name('kontributor.index');
+Route::get('/dashboardadmin', [AdminController::class, 'dashboardAdmin'])->name('dashboardadmin');
+>>>>>>> 70da441b2d98bbf26816146d690aeb1b7553f18f
 

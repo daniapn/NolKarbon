@@ -6,7 +6,7 @@ use App\Models\Emission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use App\Models\Pengguna; 
+use App\Models\Penggunas; 
 
 
 class EmissionController extends Controller
@@ -68,33 +68,23 @@ class EmissionController extends Controller
     // simpan & tampilkan halaman "Data saved"
     public function store(Request $request)
     {
-        $payload = $request->validate([
-            'name'            => ['nullable','string','max:100'],
-            'vehicle_type'    => ['required','in:motorcycle,car'],
-            'distance'        => ['required','numeric','min:0'],
-            'electric_source' => ['required','in:grid,solar'],
-            'electric_usage'  => ['required','numeric','min:0'],
-            'beef'            => ['required','numeric','min:0'],
-            'chicken'         => ['required','numeric','min:0'],
-            'organic_waste'   => ['required','numeric','min:0'],
-            'inorganic_waste' => ['required','numeric','min:0'],
-            'transport_emission' => ['required','numeric','min:0'],
-            'electric_emission'  => ['required','numeric','min:0'],
-            'food_emission'      => ['required','numeric','min:0'],
-            'rubbish_emission'   => ['required','numeric','min:0'],
-            'total_emission'     => ['required','numeric','min:0'],
-        ]);
+        // Simpan data ke database
+        $emission = new Emission();
+        $emission->name = $request->name;
+        $emission->transport_emission = $request->transport_emission;
+        $emission->electric_emission = $request->electric_emission;
+        $emission->food_emission = $request->food_emission;
+        $emission->rubbish_emission = $request->rubbish_emission;
+        $emission->total_emission = $request->total_emission;
+        $emission->save();
     
-        $emission = Emission::create($payload);
-    
-        // Langsung redirect ke kartu emisi setelah data disimpan
-        return redirect()->route('emissions.card', ['emission' => $emission->id]);
+        // Setelah disimpan, redirect ke halaman 'saved'
+        return redirect()->route('emissions.saved', ['emission' => $emission->id]);
     }
-
 
     public function saved(Emission $emission)
     {
-        return view('emisi.emission_saved', ['emission' => $emission]);
+        return view('emisi.emission_card', ['emission' => $emission]);
     }
 
     public function card($id)
