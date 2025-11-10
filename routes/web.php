@@ -12,7 +12,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\EmissionController;
-
+use App\Http\Controllers\PenggunaController;
 // Halaman utama (welcome) (dn)
 
 Route::get('/NolKarbon', [HomeController::class, 'index'])->name('home');
@@ -109,3 +109,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     
     Route::delete('/users/delete/{id}', [AdminController::class, 'deleteUser'])->name('deleteuser');
 });
+
+
+
+Route::get('/profile', [PenggunaController::class, 'index'])->name('profile.index');
+Route::post('/profile/update', [PenggunaController::class, 'update'])->name('profile.update');
