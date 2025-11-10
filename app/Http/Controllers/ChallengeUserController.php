@@ -291,7 +291,7 @@ class ChallengeUserController extends Controller
             ],
         ];
 
-        return view('challenge.badges', [
+        return view('challenges.badges', [
             'user' => $user,
             'level' => $level,
             'nextLevelPoints' => ($level * 100) - $totalPoints,
