@@ -878,7 +878,7 @@ section, div, img {
             <div class="podium">
                 <div class="podium-item">
                     <div class="podium-avatar">
-                        <img src="/images/avatar2.jpg" alt="Second Place">
+                        <img src="/images/univ.jpg" alt="Second Place">
                     </div>
                     <div class="podium-rank second">
                         2nd
@@ -887,7 +887,7 @@ section, div, img {
                 </div>
                 <div class="podium-item">
                     <div class="podium-avatar">
-                        <img src="/images/avatar1.jpg" alt="First Place">
+                        <img src="/images/univ.jpg" alt="First Place">
                     </div>
                     <div class="podium-rank first">
                         1st
@@ -896,7 +896,7 @@ section, div, img {
                 </div>
                 <div class="podium-item">
                     <div class="podium-avatar">
-                        <img src="/images/avatar3.jpg" alt="Third Place">
+                        <img src="/images/univ.jpg" alt="Third Place">
                     </div>
                     <div class="podium-rank third">
                         3rd
@@ -904,7 +904,7 @@ section, div, img {
                     </div>
                 </div>
             </div>
-            <a href="{{ route('communities.dashboard') }}">
+            <a href="{{ route('leaderboard.index') }}">
             <div class="see-more-bar">See More!</div>
             </a>
         </div>
@@ -914,7 +914,7 @@ section, div, img {
             <div class="podium">
                 <div class="podium-item">
                     <div class="podium-avatar">
-                        <img src="/images/user2.jpg" alt="Second Place">
+                        <img src="/images/students.jpg" alt="Second Place">
                     </div>
                     <div class="podium-rank second">
                         2nd
@@ -923,7 +923,7 @@ section, div, img {
                 </div>
                 <div class="podium-item">
                     <div class="podium-avatar">
-                        <img src="/images/user1.jpg" alt="First Place">
+                        <img src="/images/students.jpg" alt="First Place">
                     </div>
                     <div class="podium-rank first">
                         1st
@@ -932,7 +932,7 @@ section, div, img {
                 </div>
                 <div class="podium-item">
                     <div class="podium-avatar">
-                        <img src="/images/user3.jpg" alt="Third Place">
+                        <img src="/images/students.jpg" alt="Third Place">
                     </div>
                     <div class="podium-rank third">
                         3rd
@@ -940,7 +940,7 @@ section, div, img {
                     </div>
                 </div>
             </div>
-            <a href="{{ route('leaderboard.index') }}">
+            <a href="{{ route('communities.dashboard') }}">
             <div class="see-more-bar">See More!</div>
             </a>
         </div>
@@ -964,9 +964,10 @@ section, div, img {
         <div class="trophy">
             <img src="/images/piala.png" alt="Trophy">
         </div>
-        <a href="{{ route('login') }}">
-        <button class="btn-challenge">Check it Out!</button>
-        </a>
+        <button class="btn-challenge" onclick="window.location.href='{{ route('challenges.index') }}'">
+    Check it Out!
+</button>
+
     </section>
 
     <section id="articles" class="articles-section">

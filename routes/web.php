@@ -12,11 +12,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\EmissionController;
-
+use App\Http\Controllers\PenggunaController;
 // Halaman utama (welcome) (dn)
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/NolKarbon', [HomeController::class, 'index'])->name('home');
 Route::get('/artikel/{id}', [HomeController::class, 'show'])->name('artikel.detail');
@@ -103,9 +100,24 @@ Route::get('/emission/card', [EmissionController::class, 'showCard'])->name('emi
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
-// add-user
-Route::get('/admin/users/add', [AdminController::class, 'showAddUserForm'])
-        ->name('admin.adduser');
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/users/add', [AdminController::class, 'showAddUserForm'])->name('adduser');
+    Route::post('/users/store', [AdminController::class, 'storeUser'])->name('adduser.store');
     
-    Route::post('/admin/users/store', [AdminController::class, 'storeUser'])
-        ->name('admin.adduser.store');
+    Route::get('/users/edit/{id}', [AdminController::class, 'editUser'])->name('updateuser');
+    Route::put('/users/update/{id}', [AdminController::class, 'updateUser'])->name('updateuser.update');
+    
+    Route::get('/users/view/{id}', [AdminController::class, 'readUser'])->name('readuser');
+
+    Route::delete('/users/delete/{id}', [AdminController::class, 'deleteUser'])->name('deleteuser');
+<<<<<<< HEAD
+});
+
+
+
+Route::get('/profile', [PenggunaController::class, 'index'])->name('profile.index');
+Route::post('/profile/update', [PenggunaController::class, 'update'])->name('profile.update');
+=======
+    Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');
+});
+>>>>>>> 20a7c54934ca536840bf04aefa8efd607e9a1215
