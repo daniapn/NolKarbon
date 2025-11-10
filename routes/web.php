@@ -103,9 +103,12 @@ Route::get('/emission/card', [EmissionController::class, 'showCard'])->name('emi
 // logout (versi kamu)
 Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
 
-// add-user
-Route::get('/admin/users/add', [AdminController::class, 'showAddUserForm'])
-        ->name('admin.adduser');
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/users/add', [AdminController::class, 'showAddUserForm'])->name('adduser');
+    Route::post('/users/store', [AdminController::class, 'storeUser'])->name('adduser.store');
     
-    Route::post('/admin/users/store', [AdminController::class, 'storeUser'])
-        ->name('admin.adduser.store');
+    Route::get('/users/edit/{id}', [AdminController::class, 'editUser'])->name('updateuser');
+    Route::put('/users/update/{id}', [AdminController::class, 'updateUser'])->name('updateuser.update');
+    
+    Route::delete('/users/delete/{id}', [AdminController::class, 'deleteUser'])->name('deleteuser');
+});
