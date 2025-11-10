@@ -235,6 +235,12 @@ class AdminController extends Controller
         }
     }
 
+    public function readUser($id)
+{
+    $user = Pengguna::findOrFail($id);
+    return view('admin.readuser', compact('user'));
+}
+
     public function deleteUser($id)
     {
         try {
