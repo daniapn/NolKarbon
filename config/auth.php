@@ -22,7 +22,7 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'penggunas',
         ],
     ],
 
@@ -35,7 +35,7 @@ return [
     |
     */
 'providers' => [
-    'users' => [
+    'penggunas' => [
         'driver' => 'eloquent',
         'model' => App\Models\Pengguna::class,
     ],

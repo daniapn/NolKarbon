@@ -794,16 +794,6 @@ section, div, img {
     <button class="login-btn" type="submit">Logout</button>
 </form>
         </div>
-        
-        <div class="user-profile">
-            <div class="user-avatar">
-                <img src="/images/user.png" alt="User Avatar">
-            </div>
-            <div class="user-info">
-                <div class="user-name">{{ Auth::user()->username ?? '' }}</div>
-        <div class="user-email">{{ Auth::user()->email ?? '' }}</div>
-            </div>
-        </div>
     </header>
 
     <section class="hero">

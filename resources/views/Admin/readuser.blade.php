@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NolKarbon - Review Draft</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <title>NolKarbon - User Detail</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -19,7 +19,6 @@
             background: #EEE8DF;
         }
 
-        /* Sidebar */
         .sidebar {
             width: 230px;
             background: linear-gradient(135deg, #001d5c 0%, #003399 100%);
@@ -76,7 +75,6 @@
             height: 24px;
         }
 
-        /* Logout Button */
         .logout-btn {
             margin: 20px 15px;
             padding: 12px 20px;
@@ -98,7 +96,6 @@
             background: #f0f0f0;
         }
 
-        /* Main Content */
         .main-content {
             margin-left: 230px;
             flex: 1;
@@ -106,7 +103,6 @@
             flex-direction: column;
         }
 
-        /* Header */
         .header {
             background: white;
             padding: 20px 40px;
@@ -120,18 +116,6 @@
             font-size: 28px;
             color: #001d5c;
             font-weight: 600;
-        }
-
-        .header-left p {
-            font-size: 24px;
-            color: #000;
-            margin-top: 5px;
-        }
-
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 15px;
         }
 
         .user-profile {
@@ -170,103 +154,135 @@
             color: #666;
         }
 
-        /* Content */
         .content {
             padding: 40px;
             flex: 1;
-        }
-
-        .page-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .page-title h1 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 48px;
-            font-weight: 700;
-            color: #000;
-            line-height: 1.3;
-            margin-bottom: 0.5rem;
-        }
-
-        .page-title .highlight {
-            color: #3675BE;
-        }
-
-        /* Draft Cards */
-        .draft-list {
-            max-width: 900px;
-            margin: 0 auto;
             display: flex;
-            flex-direction: column;
-            gap: 2rem;
+            justify-content: center;
+            align-items: flex-start;
         }
 
-        .draft-card {
+        .user-detail-card {
             background: white;
-            border-radius: 20px;
-            padding: 1rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            display: grid;
-            grid-template-columns: 200px 1fr;
-            gap: 2rem;
-            align-items: center;
-            transition: all 0.3s;
-        }
-
-        .draft-card:hover {
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-            transform: translateY(-4px);
-        }
-
-        .draft-image {
-            width: 200px;
-            height: 150px;
-            border-radius: 15px;
-            overflow: hidden;
-        }
-
-        .draft-image img {
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
         }
 
-        .draft-content {
+        .user-detail-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 20px;
+            background: #001d5c;
             display: flex;
-            flex-direction: column;
-            gap: 1rem;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
         }
 
-        .draft-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 24px;
+        .user-detail-avatar svg {
+            width: 50px;
+            height: 50px;
+            color: white;
+        }
+
+        .user-detail-name {
+            font-size: 28px;
+            font-weight: 700;
+            color: #001d5c;
+            margin-bottom: 8px;
+        }
+
+        .user-detail-email {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .detail-row {
+            display: flex;
+            align-items: center;
+            padding: 18px 25px;
+            background: #F9F9F9;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .detail-row svg {
+            width: 24px;
+            height: 24px;
+            color: #001d5c;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .detail-content {
+            flex: 1;
+        }
+
+        .detail-label {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 4px;
+        }
+
+        .detail-value {
+            font-size: 16px;
             font-weight: 600;
-            color: #000;
-            line-height: 1.4;
+            color: #001d5c;
         }
 
-        .review-btn {
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .stat-box {
+            background: #F5F5F5;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: #001d5c;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .close-btn {
+            margin-top: 30px;
+            padding: 14px 40px;
             background: #001d5c;
             color: white;
-            padding: 0.8rem 2rem;
             border: none;
-            border-radius: 10px;
+            border-radius: 50px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
+            font-family: 'Lexend', sans-serif;
             transition: all 0.3s;
-            align-self: flex-start;
+            text-decoration: none;
+            display: inline-block;
         }
 
-        .review-btn:hover {
+        .close-btn:hover {
             background: #003399;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        /* Footer */
         footer {
             background: linear-gradient(135deg, #001d5c 0%, #003399 100%);
             padding: 30px 50px;
@@ -286,7 +302,7 @@
             font-size: 16px;
         }
 
-        @media (max-width: 968px) {
+        @media (max-width: 768px) {
             .sidebar {
                 width: 80px;
             }
@@ -296,72 +312,19 @@
             .nav-item span {
                 display: none;
             }
-            .logo-sidebar img {
-                width: 50px;
+            .user-detail-card {
+                padding: 25px;
             }
-            .draft-card {
-                grid-template-columns: 1fr;
-            }
-            .page-title h1 {
-                font-size: 32px;
+            .content {
+                padding: 20px;
             }
         }
     </style>
-    <style>
-.swal2-popup {
-    font-family: 'Lexend', sans-serif;
-    border-radius: 25px !important;
-    background: #ffffffff !important;
-    color: #000862 !important;
-    border: 2px solid #000862 !important;
-}
-
-.swal2-title {
-    font-weight: 700 !important;
-    color: #000862 !important;
-}
-
-.swal2-html-container {
-    color: #000862 !important;
-    font-size: 16px;
-}
-
-.swal2-confirm {
-    background-color: #000862 !important;
-    color: #ffffffff !important;
-    border-radius: 20px !important;
-    padding: 10px 25px !important;
-    font-weight: 600;
-}
-
-.swal2-confirm:hover {
-    background-color: #d65151ff !important;
-}
-
-.swal2-cancel {
-    background-color: #ffffffff !important;
-    border: 2px solid #000862 !important;
-    color: #000862 !important;
-    border-radius: 20px !important;
-    padding: 10px 25px !important;
-    font-weight: 600;
-}
-
-.swal2-cancel:hover {
-    background-color: #c4dae6ff !important;
-}
-
-.swal2-icon {
-    border-color: #000862 !important;
-    color: #000862 !important;
-}
-</style>
 </head>
 <body>
-    <!-- Sidebar -->
     <aside class="sidebar">
         <div class="logo-sidebar">
-            <img src="/images/logo.png" alt="NolKarbon Logos">
+            <img src="/images/logo.png" alt="NolKarbon Logo">
         </div>
 
         <nav class="nav-menu">
@@ -372,22 +335,21 @@
                 <span>Dashboard</span>
             </a>
 
-            <a href="{{ route('admin.usermanagement') }}" class="nav-item">
+            <a href="{{ route('admin.usermanagement') }}" class="nav-item active">
                 <svg fill="currentColor" viewBox="0 0 24 24">
                     <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
                 </svg>
                 <span>User Management</span>
             </a>
 
-
-            <a href="{{ route('admin.reviewdraft') }}" class="nav-item active">
+            <a href="{{ route('admin.reviewdraft') }}" class="nav-item">
                 <svg fill="currentColor" viewBox="0 0 24 24">
                     <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
                 </svg>
                 <span>Review Draft</span>
             </a>
 
-            <a href="{{ route('admin.challenge.index') }}" class="nav-item">
+            <a href="#challenges" class="nav-item">
                 <svg fill="currentColor" viewBox="0 0 24 24">
                     <path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 10H3V8h18v8zM6 15h2v-2H6v2zm0-3h2v-2H6v2zm3 3h8v-2H9v2zm0-3h8v-2H9v2z"/>
                 </svg>
@@ -420,93 +382,88 @@
         </form>
     </aside>
 
-    <!-- Main Content -->
     <main class="main-content">
-        <!-- Header -->
         <header class="header">
             <div class="header-left">
-                <h2>Review Draft</h2>
+                <h2>User Management</h2>
             </div>
+            <div class="user-profile">
+                <div class="user-avatar">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                </div>
+                <div class="user-info">
+                    <div class="user-name">{{ Auth::user()->name ?? 'Miguel Alexandro' }}</div>
+                    <div class="user-email">{{ Auth::user()->email ?? 'miguel@gmail.com' }}</div>
+                </div>
             </div>
         </header>
 
-        <!-- Content -->
         <div class="content">
-            <div class="page-title">
-                <h1>Let's Review Our<br>Contributor Article Draft<br>on <span class="highlight">Nol Karbon</span></h1>
-            </div>
+            <div class="user-detail-card">
+                <div class="user-detail-avatar">
+                    <svg fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                </div>
 
-            <div class="draft-list">
-    @foreach ($artikels as $artikel)
-        <div class="draft-card">
-            <div class="draft-image">
-                <img src="{{ asset('storage/' . $artikel->gambar) }}" alt="Article Image">
-            </div>
-            <div class="draft-content">
-                <h3 class="draft-title">{{ $artikel->judul }}</h3>
-                @if (strtolower($artikel->status) === 'menunggu review')
-                <form action="{{ route('admin.formreview', $artikel->idDraft) }}" method="POST" class="formreview">
-    @csrf
-    <button class="review-btn">Review</button>
-@elseif (strtolower($artikel->status) === 'published')
-    <form action="{{ route('admin.unpublish', $artikel->idDraft) }}" method="POST" class="unpublish-form">
-    @csrf
-    <button type="button" class="review-btn" style="background-color:#f44336;" onclick="confirmUnpublish(this)">
-        Unpublish
-    </button>
-</form>
+                <div class="user-detail-name">{{ $user->username }}</div>
+                <div class="user-detail-email">{{ $user->email }}</div>
 
-@endif
+                <div class="detail-row">
+                    <svg fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 2zm6.82 6L12 12.72 5.18 8 12 3.28 18.82 8zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/>
+                    </svg>
+                    <div class="detail-content">
+                        <div class="detail-label">University</div>
+                        <div class="detail-value">{{ $user->universitas ?? '-' }}</div>
+                    </div>
+                </div>
 
+                <div class="detail-row">
+                    <svg fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                    </svg>
+                    <div class="detail-content">
+                        <div class="detail-label">Role</div>
+                        <div class="detail-value">{{ $user->role }}</div>
+                    </div>
+                </div>
+
+                <div class="detail-row">
+                    <svg fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                    <div class="detail-content">
+                        <div class="detail-label">Status</div>
+                        <div class="detail-value">{{ $user->status }}</div>
+                    </div>
+                </div>
+
+                <div class="stats-row">
+                    <div class="stat-box">
+                        <div class="stat-number">{{ $user->points ?? 1250 }}</div>
+                        <div class="stat-label">Points</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">{{ $user->badges ?? 5 }}</div>
+                        <div class="stat-label">Badges</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">{{ $user->co2_saved ?? 45 }} kg</div>
+                        <div class="stat-label">CO2 Saved</div>
+                    </div>
+                </div>
+
+                <a href="{{ route('admin.usermanagement') }}" class="close-btn">Close</a>
             </div>
         </div>
-    @endforeach
 
-    @if ($artikels->isEmpty())
-        <p style="text-align:center; color:#666;">Belum ada artikel yang menunggu review atau sudah published.</p>
-    @endif
-</div>
-
-            </div>
-        </div>
-
-        <!-- Footer -->
         <footer>
             <img src="/images/logo.png" alt="NolKarbon Logo">
             <p>NolKarbon@gmail.com</p>
         </footer>
     </main>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-function confirmUnpublish(button) {
-    Swal.fire({
-        title: 'Yakin ingin unpublish artikel ini?',
-        text: "Status artikel akan berubah menjadi 'Menunggu Review'.",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Ya, Unpublish',
-        cancelButtonText: 'Batal'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // Submit form terdekat
-            button.closest('form').submit();
-        }
-    });
-}
-</script>
-@if (session('success'))
-<script>
-Swal.fire({
-    icon: 'success',
-    title: 'Berhasil',
-    text: "{{ session('success') }}",
-    showConfirmButton: false,
-    timer: 1500
-});
-</script>
-@endif
-
 </body>
 </html>

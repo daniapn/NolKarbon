@@ -337,10 +337,12 @@
         .btn-cancel {
             background: #E0E0E0;
             color: #666;
+            text-decoration: none;
         }
 
         .btn-cancel:hover {
             background: #BDBDBD;
+            text-decoration: none;
         }
 
         .btn-submit {
