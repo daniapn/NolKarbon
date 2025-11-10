@@ -82,7 +82,7 @@ public function register(Request $request)
         case 'Kontributor':
             return redirect()->route('kontributor.index')->with('success', 'Welcome Kontributor!');
         default:
-            return redirect()->route('home')->with('success', 'Login successful!');
+            return redirect()->route('homee')->with('success', 'Login successful!');
 }
 }
 

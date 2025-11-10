@@ -1,146 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emission Card - Nol Karbon</title>
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #E8DFD5;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            text-align: center;
-            padding: 50px 0;
-        }
-        .logo img {
-            width: 160px;
-        }
-        h2 {
-            font-size: 28px;
-            font-weight: 700;
-            color: #222;
-        }
-        .card-wrapper {
-            margin: 40px auto;
-            background-color: #071b66;
-            border-radius: 20px;
-            padding: 60px 0;
-            width: 80%;
-            box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
-        }
-        .card {
-            background-color: white;
-            width: 50%;
-            margin: 0 auto;
-            border-radius: 20px;
-            padding: 50px 0;
-            box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2);
-        }
-        .card h3 {
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
-        .highlight {
-            font-weight: 700;
-            color: #0D2077;
-        }
-        .emission-value {
-            font-size: 38px;
-            color: red;
-            font-weight: 700;
-        }
-        .btn-group {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-top: 40px;
-        }
-        .btn {
-            background-color: #0D2077;
-            color: white;
-            border: none;
-            border-radius: 25px;
-            padding: 10px 40px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
-        }
-        .btn:hover {
-            transform: scale(1.05);
-            transition: 0.2s;
-        }
-        footer {
-            background-color: #0D2077;
-            color: white;
-            text-align: center;
-            padding: 30px 0;
-            margin-top: 50px;
-        }
-        /* Popup */
-        .overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0, 0, 50, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .popup {
-            background-color: white;
-            padding: 50px;
-            border-radius: 20px;
-            box-shadow: 0px 0px 20px rgba(0,0,0,0.3);
-            text-align: center;
-        }
-        .popup p {
-            font-size: 20px;
-            font-weight: 700;
-            color: #0D2077;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emission Card - Nol Karbon</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #e7dfd3;
+      --navy: #001A72;
+      --white: #fff;
+      --blue-light: #2446c6;
+      --red: #e11919;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background-color: var(--bg);
+      color: #1d1d1f;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    main {
+      flex: 1;
+    }
+
+    .back-btn {
+      position: absolute;
+      top: 28px;
+      left: 28px;
+      width: 44px;
+      height: 44px;
+      background: var(--white);
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 22px;
+      color: #000;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .back-btn:hover {
+      background: #f3f3f3;
+    }
+
+    .logo {
+      text-align: center;
+      margin-top: 60px;
+    }
+
+    .logo img {
+      width: 160px;
+    }
+
+    h2 {
+      font-weight: 800;
+      font-size: 32px;
+      text-align: center;
+      margin-top: 10px;
+      margin-bottom: 40px;
+      line-height: 1.3;
+    }
+
+    .card-wrapper {
+      background-color: var(--navy);
+      border-radius: 20px;
+      width: 80%;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 60px 0;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.25);
+    }
+
+    .card {
+      background-color: var(--white);
+      width: 55%;
+      margin: 0 auto;
+      padding: 60px 40px;
+      border-radius: 22px;
+      text-align: left;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.25);
+      position: relative;
+    }
+
+    .card img {
+      display: block;
+      margin: 0 auto 40px;
+      width: 150px;
+    }
+
+    .card p {
+      font-size: 17px;
+      margin: 8px 0;
+    }
+
+    .highlight {
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .center-text {
+      text-align: center;
+      margin-top: 24px;
+    }
+
+    .bold-text {
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--navy);
+    }
+
+    .emission-value {
+      color: var(--red);
+      font-weight: 800;
+      font-size: 46px;
+      margin-top: 12px;
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 60px;
+      margin: 60px 0 100px;
+    }
+
+    .btn {
+      background-color: var(--navy);
+      color: #fff;
+      border: none;
+      border-radius: 40px;
+      padding: 16px 80px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    footer {
+      background-color: var(--navy);
+      color: white;
+      text-align: center;
+      padding: 40px 0 30px;
+      margin-top: auto;
+    }
+
+    footer img {
+      width: 160px;
+      margin-bottom: 8px;
+    }
+
+    footer div {
+      font-size: 14px;
+    }
+
+    @media(max-width: 1000px) {
+      .card {
+        width: 85%;
+        padding: 40px 20px;
+      }
+      .btn {
+        padding: 14px 50px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="logo">
-            <img src="/images/nolkarbon-logo.png" alt="Nol Karbon">
-        </div>
-        <h2>Look at your <br> <b>Emission Card 🪪</b></h2>
 
-        @if ($emission)
-        <!-- Jika ada data -->
-        <div class="card-wrapper">
-            <div class="card">
-                <img src="/images/nolkarbon-logo.png" alt="Nol Karbon" width="150">
-                <p>Hi, I'm <b class="highlight">{{ $user->name }}</b></p>
-                <p>From <b class="highlight">{{ $university }}</b></p>
-                <p>Proud to take action with <b>Nol Karbon</b><br>
-                My daily emission:</p>
-                <p class="emission-value">{{ number_format($emission->total_emission, 1) }} kg CO₂</p>
-            </div>
-        </div>
-        @else
-        <!-- Jika tidak ada data -->
-        <div class="overlay">
-            <div class="popup">
-                <p>Data not available</p>
-            </div>
-        </div>
-        @endif
+  <a href="{{ url('/') }}" class="back-btn">←</a>
 
-        <div class="btn-group">
-            <button class="btn">Unduh</button>
-            <button class="btn">Bagikan</button>
-        </div>
+  <main>
+    <div class="logo">
+      <img src="/images/nolkarbon-logo.png" alt="Nol Karbon">
     </div>
 
-    <footer>
-        <img src="/images/nolkarbon-logo.png" alt="Nol Karbon" width="140"><br>
-        Contact Us
-    </footer>
+    <h2>Look at your<br><b>Emission Card 🪪</b></h2>
+
+    @if ($emission)
+      <div class="card-wrapper">
+        <div class="card">
+          <img src="/images/nolkarbon-logo.png" alt="Nol Karbon">
+          <p>Hi, I’m <b class="highlight">{{ $emission->name }}</b></p>
+          <p>From <b class="highlight">{{ $emission->institution ?? 'Brawijaya University' }}</b></p>
+          <div class="center-text">
+            <p class="bold-text">Proud to take action<br>with Nol Karbon</p>
+            <p>My daily emission:</p>
+            <p class="emission-value">{{ number_format($emission->total_emission, 1) }} kg CO₂</p>
+          </div>
+        </div>
+      </div>
+    @else
+      <div class="card-wrapper" style="background:#ddd;text-align:center;">
+        <div class="card" style="text-align:center;">
+          <p style="font-size:20px;font-weight:700;">No emission data found.</p>
+        </div>
+      </div>
+    @endif
+
+    <div class="btn-group">
+      <button class="btn">Unduh</button>
+      <button class="btn">Bagikan</button>
+    </div>
+  </main>
+
+  <footer>
+    <img src="/images/nolkarbon-logo.png" alt="Nol Karbon">
+    <div>Contact Us</div>
+  </footer>
+
 </body>
 </html>
