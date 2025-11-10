@@ -110,44 +110,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/users/view/{id}', [AdminController::class, 'readUser'])->name('readuser');
 
     Route::delete('/users/delete/{id}', [AdminController::class, 'deleteUser'])->name('deleteuser');
-<<<<<<< HEAD
     Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');
-=======
-<<<<<<< HEAD
-
     Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');
-=======
-<<<<<<< HEAD
     Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');   
-=======
-<<<<<<< HEAD
     Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');
-=======
-
->>>>>>> 5b03aa7d9688bf82ca5be62c3734d0a8fc6045ea
->>>>>>> edb7205db206eeada2a7f814c979e30822d85cae
->>>>>>> d2cc6e4fc9f544fae9acfe78e0675c79562d1fe6
->>>>>>> bc320dc4cab4a5cb91e5b537d8f018622bfe13e3
 });
 
 Route::get('/profile', [PenggunaController::class, 'index'])->name('profile.index');
 Route::post('/profile/update', [PenggunaController::class, 'update'])->name('profile.update');
-<<<<<<< HEAD
     Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');
-
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
-=======
     Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');
->>>>>>> 5b03aa7d9688bf82ca5be62c3734d0a8fc6045ea
->>>>>>> edb7205db206eeada2a7f814c979e30822d85cae
->>>>>>> d2cc6e4fc9f544fae9acfe78e0675c79562d1fe6
->>>>>>> bc320dc4cab4a5cb91e5b537d8f018622bfe13e3
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/kontributor', [KontributorController::class, 'index'])->name('kontributor.index');
