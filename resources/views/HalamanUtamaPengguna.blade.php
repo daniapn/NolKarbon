@@ -964,9 +964,10 @@ section, div, img {
         <div class="trophy">
             <img src="/images/piala.png" alt="Trophy">
         </div>
-        <a href="{{ route('login') }}">
-        <button class="btn-challenge">Check it Out!</button>
-        </a>
+        <button class="btn-challenge" onclick="window.location.href='{{ route('challenges.index') }}'">
+    Check it Out!
+</button>
+
     </section>
 
     <section id="articles" class="articles-section">
@@ -981,7 +982,7 @@ section, div, img {
             </div>
             <div class="article-content">
                 <h3>{{ Str::limit($article->judul, 80) }}</h3>
-                <a href="{{ route('artikel.detail2', $article->idDraft) }}">Read more</a>
+                <a href="{{ route('artikel.detail', $article->idDraft) }}">Read more</a>
             </div>
         </div>
     @empty

@@ -14,9 +14,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\EmissionController;
 
 // Halaman utama (welcome) (dn)
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/NolKarbon', [HomeController::class, 'index'])->name('home');
 Route::get('/artikel/{id}', [HomeController::class, 'show'])->name('artikel.detail');
