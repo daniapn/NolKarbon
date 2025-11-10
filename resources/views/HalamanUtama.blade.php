@@ -819,7 +819,7 @@ section, div, img {
             <div class="podium">
                 <div class="podium-item">
                     <div class="podium-avatar">
-                        <img src="/images/avatar2.jpg" alt="Second Place">
+                        <img src="/images/univ.jpg" alt="Second Place">
                     </div>
                     <div class="podium-rank second">
                         2nd
@@ -828,7 +828,7 @@ section, div, img {
                 </div>
                 <div class="podium-item">
                     <div class="podium-avatar">
-                        <img src="/images/avatar1.jpg" alt="First Place">
+                        <img src="/images/univ.jpg" alt="First Place">
                     </div>
                     <div class="podium-rank first">
                         1st
@@ -837,7 +837,7 @@ section, div, img {
                 </div>
                 <div class="podium-item">
                     <div class="podium-avatar">
-                        <img src="/images/avatar3.jpg" alt="Third Place">
+                        <img src="/images/univ.jpg" alt="Third Place">
                     </div>
                     <div class="podium-rank third">
                         3rd
@@ -855,7 +855,7 @@ section, div, img {
             <div class="podium">
                 <div class="podium-item">
                     <div class="podium-avatar">
-                        <img src="/images/user2.jpg" alt="Second Place">
+                        <img src="/images/user.png" alt="Second Place">
                     </div>
                     <div class="podium-rank second">
                         2nd
@@ -864,7 +864,7 @@ section, div, img {
                 </div>
                 <div class="podium-item">
                     <div class="podium-avatar">
-                        <img src="/images/user1.jpg" alt="First Place">
+                        <img src="/images/user.png" alt="First Place">
                     </div>
                     <div class="podium-rank first">
                         1st
@@ -873,7 +873,7 @@ section, div, img {
                 </div>
                 <div class="podium-item">
                     <div class="podium-avatar">
-                        <img src="/images/user3.jpg" alt="Third Place">
+                        <img src="/images/user.png" alt="Third Place">
                     </div>
                     <div class="podium-rank third">
                         3rd
