@@ -1,105 +1,261 @@
-@extends('layouts.app')
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NOL KARBON – Calculator</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#e7dfd3; 
+    --white:#ffffff; 
+    --navy:#0a1a5c; 
+    --pill:#f6efec; 
+    --card-shadow:0 8px 22px rgba(10,26,92,.08);
+    --border:#6e63c7; 
+    --text:#1d1d1f; 
+    --muted:#9b9b9b;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:Poppins,system-ui;
+    background:var(--bg);
+    color:var(--text);
+  }
 
-@section('content')
-<div class="min-h-screen flex flex-col bg-[#EAE0D5]">
+  .wrap{
+    max-width:1100px;
+    margin:0 auto;
+    padding:28px 24px 80px;
+  }
 
-    <!-- MAIN CONTENT -->
-    <div class="flex-1 flex flex-col items-center justify-center py-10">
-        <div class="text-center mb-8">
-            <h1 class="text-4xl font-extrabold text-gray-900">
-                Start calculating <br> your daily emissions 🌍
-            </h1>
-        </div>
+    /* Tombol back */
+  .back-btn {
+    position:absolute;
+    top:24px;
+    left:24px;
+    background:var(--white);
+    border-radius:50%;
+    width:40px;
+    height:40px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 4px 8px rgba(0,0,0,0.1);
+    text-decoration:none;
+    color:#1d1d1f;
+    font-size:20px;
+    transition:background 0.2s;
+  }
+  .back-btn:hover {
+    background:#f3f3f3;
+  }
 
-        <!-- FORM CONTAINER -->
-        <div class="bg-white rounded-3xl shadow-md p-8 w-[90%] max-w-5xl">
+  .logo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    margin:20px 0 10px;
+  }
 
-            <form action="{{ route('emissions.store') }}" method="POST" class="space-y-8">
-                @csrf
+  .logo img{height:50px;}
 
-                <!-- TRANSPORTATION -->
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="border-[3px] border-[#D6C7F7] rounded-2xl p-6">
-                        <h2 class="text-lg font-semibold mb-3">Transportation 🛵</h2>
-                        <div class="flex gap-4 mb-4">
-                            <label>
-                                <input type="radio" name="vehicle_type" value="motorcycle" checked>
-                                Motorcycle
-                            </label>
-                            <label>
-                                <input type="radio" name="vehicle_type" value="car">
-                                Car
-                            </label>
-                        </div>
-                        <label class="block text-sm font-medium text-gray-600">Avg distance (km)</label>
-                        <input type="number" name="distance" step="0.1"
-                               class="w-full mt-2 p-2 rounded-xl bg-[#EFE7DF]" placeholder="Type here...">
-                    </div>
+  .title{
+    font-weight:800;
+    font-size:36px;
+    line-height:1.2;
+    text-align:center;
+    margin:10px 0 36px;
+  }
 
-                    <!-- ELECTRICITY -->
-                    <div class="border-[3px] border-[#D6C7F7] rounded-2xl p-6">
-                        <h2 class="text-lg font-semibold mb-3">Electricity ⚡</h2>
-                        <div class="flex gap-4 mb-4">
-                            <label>
-                                <input type="radio" name="electric_source" value="grid" checked>
-                                Grid Electricity
-                            </label>
-                            <label>
-                                <input type="radio" name="electric_source" value="solar">
-                                Solar Power
-                            </label>
-                        </div>
-                        <label class="block text-sm font-medium text-gray-600">Daily Power Usage (kWh)</label>
-                        <input type="number" name="electric_usage" step="0.1"
-                               class="w-full mt-2 p-2 rounded-xl bg-[#EFE7DF]" placeholder="Type here...">
-                    </div>
-                </div>
+  /* Panel putih utama */
+  .panel{
+    background:var(--white);
+    border-radius:22px;
+    box-shadow:var(--card-shadow);
+    padding:40px 50px;
+  }
 
-                <!-- FOOD & RUBBISH -->
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="border-[3px] border-[#D6C7F7] rounded-2xl p-6">
-                        <h2 class="text-lg font-semibold mb-3">Food 🍽️</h2>
-                        <label class="block text-sm font-medium text-gray-600">Beef (kg)</label>
-                        <input type="number" name="beef" step="0.1"
-                               class="w-full mt-2 p-2 rounded-xl bg-[#EFE7DF]" placeholder="Type here...">
-                        <label class="block text-sm font-medium text-gray-600 mt-4">Chicken (kg)</label>
-                        <input type="number" name="chicken" step="0.1"
-                               class="w-full mt-2 p-2 rounded-xl bg-[#EFE7DF]" placeholder="Type here...">
-                    </div>
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:40px;
+    margin-bottom:50px;
+  }
 
-                    <div class="border-[3px] border-[#D6C7F7] rounded-2xl p-6">
-                        <h2 class="text-lg font-semibold mb-3">Rubbish 🗑️</h2>
-                        <label class="block text-sm font-medium text-gray-600">Organic Waste (kg)</label>
-                        <input type="number" name="organic_waste" step="0.1"
-                               class="w-full mt-2 p-2 rounded-xl bg-[#EFE7DF]" placeholder="Type here...">
-                        <label class="block text-sm font-medium text-gray-600 mt-4">Inorganic Waste (kg)</label>
-                        <input type="number" name="inorganic_waste" step="0.1"
-                               class="w-full mt-2 p-2 rounded-xl bg-[#EFE7DF]" placeholder="Type here...">
-                    </div>
-                </div>
+  /* CARD persegi */
+  .card{
+    border-radius:18px;
+    border:3px solid #ffffff;
+    box-shadow:0 6px 16px rgba(92,92,140,.15);
+    padding:28px 26px;
+    border-color:#fff;
+    outline:3px solid rgba(110,99,199,.35);
+    height:330px;
+    display:flex;
+    flex-direction:column;
+  }
 
-                <!-- BUTTON -->
-                <div class="flex justify-center mt-8">
-                    <button type="submit"
-                            class="bg-[#001A72] text-white font-semibold px-10 py-3 rounded-full shadow-md hover:scale-105 transition">
-                        Start Calculate
-                    </button>
-                </div>
-            </form>
-        </div>
+  .card h3{
+    margin:0 0 14px;
+    font-size:20px;
+  }
+
+  .row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin:8px 0 12px;
+  }
+
+  .pill{
+    display:inline-block;
+    padding:10px 18px;
+    border-radius:999px;
+    background:var(--pill);
+    box-shadow:0 6px 10px rgba(0,0,0,.08);
+    border:0;
+    cursor:pointer;
+    font-weight:600;
+  }
+
+  .pill.active{background:#eadff7; outline:2px solid var(--border);}
+
+  .input{
+    width:100%;
+    padding:14px 16px;
+    border:0;
+    border-radius:14px;
+    background:#f6efec;
+    box-shadow:inset 0 1px 0 rgba(0,0,0,.04);
+  }
+
+  .muted{
+    color:var(--muted);
+    font-weight:600;
+    font-size:13px;
+    margin:4px 0 10px;
+  }
+
+  .btn{
+    display:block;
+    background:var(--navy);
+    color:#fff;
+    border:0;
+    border-radius:40px;
+    padding:16px 36px;
+    font-weight:700;
+    font-size:14px;
+    box-shadow:0 8px 14px rgba(10,26,92,.25);
+    cursor:pointer;
+    margin:0 auto;
+  }
+
+  /* Footer */
+  footer{
+    background:#001A72;
+    color:#fff;
+    padding:26px 0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+    margin-top:40px;
+  }
+
+  footer img{
+    height:48px;
+  }
+
+  @media(max-width:900px){
+    .grid{grid-template-columns:1fr;}
+    .card{height:auto;}
+  }
+</style>
+<script>
+  document.addEventListener('DOMContentLoaded',()=>{
+    // toggle pill radio buttons
+    document.querySelectorAll('[data-pill]').forEach(p=>{
+      p.addEventListener('click',()=>{
+        const name=p.getAttribute('data-group');
+        document.querySelectorAll(`[data-group="${name}"]`).forEach(x=>x.classList.remove('active'));
+        p.classList.add('active');
+        document.querySelector(`input[name="${name}"][value="${p.dataset.value}"]`).checked=true;
+      });
+    });
+  });
+</script>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="logo">
+      <img src="/images/nolkarbon-logo.png" alt="Nol Karbon">
     </div>
 
-    <!-- FOOTER -->
-    <footer class="bg-[#001A72] py-6">
-        <div class="container mx-auto flex justify-center md:justify-between items-center px-6 text-white">
-            <div class="flex items-center space-x-3">
-                <img src="/images/nolkarbon-logo.png" alt="Nol Karbon" class="w-28">
-            </div>
-            <div class="text-sm font-medium mt-4 md:mt-0">
-                Contact Us
-            </div>
-        </div>
-    </footer>
+    <h1 class="title">Start calculating<br>your daily emissions ⚙️</h1>
 
-</div>
-@endsection
+    <form action="{{ route('calculate') }}" method="POST">
+      @csrf
+      <div class="panel">
+        <div class="grid">
+          <!-- Transportation -->
+          <div class="card">
+            <h3><b>Transportation 🛵</b></h3>
+            <div class="muted">Vehicle type</div>
+            <div class="row">
+              <button class="pill active" type="button" data-pill data-group="vehicle_type" data-value="motorcycle">Motorcycle</button>
+              <button class="pill" type="button" data-pill data-group="vehicle_type" data-value="car">Car</button>
+            </div>
+            <div class="muted">Avg distance (km)</div>
+            <input class="input" type="number" step="0.01" min="0" name="distance" placeholder="Type here..." required>
+            <input type="radio" name="vehicle_type" value="motorcycle" checked hidden>
+            <input type="radio" name="vehicle_type" value="car" hidden>
+          </div>
+
+          <!-- Electricity -->
+          <div class="card">
+            <h3><b>Electricity ⚡</b></h3>
+            <div class="muted">Electric source</div>
+            <div class="row">
+              <button class="pill active" type="button" data-pill data-group="electric_source" data-value="grid">Grid Electricity</button>
+              <button class="pill" type="button" data-pill data-group="electric_source" data-value="solar">Solar Power</button>
+            </div>
+            <div class="muted">Daily Power Usage (kWh)</div>
+            <input class="input" type="number" step="0.01" min="0" name="electric_usage" placeholder="Type here..." required>
+            <input type="radio" name="electric_source" value="grid" checked hidden>
+            <input type="radio" name="electric_source" value="solar" hidden>
+          </div>
+
+          <!-- Food -->
+          <div class="card">
+            <h3><b>Food 🍽️</b></h3>
+            <div class="muted">Beef (Kg)</div>
+            <input class="input" type="number" step="0.01" min="0" name="beef" placeholder="Type here..." required>
+            <div class="muted" style="margin-top:10px;">Chicken (Kg)</div>
+            <input class="input" type="number" step="0.01" min="0" name="chicken" placeholder="Type here..." required>
+          </div>
+
+          <!-- Rubbish -->
+          <div class="card">
+            <h3><b>Rubbish 🗑️</b></h3>
+            <div class="muted">Organic Waste (Kg)</div>
+            <input class="input" type="number" step="0.01" min="0" name="organic_waste" placeholder="Type here..." required>
+            <div class="muted" style="margin-top:10px;">Inorganic Waste (Kg)</div>
+            <input class="input" type="number" step="0.01" min="0" name="inorganic_waste" placeholder="Type here..." required>
+          </div>
+        </div>
+
+        <button type="submit" class="btn">Start Calculate</button>
+      </div>
+    </form>
+
+    <footer>
+      <img src="/images/nolkarbon-logo.png" alt="Nol Karbon">
+      <div>Contact Us</div>
+    </footer>
+  </div>
+</body>
+</html>
