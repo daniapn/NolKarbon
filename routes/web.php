@@ -128,18 +128,16 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/users/view/{id}', [AdminController::class, 'readUser'])->name('readuser');
 
     Route::delete('/users/delete/{id}', [AdminController::class, 'deleteUser'])->name('deleteuser');
+
     Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');
-    Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');
-    Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');   
-    Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');
+    
 });
 
 Route::get('/profile', [PenggunaController::class, 'index'])->name('profile.index');
 Route::post('/profile/update', [PenggunaController::class, 'update'])->name('profile.update');
-    Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');
-    Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/NolKarbon', [HomeController::class, 'index'])->name('home');
 Route::get('/kontributor', [KontributorController::class, 'index'])->name('kontributor.index');
 Route::get('/dashboardadmin', [AdminController::class, 'dashboardAdmin'])->name('dashboardadmin');
+
 
