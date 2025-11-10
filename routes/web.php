@@ -110,10 +110,25 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/users/view/{id}', [AdminController::class, 'readUser'])->name('readuser');
 
     Route::delete('/users/delete/{id}', [AdminController::class, 'deleteUser'])->name('deleteuser');
+<<<<<<< HEAD
     Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');   
+=======
+<<<<<<< HEAD
+    Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');
+=======
+
+>>>>>>> 5b03aa7d9688bf82ca5be62c3734d0a8fc6045ea
+>>>>>>> edb7205db206eeada2a7f814c979e30822d85cae
 });
 
 Route::get('/profile', [PenggunaController::class, 'index'])->name('profile.index');
 Route::post('/profile/update', [PenggunaController::class, 'update'])->name('profile.update');
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+=======
+    Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');
+>>>>>>> 5b03aa7d9688bf82ca5be62c3734d0a8fc6045ea
+>>>>>>> edb7205db206eeada2a7f814c979e30822d85cae
 
