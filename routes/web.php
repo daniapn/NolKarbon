@@ -128,25 +128,23 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/users/view/{id}', [AdminController::class, 'readUser'])->name('readuser');
 
     Route::delete('/users/delete/{id}', [AdminController::class, 'deleteUser'])->name('deleteuser');
-<<<<<<< HEAD
+
     Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');   
-=======
+
     Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');
     Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');
     Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');   
     Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');
->>>>>>> 70da441b2d98bbf26816146d690aeb1b7553f18f
+    
 });
 
 Route::get('/profile', [PenggunaController::class, 'index'])->name('profile.index');
 Route::post('/profile/update', [PenggunaController::class, 'update'])->name('profile.update');
-<<<<<<< HEAD
-=======
+
     Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');
     Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/kontributor', [KontributorController::class, 'index'])->name('kontributor.index');
 Route::get('/dashboardadmin', [AdminController::class, 'dashboardAdmin'])->name('dashboardadmin');
->>>>>>> 70da441b2d98bbf26816146d690aeb1b7553f18f
 
