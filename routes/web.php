@@ -14,9 +14,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\EmissionController;
 
 // Halaman utama (welcome) (dn)
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/NolKarbon', [HomeController::class, 'index'])->name('home');
 Route::get('/artikel/{id}', [HomeController::class, 'show'])->name('artikel.detail');
@@ -35,8 +32,7 @@ Route::post('/kontributor/store-draft', [KontributorController::class, 'storeDra
 Route::get('/kontributor/notif', [KontributorController::class, 'getNotif'])->name('kontributor.notif');
 Route::get('/admin/review', [AdminController::class, 'reviewDraft'])->name('admin.reviewdraft');
 Route::post('/admin/unpublish/{id}', [AdminController::class, 'unpublish'])->name('admin.unpublish');
-Route::match(['get', 'post'], '/admin/formreview/{id}', [AdminController::class, 'formReview'])
-    ->name('admin.formreview');
+Route::post('/admin/formreview/{id}', [AdminController::class, 'formReview'])->name('admin.formreview');
 Route::post('/admin/approve/{id}', [AdminController::class, 'approve'])->name('admin.approve');
 Route::post('/admin/tolak/{id}', [AdminController::class, 'tolak'])->name('admin.tolak');
 Route::post('/admin/revisi/{id}', [AdminController::class, 'revisi'])->name('admin.revisi');
@@ -101,7 +97,8 @@ Route::get('/emission/card', [EmissionController::class, 'showCard'])->name('emi
 
 
 // logout (versi kamu)
-Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/users/add', [AdminController::class, 'showAddUserForm'])->name('adduser');

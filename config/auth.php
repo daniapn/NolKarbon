@@ -34,13 +34,13 @@ return [
     | Ini bagian penting: arahkan model ke App\Models\Pengguna
     |
     */
-
-    'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Pengguna::class,
-        ],
+'providers' => [
+    'users' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Pengguna::class,
     ],
+],
+
 
     /*
     |--------------------------------------------------------------------------

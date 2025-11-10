@@ -75,7 +75,7 @@ public function register(Request $request)
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('login');
+        return redirect()->route('home')->with('success', 'Logout berhasil!');
     }
 
     public function showLogin()

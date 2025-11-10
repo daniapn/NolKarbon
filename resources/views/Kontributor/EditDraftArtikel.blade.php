@@ -321,7 +321,10 @@
 </head>
 <body>
     <header>
-        <button class="logout-btn">Logout</button>
+                    <form action="{{ route('logout') }}" method="POST">
+    @csrf
+    <button class="logout-btn" type="submit">Logout</button>
+</form>
     </header>
 
     <div class="logo-section">

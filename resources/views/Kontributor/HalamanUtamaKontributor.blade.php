@@ -311,7 +311,10 @@
             <div class="notification-icon">
     <img src="/images/notif.png" alt="Notifications">
 </div>
-            <button class="logout-btn">Logout</button>
+            <form action="{{ route('logout') }}" method="POST">
+    @csrf
+    <button class="logout-btn" type="submit">Logout</button>
+</form>
         </div>
     </header>
 
