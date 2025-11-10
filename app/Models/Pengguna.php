@@ -39,10 +39,5 @@ class Pengguna extends Authenticatable
     /**
      * Mutator untuk otomatis enkripsi password
      */
-    protected function password(): Attribute
-    {
-        return Attribute::make(
-            set: fn($value) => bcrypt($value),
-        );
-    }
+    
 }

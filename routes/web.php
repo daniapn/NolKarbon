@@ -110,17 +110,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/users/view/{id}', [AdminController::class, 'readUser'])->name('readuser');
 
     Route::delete('/users/delete/{id}', [AdminController::class, 'deleteUser'])->name('deleteuser');
-<<<<<<< HEAD
-    Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');
-=======
 
->>>>>>> 5b03aa7d9688bf82ca5be62c3734d0a8fc6045ea
+    Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');
 });
 
 Route::get('/profile', [PenggunaController::class, 'index'])->name('profile.index');
 Route::post('/profile/update', [PenggunaController::class, 'update'])->name('profile.update');
-<<<<<<< HEAD
-=======
-    Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');
->>>>>>> 5b03aa7d9688bf82ca5be62c3734d0a8fc6045ea
 
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/kontributor', [KontributorController::class, 'index'])->name('kontributor.index');
+Route::get('/dashboardadmin', [AdminController::class, 'dashboardAdmin'])->name('dashboardadmin');
