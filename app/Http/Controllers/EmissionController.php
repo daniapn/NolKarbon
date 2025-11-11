@@ -6,7 +6,7 @@ use App\Models\Emission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use App\Models\Penggunas; 
+use App\Models\Pengguna; 
 
 
 class EmissionController extends Controller
@@ -124,16 +124,16 @@ class EmissionController extends Controller
     public function showCard()
     {
         // Ambil data pengguna pertama (sementara)
-        $pengguna = Pengguna::first();
+        $penggunas = Pengguna::first();
     
-        if (!$pengguna) {
+        if (!$penggunas) {
             return back()->with('error', 'Data pengguna tidak ditemukan');
         }
     
         // Ambil data emission berdasarkan nama pengguna
-        $emission = Emission::where('name', $pengguna->username)->latest()->first();
+        $emission = Emission::where('name', $penggunas->username)->latest()->first();
     
-        $university = $pengguna->universitas ?? 'Unknown University';
+        $university = $penggunas->universitas ?? 'Unknown University';
     
         if ($emission) {
             // Ada data → tampilkan kartu
@@ -145,7 +145,7 @@ class EmissionController extends Controller
         } else {
             // Tidak ada data → tampilkan “Data not available”
             return view('emisi.emission_card', [
-                'user' => $pengguna,
+                'user' => $penggunas,
                 'university' => $university,
                 'emission' => null,
             ]);

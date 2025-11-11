@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\EmissionTemplate;
+
 
 class EmissionTemplateController extends Controller
 {
@@ -22,10 +23,14 @@ class EmissionTemplateController extends Controller
     }
 
     public function edit($id)
-    {
-        $template = EmissionTemplate::findOrFail($id);
-        return view('admin.emission_card.edit', compact('template'));
-    }
+{
+    // ambil data berdasarkan ID
+    $template = EmissionTemplate::findOrFail($id);
+
+    // kirim ke view edit.blade.php
+    return view('admin.emission_card.edit', compact('template'));
+}
+
 
     public function update(Request $request, $id)
     {
@@ -38,9 +43,15 @@ class EmissionTemplateController extends Controller
     public function destroy($id)
     {
         EmissionTemplate::destroy($id);
-        return redirect()->back()->with('success', 'Template deleted successfully.');
+        return redirect()->route('admin.emission-card.deleted')
+                         ->with('success', 'Template deleted successfully.');
     }
-    
+
+    public function create()
+    {
+        return view('admin.emission_card.edit');
+    }
+
     public function deleted()
     {
         return view('admin.emission_card.deleted');

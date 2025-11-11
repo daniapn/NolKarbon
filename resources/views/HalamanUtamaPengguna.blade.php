@@ -854,7 +854,7 @@ section, div, img {
         <div class="habits-content">
             <h2>Let's see how your habits affect the Earth</h2>
             <p>Empower your climate action with data-driven insight</p>
-            <a href="{{ route('login') }}">
+            <a href="{{ route('form') }}">
             <button class="btn-primary">Start Calculate</button>
             </a>
         </div>
