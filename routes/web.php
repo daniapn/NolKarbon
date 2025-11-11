@@ -96,8 +96,7 @@ Route::post('/calculate', [EmissionController::class, 'calculate'])->name('calcu
 Route::post('/emissions', [EmissionController::class, 'store'])->name('emissions.store');
 Route::get('/emissions/{emission}/saved', [EmissionController::class, 'saved'])->name('emissions.saved');
 Route::get('/emissions/{emission}/card', [EmissionController::class, 'card'])->name('emissions.card');
-
-Route::get('/emission/card', [EmissionController::class, 'showCard'])->name('emission.card');
+Route::get('/emission/card', [EmissionController::class, 'card'])->name('emission.card');
 
 
 // logout (versi kamu)

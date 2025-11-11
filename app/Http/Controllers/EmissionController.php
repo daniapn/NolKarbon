@@ -82,33 +82,47 @@ class EmissionController extends Controller
         return redirect()->route('emissions.saved', ['emission' => $emission->id]);
     }
 
-    public function saved(Emission $emission)
+    public function saved($emission)
     {
+        // pastikan kita ambil dari DB lagi
+        $emission = Emission::find($emission);
+    
+        if (!$emission) {
+            return back()->with('error', 'Data emisi tidak ditemukan');
+        }
+    
         return view('emisi.emission_card', ['emission' => $emission]);
     }
 
-    public function card($id)
+
+    public function card($id = null)
     {
-        // Ambil data pengguna pertama (sementara, kalau belum login system)
-        $pengguna = Pengguna::first();
-    
-        // Kalau belum ada data pengguna sama sekali
-        if (!$pengguna) {
-            return back()->with('error', 'Data pengguna tidak ditemukan');
-        }
-    
-        // Ambil data emisi sesuai ID
-        $emission = Emission::find($id);
-    
-        // Ambil universitas
-        $university = $pengguna->universitas ?? 'Unknown University';
-    
-        return view('emisi.emission_card', [
-            'user' => $pengguna,
-            'university' => $university,
-            'emission' => $emission
-        ]);
+    // Ambil data pengguna (sementara: pengguna pertama, nanti bisa pakai Auth)
+    $pengguna = Auth::check() ? Auth::user() : Pengguna::first();
+
+    if (!$pengguna) {
+        return view('emisi.no_pengguna');
     }
+
+    // Ambil data emission berdasarkan ID (kalau ada)
+    if ($id) {
+        $emission = Emission::find($id);
+    } else {
+        // Kalau tidak ada ID → ambil emission terakhir dari user
+        $emission = Emission::where('name', $pengguna->username ?? $pengguna->name)
+            ->latest()
+            ->first();
+    }
+
+    $university = $pengguna->universitas ?? 'Unknown University';
+
+    return view('emisi.emission_card', [
+        'user' => $pengguna,
+        'university' => $university,
+        'emission' => $emission,
+    ]);
+    }
+
 
     private function percentages(array $b): array
     {
@@ -119,37 +133,6 @@ class EmissionController extends Controller
             'food'      => round(($b['food']/$t)*100, 0),
             'rubbish'   => round(($b['rubbish']/$t)*100, 0),
         ];
-    }
-
-    public function showCard()
-    {
-        // Ambil data pengguna pertama (sementara)
-        $penggunas = Pengguna::first();
-    
-        if (!$penggunas) {
-            return back()->with('error', 'Data pengguna tidak ditemukan');
-        }
-    
-        // Ambil data emission berdasarkan nama pengguna
-        $emission = Emission::where('name', $penggunas->username)->latest()->first();
-    
-        $university = $penggunas->universitas ?? 'Unknown University';
-    
-        if ($emission) {
-            // Ada data → tampilkan kartu
-            return view('emisi.emission_card', [
-                'user' => $pengguna,
-                'university' => $university,
-                'emission' => $emission,
-            ]);
-        } else {
-            // Tidak ada data → tampilkan “Data not available”
-            return view('emisi.emission_card', [
-                'user' => $penggunas,
-                'university' => $university,
-                'emission' => null,
-            ]);
-        }
     }
 
 }

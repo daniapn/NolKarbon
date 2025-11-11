@@ -31,26 +31,27 @@
   }
 
     /* Tombol back */
-  .back-btn {
-    position:absolute;
-    top:24px;
-    left:24px;
-    background:var(--white);
-    border-radius:50%;
-    width:40px;
-    height:40px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    box-shadow:0 4px 8px rgba(0,0,0,0.1);
-    text-decoration:none;
-    color:#1d1d1f;
-    font-size:20px;
-    transition:background 0.2s;
-  }
-  .back-btn:hover {
-    background:#f3f3f3;
-  }
+    .back-btn {
+      position: absolute;
+      top: 28px;
+      left: 28px;
+      width: 44px;
+      height: 44px;
+      background: var(--white);
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 22px;
+      color: #000;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .back-btn:hover {
+      background: #f3f3f3;
+    }
 
   .logo{
     display:flex;
@@ -192,6 +193,9 @@
 </head>
 
 <body>
+
+    <a href="{{ route('homee') }}" class="back-btn">←</a>
+
   <div class="wrap">
     <div class="logo">
       <img src="/images/logo.png" alt="NolKarbon Logo">
