@@ -37,20 +37,20 @@ class EmissionTemplateController extends Controller
         $request->validate(['name' => 'required|string|max:100']);
         $template = EmissionTemplate::findOrFail($id);
         $template->update(['name' => $request->name]);
-        return redirect()->route('admin.emission-card')->with('success', 'Template updated successfully.');
+        return redirect()->route('admin.admin.emission-card')->with('success', 'Template updated successfully.');
     }
 
     public function destroy($id)
     {
         EmissionTemplate::destroy($id);
-        return redirect()->route('admin.emission-card.deleted')
+        return redirect()->route('admin.admin.emission-card.deleted')
                          ->with('success', 'Template deleted successfully.');
     }
 
-    public function create()
-    {
-        return view('admin.emission_card.edit');
+    public function create() {
+        return view('Admin.emission_card.create');
     }
+
 
     public function deleted()
     {

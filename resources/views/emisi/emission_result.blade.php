@@ -181,7 +181,7 @@
 
   <div class="wrap">
     <div class="logo">
-      <img src="/images/nolkarbon-logo.png" alt="Nol Karbon">
+      <img src="/images/logo.png" alt="NolKarbon Logo">
     </div>
 
     <h1>Here’s your<br>daily emissions</h1>
@@ -227,7 +227,7 @@
 </main>
 
 <footer>
-  <img src="/images/nolkarbon-logo.png" alt="Nol Karbon">
+ <img src="/images/logo.png" alt="NolKarbon Logo">
   <div>Contact Us</div>
 </footer>
 </body>

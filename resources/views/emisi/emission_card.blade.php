@@ -183,7 +183,7 @@
 
   <main>
     <div class="logo">
-      <img src="/images/nolkarbon-logo.png" alt="Nol Karbon">
+      <img src="/images/logo.png" alt="NolKarbon Logo">
     </div>
 
     <h2>Look at your<br><b>Emission Card 🪪</b></h2>
@@ -191,7 +191,7 @@
     @if ($emission)
       <div class="card-wrapper">
         <div class="card">
-          <img src="/images/nolkarbon-logo.png" alt="Nol Karbon">
+          <img src="/images/logo.png" alt="NolKarbon Logo">
           <p>Hi, I’m <b class="highlight">{{ $emission->name }}</b></p>
           <p>From <b class="highlight">{{ $emission->institution ?? 'Brawijaya University' }}</b></p>
           <div class="center-text">
@@ -216,7 +216,7 @@
   </main>
 
   <footer>
-    <img src="/images/nolkarbon-logo.png" alt="Nol Karbon">
+    <img src="/images/logo.png" alt="NolKarbon Logo">
     <div>Contact Us</div>
   </footer>
 

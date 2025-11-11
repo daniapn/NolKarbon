@@ -111,13 +111,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/admin/users/store', [AdminController::class, 'storeUser'])
         ->name('admin.adduser.store');
 
-    Route::get('/emission-card', [EmissionTemplateController::class, 'index'])->name('emission-card');
-    Route::post('/emission-card', [EmissionTemplateController::class, 'store'])->name('emission-card.store');
-    Route::get('/emission-card/create', [EmissionTemplateController::class, 'create'])->name('emission-card.create');
-    Route::get('/emission-card/{id}/edit', [EmissionTemplateController::class, 'edit'])->name('emission-card.edit');
-    Route::put('/emission-card/{id}', [EmissionTemplateController::class, 'update'])->name('emission-card.update');
-    Route::delete('/emission-card/{id}', [EmissionTemplateController::class, 'destroy'])->name('emission-card.delete');
-    Route::get('/emission-card/deleted', [EmissionTemplateController::class, 'deleted'])->name('emission-card.deleted');
+    Route::get('/emission-card', [EmissionTemplateController::class, 'index'])->name('admin.emission-card');
+    Route::post('emission-card', [EmissionTemplateController::class, 'store'])->name('admin.emission-card.store');
+    Route::get('emission-card/{id}/edit', [EmissionTemplateController::class, 'edit'])->name('admin.emission-card.edit');
+    Route::get('emission-card/create', [EmissionTemplateController::class, 'create'])->name('admin.emission-card.create');
+    Route::put('emission-card/{id}', [EmissionTemplateController::class, 'update'])->name('admin.emission-card.update');
+    Route::delete('emission-card/{id}', [EmissionTemplateController::class, 'destroy'])->name('admin.emission-card.delete');
+    Route::get('emission-card/deleted', [EmissionTemplateController::class, 'deleted'])->name('admin.emission-card.deleted');
+
 
     Route::get('/users/edit/{id}', [AdminController::class, 'editUser'])->name('updateuser');
     Route::put('/users/update/{id}', [AdminController::class, 'updateUser'])->name('updateuser.update');
@@ -125,17 +126,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/users/view/{id}', [AdminController::class, 'readUser'])->name('readuser');
 
     Route::delete('/users/delete/{id}', [AdminController::class, 'deleteUser'])->name('deleteuser');
+
     Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');
-    Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');
-    Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');   
-    Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');
+    
 });
 
 Route::get('/profile', [PenggunaController::class, 'index'])->name('profile.index');
 Route::post('/profile/update', [PenggunaController::class, 'update'])->name('profile.update');
-    Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');
-    Route::get('/users/delete/{id}', [AdminController::class, 'showDeleteUser'])->name('showdeleteuser');
 
 Route::get('/kontributor', [KontributorController::class, 'index'])->name('kontributor.index');
 Route::get('/dashboardadmin', [AdminController::class, 'dashboardAdmin'])->name('dashboardadmin');
+
 

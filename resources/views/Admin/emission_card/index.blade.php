@@ -306,7 +306,7 @@
         <span>Reports</span>
       </a>
 
-      <a href="{{ route('admin.emission-card') }}" class="nav-item active">
+      <a href="{{ route('admin.admin.emission-card') }}" class="nav-item active">
         <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
         <span>Emission Card</span>
       </a>
@@ -331,19 +331,18 @@
 
     <div class="content">
       <div class="templates-section">
-        <form action="{{ route('admin.emission-card.store') }}" method="POST">
+        <form action="{{ route('admin.admin.emission-card.store') }}" method="POST">
           @csrf
-          <a href="{{ route('admin.emission-card.create') }}" class="btn-primary">Make a new template</a>
         </form>
 
         @forelse ($templates as $template)
           <div class="template-card">
             <div><strong>{{ $template->name }}</strong></div>
             <div class="template-actions">
-              <a href="{{ route('admin.emission-card.edit', $template->id) }}">
+              <a href="{{ route('admin.admin.emission-card.edit', $template->id) }}">
                 <button type="button" class="edit">Edit</button>
               </a>
-              <form action="{{ route('admin.emission-card.delete', $template->id) }}" method="POST" style="display:inline;">
+              <form action="{{ route('admin.admin.emission-card.delete', $template->id) }}" method="POST" style="display:inline;">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="delete">Delete</button>
