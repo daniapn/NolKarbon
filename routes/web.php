@@ -99,7 +99,7 @@ Route::get('/emissions/{emission}/card', [EmissionController::class, 'card'])->n
 Route::get('/emission/card', [EmissionController::class, 'card'])->name('emission.card');
 
 
-// logout (versi kamu)
+// logout
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
