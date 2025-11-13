@@ -625,19 +625,6 @@
                 <h2>Detail Tantangan</h2>
                 <p class="header-subtitle">Lihat ringkasan status tantangan dan peserta aktif.</p>
             </div>
-            <div class="header-right">
-                <div class="user-profile">
-                    <div class="user-avatar">
-                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                        </svg>
-                    </div>
-                    <div class="user-info">
-                        <div class="user-name">{{ Auth::user()->name ?? 'Admin' }}</div>
-                        <div class="user-email">{{ Auth::user()->email ?? 'admin@nolkarbon.com' }}</div>
-                    </div>
-                </div>
-            </div>
         </header>
 
         <!-- Content -->
@@ -697,50 +684,6 @@
                                     </button>
                                 </form>
                             </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Participants Section -->
-                <section class="participants-section">
-                    <div class="participants-card">
-                        <div class="participants-header">
-                            <h2>Peserta Aktif</h2>
-                            <p>Pantau progres dan poin peserta yang saat ini mengikuti tantangan.</p>
-                        </div>
-                        
-                        <div class="participants-grid">
-                            @forelse ($challenge->participants as $participant)
-                                <article class="participant-card">
-                                    <div class="participant-header">
-                                        <span class="participant-avatar">
-                                            {{ strtoupper(substr($participant->user?->name ?? 'P', 0, 2)) }}
-                                        </span>
-                                        <div class="participant-info">
-                                            <p>{{ $participant->user?->name ?? 'Peserta' }}</p>
-                                            <p>Status: {{ ucfirst($participant->status) }}</p>
-                                        </div>
-                                    </div>
-                                    <dl class="participant-stats">
-                                        <div class="stat-row">
-                                            <dt>Poin</dt>
-                                            <dd>{{ $participant->points_earned }}</dd>
-                                        </div>
-                                        <div class="stat-row">
-                                            <dt>Progres</dt>
-                                            <dd>{{ round($participant->progress_percentage) }}%</dd>
-                                        </div>
-                                        <div class="stat-row">
-                                            <dt>Terakhir lapor</dt>
-                                            <dd>{{ optional($participant->last_reported_at)->diffForHumans() ?? 'Belum ada' }}</dd>
-                                        </div>
-                                    </dl>
-                                </article>
-                            @empty
-                                <div class="empty-participants">
-                                    Belum ada peserta yang bergabung.
-                                </div>
-                            @endforelse
                         </div>
                     </div>
                 </section>

@@ -3,12 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable; // supaya bisa login
+use Illuminate\Foundation\Auth\User as Authenticatable; // ini udah bener!
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Model;
 
-class Pengguna extends Model
+class Pengguna extends Authenticatable // ⬅ ubah ini
 {
     use HasFactory, Notifiable;
 
@@ -40,5 +39,10 @@ class Pengguna extends Model
     /**
      * Mutator untuk otomatis enkripsi password
      */
-    
+    protected function password(): Attribute
+    {
+        return Attribute::make(
+            set: fn ($value) => bcrypt($value)
+        );
+    }
 }

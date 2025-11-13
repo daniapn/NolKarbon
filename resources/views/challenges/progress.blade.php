@@ -75,18 +75,18 @@
             @error('progress_percentage') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
         </label>
 
-        <div class="rounded-[32px] border border-blue-200 bg-white p-6 text-sm text-blue-900 shadow-lg">
-            <span class="text-xs font-semibold uppercase text-blue-600">Lampiran Bukti (URL)</span>
-            <div class="mt-3 space-y-3">
-                @for ($i = 0; $i < 3; $i++)
-                    <input name="attachments[]" type="url" value="{{ old('attachments.' . $i) }}"
-                           class="w-full rounded-full border border-blue-200 px-4 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
-                           placeholder="https://link-documentasi.com/bukti">
-                @endfor
-            </div>
-            @error('attachments') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
-            @error('attachments.*') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
-        </div>
+<div class="rounded-[32px] border border-blue-200 bg-white p-6 text-sm text-blue-900 shadow-lg">
+    <span class="text-xs font-semibold uppercase text-blue-600">Lampiran Bukti (URL)</span>
+    <div class="mt-3">
+        <input name="attachments" type="url" value="{{ old('attachments') }}"
+               class="w-full rounded-full border border-blue-200 px-4 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+               placeholder="https://link-documentasi.com/bukti">
+    </div>
+    @error('attachments') 
+        <p class="mt-1 text-xs text-red-600">{{ $message }}</p> 
+    @enderror
+</div>
+
 
                 <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
                     <button type="submit"

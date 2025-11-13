@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Challenge;
+use App\Models\Pengguna;
 use App\Models\ChallengeParticipant;
 use App\Models\ChallengeProgressLog;
-use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,22 +13,20 @@ use Illuminate\View\View;
 
 class ChallengeUserController extends Controller
 {
+    /**
+     * Menampilkan daftar challenge.
+     */
     public function index(Request $request): View
     {
-        $statusString = $request->string('status')->trim();
-        $status = $statusString->isNotEmpty() ? $statusString->toString() : null;
+        $status = $request->string('status')->trim()->toString() ?: null;
+        $visibility = $request->string('visibility')->trim()->toString() ?: null;
+        $search = $request->string('q')->trim()->toString() ?: null;
 
-        $visibilityString = $request->string('visibility')->trim();
-        $visibility = $visibilityString->isNotEmpty() ? $visibilityString->toString() : null;
-
-        $searchString = $request->string('q')->trim();
-        $search = $searchString->isNotEmpty() ? $searchString->toString() : null;
-
-        $user = Auth::user() ?? User::query()->firstOrFail();
+        $pengguna = Auth::user() ?? Pengguna::query()->firstOrFail();
 
         $participations = ChallengeParticipant::query()
             ->with('challenge')
-            ->where('user_id', $user->id)
+            ->where('idPengguna', $pengguna->idPengguna)
             ->orderByDesc('created_at')
             ->get();
 
@@ -44,14 +42,24 @@ class ChallengeUserController extends Controller
         $challenges = Challenge::query()
             ->withCount('participants')
             ->with('creator')
-            ->when($status, fn ($query) => $query->where('status', $status))
-            ->when($visibility, fn ($query) => $query->where('visibility', $visibility))
+            ->when($status, fn($query) => $query->where('status', $status))
+            ->when($visibility, fn($query) => $query->where('visibility', $visibility))
             ->when($search, function ($query) use ($search) {
-                $query->where(fn ($subQuery) => $subQuery
-                    ->where('title', 'like', "%{$search}%")
-                    ->orWhere('description', 'like', "%{$search}%"));
+                $query->where(function ($subQuery) use ($search) {
+                    $subQuery->where('title', 'like', "%{$search}%")
+                             ->orWhere('description', 'like', "%{$search}%");
+                });
             })
-            ->orderByRaw("FIELD(status, 'active', 'upcoming', 'draft', 'completed', 'archived')")
+            ->orderByRaw("
+                CASE status
+                    WHEN 'active' THEN 1
+                    WHEN 'upcoming' THEN 2
+                    WHEN 'draft' THEN 3
+                    WHEN 'completed' THEN 4
+                    WHEN 'archived' THEN 5
+                    ELSE 6
+                END
+            ")
             ->orderByDesc('created_at')
             ->paginate(8)
             ->withQueryString();
@@ -63,7 +71,7 @@ class ChallengeUserController extends Controller
             ->first();
 
         return view('challenges.index', [
-            'user' => $user,
+            'user' => $pengguna,
             'totalPoints' => $totalPoints,
             'activeParticipation' => $activeParticipation,
             'participations' => $participations,
@@ -78,23 +86,28 @@ class ChallengeUserController extends Controller
         ]);
     }
 
+    /**
+     * Menampilkan detail challenge.
+     */
     public function show(Challenge $challenge): View
     {
         $challenge->load([
             'creator',
             'participants.user',
-            'progressLogs' => fn ($query) => $query->latest()->limit(10),
+            'progressLogs' => fn($query) =>
+                $query->orderBy('challenge_progress_logs.created_at', 'desc')->limit(10),
         ])->loadCount('participants');
 
-        $user = Auth::user();
+        $pengguna = Auth::user();
         $participant = null;
-        if ($user) {
+
+        if ($pengguna) {
             $participant = $challenge->participants
-                ->where('user_id', $user->id)
+                ->where('idPengguna', $pengguna->idPengguna)
                 ->first();
         }
 
-        if (! $participant) {
+        if (!$participant) {
             $participant = ChallengeParticipant::query()
                 ->with('user')
                 ->where('challenge_id', $challenge->id)
@@ -115,6 +128,9 @@ class ChallengeUserController extends Controller
         ]);
     }
 
+    /**
+     * Menampilkan form join challenge.
+     */
     public function joinForm(Challenge $challenge): View
     {
         return view('challenges.join', [
@@ -122,6 +138,9 @@ class ChallengeUserController extends Controller
         ]);
     }
 
+    /**
+     * Proses join challenge.
+     */
     public function join(Request $request, Challenge $challenge): RedirectResponse
     {
         $payload = $request->validate([
@@ -131,12 +150,13 @@ class ChallengeUserController extends Controller
             'team_name' => ['nullable', 'string', 'max:120'],
         ]);
 
-        $user = Auth::user() ?? User::query()->firstOrFail();
+        // ✅ Gunakan Auth::user() konsisten dengan AuthController
+        $pengguna = Auth::user() ?? Pengguna::query()->firstOrFail();
 
         $participant = ChallengeParticipant::updateOrCreate(
             [
                 'challenge_id' => $challenge->id,
-                'user_id' => $user->id,
+                'idPengguna' => $pengguna->idPengguna,
             ],
             [
                 'status' => 'joined',
@@ -158,14 +178,17 @@ class ChallengeUserController extends Controller
             ->with('participant_id', $participant->id);
     }
 
+    /**
+     * Menampilkan form progress.
+     */
     public function progressForm(Challenge $challenge): View
     {
-        $user = Auth::user() ?? User::query()->firstOrFail();
+        $pengguna = Auth::user() ?? Pengguna::query()->firstOrFail();
 
         $participant = ChallengeParticipant::query()
             ->where('challenge_id', $challenge->id)
-            ->where('user_id', $user->id)
-            ->with(['challenge', 'progressLogs' => fn ($query) => $query->latest()->limit(10)])
+            ->where('idPengguna', $pengguna->idPengguna)
+            ->with(['challenge', 'progressLogs' => fn($query) => $query->latest()->limit(10)])
             ->first();
 
         abort_unless($participant, 404, 'Kamu belum bergabung di tantangan ini.');
@@ -176,63 +199,80 @@ class ChallengeUserController extends Controller
         ]);
     }
 
+    /**
+     * Menyimpan progress challenge.
+     */
     public function progress(Request $request, Challenge $challenge): RedirectResponse
     {
-        $validated = $request->validate([
-            'activity_type' => ['required', 'in:submission,check_in,milestone,adjustment'],
-            'logged_for' => ['required', 'date'],
-            'description' => ['required', 'string', 'max:600'],
-            'metric_value' => ['nullable', 'numeric', 'min:0'],
-            'metric_unit' => ['nullable', 'string', 'max:30'],
-            'attachments' => ['nullable', 'array'],
-            'attachments.*' => ['string', 'max:255'],
-            'progress_percentage' => ['nullable', 'numeric', 'min:0', 'max:100'],
-        ]);
+$validated = $request->validate([
+    'activity_type' => ['required', 'in:submission,check_in,milestone,adjustment'],
+    'logged_for' => ['required', 'date'],
+    'description' => ['required', 'string', 'max:600'],
+    'metric_value' => ['nullable', 'numeric', 'min:0'],
+    'metric_unit' => ['nullable', 'string', 'max:30'],
+    'attachments' => ['nullable', 'string', 'max:255'], // ⬅ ubah ini
+    'progress_percentage' => ['nullable', 'numeric', 'min:0', 'max:100'],
+]);
 
-        $user = Auth::user() ?? User::query()->firstOrFail();
 
-        $participant = ChallengeParticipant::query()
-            ->where('challenge_id', $challenge->id)
-            ->where('user_id', $user->id)
-            ->firstOrFail();
+        $pengguna = Auth::user() ?? Pengguna::query()->firstOrFail();
 
-        $attachments = collect($validated['attachments'] ?? [])
-            ->filter(fn ($value) => filled($value))
-            ->values()
-            ->all();
+    $participant = ChallengeParticipant::query()
+        ->where('challenge_id', $challenge->id)
+        ->where('idPengguna', $pengguna->idPengguna)
+        ->firstOrFail();
 
-        $log = ChallengeProgressLog::create([
-            'challenge_participant_id' => $participant->id,
-            'logged_for' => $validated['logged_for'],
-            'activity_type' => $validated['activity_type'],
-            'description' => $validated['description'],
-            'metric_value' => $validated['metric_value'] ?? null,
-            'metric_unit' => $validated['metric_unit'] ?? null,
-            'attachments' => $attachments,
-            'metadata' => [
-                'submitted_by' => $user->only(['id', 'name']),
-            ],
-        ]);
+    // ✅ Simpan hanya attachment yang tidak kosong
+    $attachments = collect($validated['attachments'] ?? [])
+        ->filter(fn($value) => filled($value))
+        ->values()
+        ->all();
+
+    // ✅ Buat log progres
+    $log = ChallengeProgressLog::create([
+        'challenge_participant_id' => $participant->id,
+        'logged_for' => $validated['logged_for'],
+        'activity_type' => $validated['activity_type'],
+        'description' => $validated['description'],
+        'metric_value' => $validated['metric_value'] ?? null,
+        'metric_unit' => $validated['metric_unit'] ?? null,
+        'attachments' => $attachments, // simpan array string hasil input user
+        'metadata' => [
+            'submitted_by' => $pengguna->only(['idPengguna', 'username']),
+        ],
+    ]);
+
+    //  Update progress peserta
+    $participant->update([
+        'progress_percentage' => $validated['progress_percentage'] ?? $participant->progress_percentage,
+        'last_reported_at' => now(),
+    ]);
+
+    //  Jika progress 100%, update poin otomatis
+    if (isset($validated['progress_percentage']) && $validated['progress_percentage'] == 100) {
+        $totalPoints = $challenge->point_reward + $challenge->bonus_point;
 
         $participant->update([
-            'progress_percentage' => $validated['progress_percentage'] ?? $participant->progress_percentage,
-            'last_reported_at' => now(),
+            'points_earned' => $totalPoints,
         ]);
-
-        return redirect()
-            ->route('challenges.progress.create', $challenge)
-            ->with('status', 'Laporan progres berhasil disimpan!')
-            ->with('log_id', $log->id);
     }
 
+    return redirect()
+        ->route('challenges.progress.create', $challenge)
+        ->with('status', 'Laporan progres berhasil disimpan!')
+        ->with('log_id', $log->id);
+}
+    /**
+     * Dashboard pengguna.
+     */
     public function dashboard(): View
     {
-        $user = Auth::user() ?? User::query()->firstOrFail();
+        $pengguna = Auth::user() ?? Pengguna::query()->firstOrFail();
 
         $participations = ChallengeParticipant::query()
-            ->with(['challenge' => fn ($query) => $query->select(['id', 'title', 'slug', 'description', 'point_reward', 'cover_image_path', 'status'])])
+            ->with(['challenge' => fn($query) => $query->select(['id', 'title', 'slug', 'description', 'point_reward', 'cover_image_path', 'status'])])
             ->withCount('progressLogs')
-            ->where('user_id', $user->id)
+            ->where('idPengguna', $pengguna->idPengguna)
             ->orderByDesc('created_at')
             ->get();
 
@@ -252,7 +292,7 @@ class ChallengeUserController extends Controller
             ->get();
 
         return view('challenges.dashboard', [
-            'user' => $user,
+            'user' => $pengguna,
             'participations' => $participations,
             'totalPoints' => $totalPoints,
             'activeChallenges' => $activeChallenges,
@@ -262,12 +302,15 @@ class ChallengeUserController extends Controller
         ]);
     }
 
+    /**
+     * Halaman badges pengguna.
+     */
     public function badges(): View
     {
-        $user = Auth::user() ?? User::query()->firstOrFail();
+        $pengguna = Auth::user() ?? Pengguna::query()->firstOrFail();
 
         $participations = ChallengeParticipant::query()
-            ->where('user_id', $user->id)
+            ->where('idPengguna', $pengguna->idPengguna)
             ->get();
 
         $totalPoints = $participations->sum('points_earned');
@@ -292,12 +335,11 @@ class ChallengeUserController extends Controller
         ];
 
         return view('challenges.badges', [
-            'user' => $user,
+            'user' => $pengguna,
             'level' => $level,
             'nextLevelPoints' => ($level * 100) - $totalPoints,
             'totalPoints' => $totalPoints,
             'badges' => $badges,
         ]);
     }
-
 }

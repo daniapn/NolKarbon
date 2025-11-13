@@ -82,14 +82,13 @@ public function submitDraft($id)
 {
     $draft = DraftArtikel::findOrFail($id);
 
-    $draft->status = 'menunggu review';
+    $draft->status = 'Menunggu Review';
     
     // ✅ Simpan waktu update juga
     $draft->tanggalUpdate = now();
 
     $draft->save();
 DB::table('notifications')->insert([
-    'user_id' => Auth::id(),
     'judul' => $draft->judul,
     'catatan' => "Draft '{$draft->judul}' berhasil dikirim untuk review.",
     'status' => $draft->status,
@@ -118,7 +117,7 @@ public function storeDraft(Request $request)
     $draft->idKontributor = $request->idKontributor;
     $draft->judul = $request->judul;
     $draft->isi = $request->isi;
-    $draft->status = 'draft';
+    $draft->status = 'Draft';
     $draft->tanggalDibuat = now();
     $draft->tanggalUpdate = now();
 
@@ -129,7 +128,6 @@ public function storeDraft(Request $request)
 
     $draft->save();
 DB::table('notifications')->insert([
-    'user_id' => Auth::id(),
     'judul' => $draft->judul,
     'catatan' => "Draft '{$draft->judul}' berhasil dibuat.",
     'status' => $draft->status,
@@ -143,7 +141,6 @@ DB::table('notifications')->insert([
 public function getNotif()
 {
     $notifs = DB::table('notifications')
-        ->where('user_id', Auth::id())
         ->orderBy('created_at', 'DESC')
         ->get();
 

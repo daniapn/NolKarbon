@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Article;
 use App\Models\Challenge;
 use App\Models\Community;
+use App\Models\Pengguna;
+use App\Models\DraftArtikel;
 use App\Models\EmissionCard;
 use App\Models\EmissionRecord;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
@@ -21,8 +21,8 @@ class ChallengeAdminController extends Controller
     {
         $startOfMonth = Carbon::now()->startOfMonth();
 
-        $totalUsers = User::count();
-        $newUsers = User::where('created_at', '>=', $startOfMonth)->count();
+        $totalUsers = Pengguna::count();
+        $newUsers = Pengguna::where('created_at', '>=', $startOfMonth)->count();
 
         $activeCommunities = Community::where('status', 'active')->count();
         $newCommunities = Community::where('status', 'active')
@@ -72,9 +72,9 @@ class ChallengeAdminController extends Controller
         $totalEmissionCards = EmissionCard::count();
 
         $draftStats = [
-            'submitted' => Article::count(),
-            'unreviewed' => Article::whereIn('status', ['draft', 'pending_review'])->count(),
-            'approved' => Article::where('status', 'published')->count(),
+            'submitted' => DraftArtikel::count(),
+            'unreviewed' => DraftArtikel::whereIn('status', ['Draft', 'Menunggu Review'])->count(),
+            'approved' => DraftArtikel::where('status', 'Published')->count(),
         ];
 
         $emissionTrend = $this->buildEmissionTrend();

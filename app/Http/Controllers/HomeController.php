@@ -10,7 +10,7 @@ class HomeController extends Controller
     public function index()
 {
     // Ambil semua artikel yang sudah publish
-    $articles = DraftArtikel::where('status', 'published')
+    $articles = DraftArtikel::where('status', 'Published')
                     ->orderBy('tanggalDibuat', 'desc')
                     ->get();
 
@@ -19,14 +19,14 @@ class HomeController extends Controller
 
     public function show($id)
 {
-    $article = DraftArtikel::where('idDraft', $id)->where('status', 'published')->firstOrFail();
+    $article = DraftArtikel::where('idDraft', $id)->where('status', 'Published')->firstOrFail();
     return view('ArtikelDetail', compact('article'));
 }
 
 public function index2()
 {
     // Ambil semua artikel yang sudah publish
-    $articles = DraftArtikel::where('status', 'published')
+    $articles = DraftArtikel::where('status', 'Published')
                     ->orderBy('tanggalDibuat', 'desc')
                     ->get();
 

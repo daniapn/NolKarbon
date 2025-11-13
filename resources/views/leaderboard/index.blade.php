@@ -264,12 +264,6 @@
                                 </p>
                                 <p class="campus-emission">Emisi <?= number_format($row['emission'], 0) ?> Kg CO₂</p>
                             </div>
-                            <div class="campus-score-section">
-                                <span class="campus-score"><?= $row['score'] ?>%</span>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: <?= min($row['score'], 100) ?>%;"></div>
-                                </div>
-                            </div>
                         </article>
                     <?php endforeach; ?>
                 <?php else: ?>

@@ -13,7 +13,7 @@ class ChallengeParticipant extends Model
 
     protected $fillable = [
         'challenge_id',
-        'user_id',
+        'idPengguna',
         'status',
         'progress_percentage',
         'points_earned',
@@ -39,7 +39,7 @@ class ChallengeParticipant extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Pengguna::class);
     }
 
     public function progressLogs(): HasMany

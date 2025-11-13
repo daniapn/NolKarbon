@@ -378,7 +378,7 @@
                 <span>Review Draft</span>
             </a>
 
-            <a href="#challenges" class="nav-item">
+            <a href="{{ route('admin.challenge.index') }}" class="nav-item">
                 <svg fill="currentColor" viewBox="0 0 24 24">
                     <path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 10H3V8h18v8zM6 15h2v-2H6v2zm0-3h2v-2H6v2zm3 3h8v-2H9v2zm0-3h8v-2H9v2z"/>
                 </svg>
@@ -392,7 +392,7 @@
                 <span>Reports</span>
             </a>
 
-            <a href="{{ route('admin.reports.index') }}" class="nav-item">
+            <a href="{{ route('admin.admin.emission-card') }}" class="nav-item">
                 <svg fill="currentColor" viewBox="0 0 24 24">
                     <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
                 </svg>

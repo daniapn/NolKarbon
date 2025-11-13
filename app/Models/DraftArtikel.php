@@ -8,11 +8,10 @@ class DraftArtikel extends Model
 {
     protected $table = 'draft_artikels';
     protected $primaryKey = 'idDraft';
-    public $incrementing = false;
-    protected $keyType = 'string';
+    public $incrementing = true;
+    protected $keyType = 'integer';
 
     protected $fillable = [
-        'idDraft',
         'judul',
         'isi',
         'gambar',
@@ -25,7 +24,6 @@ class DraftArtikel extends Model
 
     public $timestamps = false;
 
-    // Relasi: DraftArtikel dimiliki oleh 1 Kontributor
     public function kontributor()
     {
         return $this->belongsTo(Kontributor::class, 'idKontributor', 'idKontributor');

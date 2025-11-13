@@ -210,7 +210,7 @@
     <h1>Here’s your<br>daily emissions</h1>
 
     <div class="box">
-      <div class="name">{{ strtoupper($name) }}</div>
+      <div class="name">{{ strtoupper($username) }}</div>
       <div class="subtitle">Has produced daily carbon emissions of</div>
 
       <div class="center-text">
@@ -232,7 +232,7 @@
 
       <form method="POST" action="{{ route('emissions.store') }}">
         @csrf
-        <input type="hidden" name="name" value="{{ $name }}">
+        <input type="hidden" name="name" value="{{ $username }}">
         @foreach($input as $k=>$v)
           <input type="hidden" name="{{ $k }}" value="{{ $v }}">
         @endforeach

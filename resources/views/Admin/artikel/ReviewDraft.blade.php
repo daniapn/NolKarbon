@@ -445,19 +445,18 @@
             <div class="draft-content">
                 <h3 class="draft-title">{{ $artikel->judul }}</h3>
                 @if (strtolower($artikel->status) === 'menunggu review')
-                <form action="{{ route('admin.formreview', $artikel->idDraft) }}" method="POST" class="formreview">
-    @csrf
-    <button class="review-btn">Review</button>
+    <form action="{{ route('admin.formreview', $artikel->idDraft) }}" method="POST" class="formreview">
+        @csrf
+        <button class="review-btn">Review</button>
+    </form>
 @elseif (strtolower($artikel->status) === 'published')
     <form action="{{ route('admin.unpublish', $artikel->idDraft) }}" method="POST" class="unpublish-form">
-    @csrf
-    <button type="button" class="review-btn" style="background-color:#f44336;" onclick="confirmUnpublish(this)">
-        Unpublish
-    </button>
-</form>
-
+        @csrf
+        <button type="button" class="review-btn" style="background-color:#f44336;" onclick="confirmUnpublish(this)">
+            Unpublish
+        </button>
+    </form>
 @endif
-
             </div>
         </div>
     @endforeach

@@ -199,7 +199,7 @@
           <p style="font-size:18px; font-weight:800; color:var(--navy); margin:4px 0 16px;">{{ $emission->name ?? $user->username ?? 'User' }}</p>
           
           <p style="font-size:16px; margin:8px 0;">From</p>
-          <p style="font-size:18px; font-weight:800; color:var(--navy); margin:4px 0 24px;">{{ $university ?? 'Unknown University' }}</p>
+          <p style="font-size:18px; font-weight:800; color:var(--navy); margin:4px 0 24px;">{{ $emission->universitas ?? $user->universitas ?? 'Unknown University' }}</p>
           
           <div class="center-text" style="text-align:center; margin-top:40px;">
             <p style="font-weight:800; color:var(--navy); font-size:18px; margin-bottom:4px;">Proud to take action<br>with Nol Karbon</p>

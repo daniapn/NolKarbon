@@ -9,15 +9,17 @@ class CommunityController extends Controller
 {
     public function dashboard(): View
     {
-        $topPerformers = DB::table('community_user')
-            ->join('users', 'community_user.user_id', '=', 'users.id')
-            ->join('communities', 'community_user.community_id', '=', 'communities.id')
-            ->select([
-                'users.name as member_name',
-                'communities.name as community_name',
-                'community_user.points_accumulated',
-            ])
-            ->orderByDesc('community_user.points_accumulated')
+        $topPerformers = DB::table('penggunas')
+            ->join('communities', 'penggunas.universitas', '=', 'communities.name')
+            ->leftJoin('challenge_participants', 'penggunas.idPengguna', '=', 'challenge_participants.idPengguna')
+            ->select(
+                'penggunas.username as member_name',
+                'penggunas.universitas as community_name',
+                DB::raw('COALESCE(SUM(challenge_participants.points_earned), 0) as total_points')
+            )
+            ->where('penggunas.role', '=', 'User') // ✅ hanya tampilkan role = User
+            ->groupBy('penggunas.idPengguna', 'penggunas.username', 'penggunas.universitas')
+            ->orderByDesc('total_points')
             ->limit(12)
             ->get();
 
@@ -26,7 +28,7 @@ class CommunityController extends Controller
                 'rank' => $index + 1,
                 'member' => $row->member_name,
                 'community' => $row->community_name,
-                'points' => (int) $row->points_accumulated,
+                'points' => (int) $row->total_points,
             ];
         });
 

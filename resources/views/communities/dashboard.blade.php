@@ -6,11 +6,7 @@
     <title>Community Dashboard - Nol Karbon</title>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Lexend', sans-serif;
@@ -19,7 +15,6 @@
             overflow-x: hidden;
         }
 
-        /* Hero Section */
         .hero-section {
             text-align: center;
             padding: 4rem 5% 3rem;
@@ -31,7 +26,6 @@
             font-size: 55px;
             font-weight: 600;
             line-height: 65px;
-            letter-spacing: 1.1px;
             color: #000862;
             margin-bottom: 1rem;
         }
@@ -44,7 +38,6 @@
             color: #333;
         }
 
-        /* Dashboard Section */
         .dashboard-container {
             max-width: 900px;
             margin: 3rem auto;
@@ -82,10 +75,6 @@
             box-shadow: 0 16px 32px rgba(9, 27, 121, 0.18);
         }
 
-        .member-info {
-            flex: 1;
-        }
-
         .member-name {
             font-family: 'Poppins', sans-serif;
             font-size: 20px;
@@ -94,7 +83,7 @@
             margin-bottom: 0.5rem;
         }
 
-        .community-name {
+        .university-name {
             font-size: 14px;
             color: #64748b;
         }
@@ -117,7 +106,6 @@
             font-size: 16px;
         }
 
-        /* Footer */
         footer {
             background: #000862;
             padding: 3rem 5%;
@@ -126,72 +114,25 @@
             margin-top: 6rem;
         }
 
-        footer .logo {
-            margin-bottom: 1.5rem;
-        }
+        footer img { height: 50px; width: auto; }
 
-        footer .logo img {
-            height: 50px;
-            width: auto;
-        }
-
-        footer p {
-            margin: 0.5rem 0;
-            font-size: 18px;
-            color: white;
-        }
-
-        /* Responsive */
         @media (min-width: 640px) {
             .dashboard-item {
                 flex-direction: row;
                 align-items: center;
                 justify-content: space-between;
             }
-
-            .member-points {
-                align-self: center;
-            }
+            .member-points { align-self: center; }
         }
 
         @media (max-width: 768px) {
-            .hero-section h1 {
-                font-size: 40px;
-                line-height: 50px;
-            }
-
-            .hero-section p {
-                font-size: 16px;
-            }
-
-            .dashboard-wrapper {
-                padding: 1.5rem;
-                border-radius: 32px;
-            }
-
-            .dashboard-item {
-                padding: 1.25rem 1.5rem;
-            }
-
-            .member-name {
-                font-size: 18px;
-            }
-
-            .community-name {
-                font-size: 13px;
-            }
-
-            .member-points {
-                font-size: 24px;
-            }
-        }
-
-        html, body {
-            overflow-x: hidden;
-        }
-
-        section, div, img {
-            max-width: 100%;
+            .hero-section h1 { font-size: 40px; line-height: 50px; }
+            .hero-section p { font-size: 16px; }
+            .dashboard-wrapper { padding: 1.5rem; border-radius: 32px; }
+            .dashboard-item { padding: 1.25rem 1.5rem; }
+            .member-name { font-size: 18px; }
+            .university-name { font-size: 13px; }
+            .member-points { font-size: 24px; }
         }
     </style>
 </head>
@@ -199,37 +140,38 @@
     <!-- Hero Section -->
     <section class="hero-section">
         <h1>View Community Dashboard</h1>
-        <p>
-            Kenali kontributor terbaik dari setiap komunitas kampus dan lihat bagaimana poin mereka menumbuhkan gerakan Nol Karbon.
-        </p>
+        <p>Kenali kontributor terbaik dari setiap kampus dan lihat bagaimana poin mereka menumbuhkan gerakan Nol Karbon.</p>
     </section>
 
     <!-- Dashboard Section -->
-    <section class="dashboard-container">
-        <div class="dashboard-wrapper">
-            <div class="dashboard-items">
-                <?php if (!empty($entries)): ?>
-                    <?php foreach ($entries as $entry): ?>
-                        <article class="dashboard-item">
-                            <div class="member-info">
-                                <p class="member-name">
-                                    <?= $entry['rank'] ?>. <?= htmlspecialchars($entry['member']) ?>
-                                </p>
-                                <p class="community-name"><?= htmlspecialchars($entry['community']) ?></p>
-                            </div>
-                            <span class="member-points">
-                                <?= number_format($entry['points'], 0, ',', '.') ?> poin
-                            </span>
-                        </article>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <div class="empty-state">
-                        Belum ada data komunitas untuk ditampilkan.
-                    </div>
-                <?php endif; ?>
-            </div>
+<section class="dashboard-container">
+    <div class="dashboard-wrapper">
+        <div class="dashboard-items">
+            <?php if (!empty($entries)): ?>
+                <?php foreach ($entries as $entry): ?>
+                    <article class="dashboard-item">
+                        <div class="member-info">
+                            <p class="member-name">
+                                <?= $entry['rank'] ?>. <?= htmlspecialchars($entry['member']) ?>
+                            </p>
+                            <p class="community-name">
+                                <?= htmlspecialchars($entry['community']) ?>
+                            </p>
+                        </div>
+                        <span class="member-points">
+                            <?= number_format($entry['points'], 0, ',', '.') ?> poin
+                        </span>
+                    </article>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <div class="empty-state">
+                    Belum ada data komunitas untuk ditampilkan.
+                </div>
+            <?php endif; ?>
         </div>
-    </section>
+    </div>
+</section>
+
 
     <!-- Footer -->
     <footer>

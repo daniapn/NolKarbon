@@ -36,8 +36,8 @@ class AdminController extends Controller
         $currentMonth = now()->startOfMonth();
         $lastMonth = now()->subMonth()->startOfMonth();
 
-        $totalUsersNow = \App\Models\User::count();
-        $totalUsersLastMonth = \App\Models\User::where('created_at', '<', $currentMonth)->count();
+        $totalUsersNow = \App\Models\Pengguna::count();
+        $totalUsersLastMonth = \App\Models\Pengguna::where('created_at', '<', $currentMonth)->count();
         $userGrowth = $totalUsersLastMonth > 0 
             ? round((($totalUsersNow - $totalUsersLastMonth) / $totalUsersLastMonth) * 100, 1) 
             : 0;
@@ -75,21 +75,22 @@ class AdminController extends Controller
 
         $cardData = [
             'total_cards' => \App\Models\EmissionCard::count(),
-            'submitted_drafts' => \App\Models\Article::where('status', 'submitted')->count(),
-            'unreviewed_drafts' => \App\Models\Article::where('status', 'pending')->count(),
-            'approved_drafts' => \App\Models\Article::where('status', 'approved')->count(),
+            'submitted_drafts' => \App\Models\DraftArtikel::where('status', 'Draft')->count(),
+            'unreviewed_drafts' => \App\Models\DraftArtikel::where('status', 'Menunggu Review')->count(),
+            'approved_drafts' => \App\Models\DraftArtikel::where('status', 'Published')->count(),
         ];
 
-        $emissionStats = \App\Models\emission_records::selectRaw('
-                MONTHNAME(created_at) as month,
-                MONTH(created_at) as month_num,
-                SUM(emission_kg_co2) as emission,
-                SUM(reduction_kg_co2) as reduction
-            ')
-            ->whereYear('created_at', now()->year)
-            ->groupBy('month', 'month_num')
-            ->orderBy('month_num')
-            ->get();
+        $emissionStats = \App\Models\emission_records::selectRaw("
+    TO_CHAR(created_at, 'Month') as month,
+    EXTRACT(MONTH FROM created_at) as month_num,
+    SUM(emission_kg_co2) as emission,
+    SUM(reduction_kg_co2) as reduction
+")
+->whereRaw('EXTRACT(YEAR FROM created_at) = ?', [now()->year])
+->groupBy('month', 'month_num')
+->orderBy('month_num')
+->get();
+
 
         return view('admin.dashboardadmin', compact('stats', 'cardData', 'emissionStats'));
     }
@@ -275,7 +276,7 @@ public function showDeleteUser($id)
     // ========== ARTIKEL (jgn dihapus -dn) ==========
     public function reviewDraft()
     {
-        $artikels = DraftArtikel::whereIn('status', ['menunggu review', 'published'])->get();
+        $artikels = DraftArtikel::whereIn('status', ['Menunggu Review', 'Published'])->get();
         return view('Admin.artikel.ReviewDraft', compact('artikels'));
     }
 
@@ -300,12 +301,11 @@ public function showDeleteUser($id)
     public function approve($id)
     {
         $artikel = DraftArtikel::findOrFail($id);
-        $artikel->status = 'published';
+        $artikel->status = 'Published';
         $artikel->catatan = null;
         $artikel->save();
 
         DB::table('notifications')->insert([
-            'user_id' => $artikel->user_id, 
             'catatan' => $artikel->catatan,
             'judul' => $artikel->judul,
             'status' => $artikel->status,
@@ -319,12 +319,11 @@ public function showDeleteUser($id)
     public function revisi(Request $request, $id)
     {
         $artikel = DraftArtikel::findOrFail($id);
-        $artikel->status = 'revisi';
+        $artikel->status = 'Revisi';
         $artikel->catatan = $request->catatan;
         $artikel->save();
 
         DB::table('notifications')->insert([
-            'user_id' => $artikel->user_id, 
             'catatan' => $artikel->catatan,
             'judul' => $artikel->judul,
             'status' => $artikel->status,
@@ -338,12 +337,11 @@ public function showDeleteUser($id)
     public function tolak(Request $request, $id)
     {
         $artikel = DraftArtikel::findOrFail($id);
-        $artikel->status = 'ditolak';
+        $artikel->status = 'Ditolak';
         $artikel->catatan = $request->catatan;
         $artikel->save();
 
         DB::table('notifications')->insert([
-            'user_id' => $artikel->user_id,
             'catatan' => $artikel->catatan,
             'judul' => $artikel->judul,
             'status' => $artikel->status,
