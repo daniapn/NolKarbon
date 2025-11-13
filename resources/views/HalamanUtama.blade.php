@@ -823,7 +823,6 @@ section, div, img {
                     </div>
                     <div class="podium-rank second">
                         2nd
-                        <span class="podium-name second">Kucing Ngelag<br>90.000 point</span>
                     </div>
                 </div>
                 <div class="podium-item">
@@ -832,7 +831,6 @@ section, div, img {
                     </div>
                     <div class="podium-rank first">
                         1st
-                        <span class="podium-name first">Kucing Marah<br>100.000 point</span>
                     </div>
                 </div>
                 <div class="podium-item">
@@ -841,7 +839,6 @@ section, div, img {
                     </div>
                     <div class="podium-rank third">
                         3rd
-                        <span class="podium-name third">Kucing Ngoding<br>80.000 point</span>
                     </div>
                 </div>
             </div>
@@ -859,7 +856,6 @@ section, div, img {
                     </div>
                     <div class="podium-rank second">
                         2nd
-                        <span class="podium-name second">User Name<br>Points</span>
                     </div>
                 </div>
                 <div class="podium-item">
@@ -868,7 +864,6 @@ section, div, img {
                     </div>
                     <div class="podium-rank first">
                         1st
-                        <span class="podium-name first">User Name<br>Points</span>
                     </div>
                 </div>
                 <div class="podium-item">
@@ -877,7 +872,6 @@ section, div, img {
                     </div>
                     <div class="podium-rank third">
                         3rd
-                        <span class="podium-name third">User Name<br>Points</span>
                     </div>
                 </div>
             </div>
