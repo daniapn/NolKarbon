@@ -31,26 +31,27 @@
   }
 
     /* Tombol back */
-  .back-btn {
-    position:absolute;
-    top:24px;
-    left:24px;
-    background:var(--white);
-    border-radius:50%;
-    width:40px;
-    height:40px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    box-shadow:0 4px 8px rgba(0,0,0,0.1);
-    text-decoration:none;
-    color:#1d1d1f;
-    font-size:20px;
-    transition:background 0.2s;
-  }
-  .back-btn:hover {
-    background:#f3f3f3;
-  }
+    .back-btn {
+      position: absolute;
+      top: 28px;
+      left: 28px;
+      width: 44px;
+      height: 44px;
+      background: var(--white);
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 22px;
+      color: #000;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .back-btn:hover {
+      background: #f3f3f3;
+    }
 
   .logo{
     display:flex;
@@ -154,25 +155,27 @@
   }
 
   /* Footer */
-  footer{
-    background:#001A72;
+  footer {
+    background:var(--navy);
     color:#fff;
-    padding:26px 0;
+    padding:30px 0;
     display:flex;
     justify-content:center;
     align-items:center;
     gap:20px;
-    margin-top:40px;
+    margin-top:auto;
   }
 
-  footer img{
+  footer img {
     height:48px;
   }
 
   @media(max-width:900px){
-    .grid{grid-template-columns:1fr;}
-    .card{height:auto;}
+    .box{padding:40px 20px;}
+    .total{font-size:42px;}
+    .back-btn{top:16px;left:16px;}
   }
+  
 </style>
 <script>
   document.addEventListener('DOMContentLoaded',()=>{
@@ -190,9 +193,12 @@
 </head>
 
 <body>
+
+    <a href="{{ route('homee') }}" class="back-btn">←</a>
+
   <div class="wrap">
     <div class="logo">
-      <img src="/images/nolkarbon-logo.png" alt="Nol Karbon">
+      <img src="/images/logo.png" alt="NolKarbon Logo">
     </div>
 
     <h1 class="title">Start calculating<br>your daily emissions ⚙️</h1>
@@ -252,10 +258,10 @@
       </div>
     </form>
 
-    <footer>
-      <img src="/images/nolkarbon-logo.png" alt="Nol Karbon">
-      <div>Contact Us</div>
-    </footer>
   </div>
+  <footer>
+  <img src="/images/logo.png" alt="NolKarbon Logo">
+  <div>Contact Us</div>
+</footer>
 </body>
 </html>

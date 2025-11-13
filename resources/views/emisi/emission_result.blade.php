@@ -53,9 +53,7 @@
     font-size:20px;
     transition:background 0.2s;
   }
-  .back-btn:hover {
-    background:#f3f3f3;
-  }
+  .back-btn:hover { background:#f3f3f3; }
 
   /* Logo */
   .logo {
@@ -65,9 +63,7 @@
     margin-bottom:10px;
   }
 
-  .logo img {
-    height:50px;
-  }
+  .logo img { height:50px; }
 
   /* Title */
   h1 {
@@ -103,9 +99,7 @@
     text-align:left;
   }
 
-  .center-text {
-    text-align:center;
-  }
+  .center-text { text-align:center; }
 
   .total {
     color:#e11919;
@@ -120,6 +114,40 @@
     text-align:center;
   }
 
+  /* Chart container */
+  .chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0;
+    gap: 50px;
+  }
+
+  .chart-container canvas {
+    width: 200px !important;
+    height: 200px !important;
+  }
+
+  .chart-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 15px;
+  }
+
+  .chart-legend div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+
   .cols {
     display:grid;
     grid-template-columns:1fr auto;
@@ -130,13 +158,9 @@
     color:#000;
   }
 
-  .cols span {
-    text-align:right;
-  }
+  .cols span { text-align:right; }
 
-  .percent {
-    font-weight:800;
-  }
+  .percent { font-weight:800; }
 
   .btn {
     display:block;
@@ -163,25 +187,24 @@
     margin-top:auto;
   }
 
-  footer img {
-    height:48px;
-  }
+  footer img { height:48px; }
 
   @media(max-width:900px){
     .box{padding:40px 20px;}
     .total{font-size:42px;}
     .back-btn{top:16px;left:16px;}
+    .chart-container{flex-direction:column;gap:20px;}
   }
 </style>
 </head>
 
 <body>
 <main>
-  <a href="{{ url('/') }}" class="back-btn">←</a>
+  <a href="{{ url('/form') }}" class="back-btn">←</a>
 
   <div class="wrap">
     <div class="logo">
-      <img src="/images/nolkarbon-logo.png" alt="Nol Karbon">
+      <img src="/images/logo.png" alt="NolKarbon Logo">
     </div>
 
     <h1>Here’s your<br>daily emissions</h1>
@@ -195,18 +218,16 @@
         <div class="perday">per day</div>
       </div>
 
-      <div class="cols">
-        <div>Transportation</div><span>{{ number_format($breakdown['transport'],1) }} kg CO₂</span>
-        <div>Electricity</div><span>{{ number_format($breakdown['electric'],1) }} kg CO₂</span>
-        <div>Food</div><span>{{ number_format($breakdown['food'],1) }} kg CO₂</span>
-        <div>Rubbish</div><span>{{ number_format($breakdown['rubbish'],1) }} kg CO₂</span>
-      </div>
+      <!-- GRAFIK PIE -->
+      <div class="chart-container">
+        <canvas id="emissionChart"></canvas>
+        <div class="chart-legend">
+          <div><span class="dot" style="background:#4B4DB7"></span> <b>Transportation</b> &nbsp; {{ number_format($breakdown['transport'],1) }} kg CO₂ ({{ $percent['transport'] }}%)</div>
+          <div><span class="dot" style="background:#E11919"></span> <b>Electricity</b> &nbsp; {{ number_format($breakdown['electric'],1) }} kg CO₂ ({{ $percent['electric'] }}%)</div>
+          <div><span class="dot" style="background:#4CAF50"></span> <b>Food</b> &nbsp; {{ number_format($breakdown['food'],1) }} kg CO₂ ({{ $percent['food'] }}%)</div>
+          <div><span class="dot" style="background:#FFC107"></span> <b>Rubbish</b> &nbsp; {{ number_format($breakdown['rubbish'],1) }} kg CO₂ ({{ $percent['rubbish'] }}%)</div>
+        </div>
 
-      <div class="cols" style="margin-top:8px;color:#000;">
-        <div></div><span class="percent">{{ $percent['transport'] }}%</span>
-        <div></div><span class="percent">{{ $percent['electric'] }}%</span>
-        <div></div><span class="percent">{{ $percent['food'] }}%</span>
-        <div></div><span class="percent">{{ $percent['rubbish'] }}%</span>
       </div>
 
       <form method="POST" action="{{ route('emissions.store') }}">
@@ -227,8 +248,37 @@
 </main>
 
 <footer>
-  <img src="/images/nolkarbon-logo.png" alt="Nol Karbon">
+ <img src="/images/logo.png" alt="NolKarbon Logo">
   <div>Contact Us</div>
 </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById('emissionChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Transportation', 'Electricity', 'Food', 'Rubbish'],
+      datasets: [{
+        data: [
+          {{ $breakdown['transport'] ?? 0 }},
+          {{ $breakdown['electric'] ?? 0 }},
+          {{ $breakdown['food'] ?? 0 }},
+          {{ $breakdown['rubbish'] ?? 0 }}
+        ],
+        backgroundColor: ['#4B4DB7', '#E11919', '#4CAF50', '#FFC107'],
+        borderWidth: 0,
+        hoverOffset: 8
+      }]
+    },
+    options: {
+      cutout: '60%',
+      plugins: {
+        legend: { display: false },
+      }
+    }
+  });
+</script>
+
 </body>
 </html>
