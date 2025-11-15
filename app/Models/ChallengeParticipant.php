@@ -34,12 +34,13 @@ class ChallengeParticipant extends Model
 
     public function challenge(): BelongsTo
     {
-        return $this->belongsTo(Challenge::class);
+        return $this->belongsTo(Challenge::class, 'challenge_id');
     }
 
-    public function user(): BelongsTo
+    // RELASI YANG BENAR → karena tabelmu pakai idPengguna
+    public function pengguna(): BelongsTo
     {
-        return $this->belongsTo(Pengguna::class);
+        return $this->belongsTo(Pengguna::class, 'idPengguna', 'idPengguna');
     }
 
     public function progressLogs(): HasMany
